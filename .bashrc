@@ -137,6 +137,11 @@ alias pi2='TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
 alias pi3='TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210'
 alias mac='ssh utylee@192.168.0.107'
 alias italic='echo `tput sitm`italic`tput ritm`'
+
+alias t1="source .tmuxset-misc"
+alias t2="source .tmuxset-flask"
+alias vi1="vim --REMOTE misc"
+
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
