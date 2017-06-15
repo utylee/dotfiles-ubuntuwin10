@@ -9,6 +9,10 @@ case $- in
 esac
 
 export TERM=xterm-256color-italic
+# 윈도에서의 XWindowserver인 xming에서의 diplay를 설정해줘야합니다.
+# vim에서의 client-server 기능의 동작을 위해서 필수입니다 (개인적으로 테스트해봤음)
+export DISPLAY=:0
+
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
@@ -130,12 +134,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias od='tmux rename-window "od";TTERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
+alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207 -t tmux a'
 #alias od='ssh -p 8022 odroid@192.168.0.207'
 #alias od='TERM=screen-256color-italic ssh -p 8022 odroid@192.168.0.207'
-alias pi='tmux rename-window "pi";TTERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208'
-alias pi2='tmux rename-window "pi2";TTERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
-alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210'
+alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
+#alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209 -t tmux a'
+alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
+alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210 -t tmux a'
 alias mac='tmux rename-window "mac";ssh utylee@192.168.0.107'
 #vWIN 에서 이름이 변경돼서 꼬이기 때문에 제거했습니다
 #alias win='tmux rename-window "win";ssh utylee@localhost'
@@ -149,7 +154,10 @@ alias t2="source .tmuxset-flask"
 alias t3="source .tmuxset-win"
 #windows ssh 연결후의 비밀번호를 입력하기 위한 별도의 단축키입니다(openssh와 방식이 달라서인지 ssh-copy-id가 되질 않습니다)
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
-alias vi1="vim --REMOTE misc"
+
+alias vi0="vim --servername blog --remote "
+alias vi1="vim --servername misc --remote "
+#alias vi1="vim --REMOTE misc"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
