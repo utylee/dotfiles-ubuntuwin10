@@ -13,6 +13,7 @@ set nocompatible
 "!ts 가 -i 로 인터렉티브하게 안해도 실행되게끔 해줍니다
 " 해당 파일안에는 현재 ts 함수만 설정되어 있습니다
 let $BASH_ENV = "/home/utylee/.bash_functions"
+let vim_markdown_preview_hotkey='<C-m>'
 
 "set term=screen-256color
 set backspace=indent,eol,start
@@ -162,7 +163,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "endfunction
 "call airline#add_statusline_func('MyOverride')
 
-"let g:jedi#auto_initialization = 1 
+let g:jedi#auto_initialization = 0 
 "let g:jedi#squelch_py_warning = 1
 
 set noundofile
@@ -197,9 +198,11 @@ set noshellslash
 "nmap <leader>e :!python3 '%:p'<CR>
 "nmap <leader>e :set shellcmdflag=-ic <CR> :!ts python '%'<CR> <CR> :set shellcmdflag=-c<CR>
 "nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
+nmap <leader>r :redraw!<CR>
 nmap <leader>e :!ts python '%' 2>/dev/null<CR> <CR>
+nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/Users/utylee/.virtualenvs/win/src/'%' 2>/dev/null<CR> <CR>
 "현재 행을 실행하는 커맨드인데 공백제거가 안돼 아직 제대로 되지 않습니다
-nmap <leader>w :exec '!ts python -c \"'getline('.')'\"'<CR>
+"nmap <leader>w :exec '!ts python -c \"'getline('.')'\"'<CR>
 nmap <leader>` :set fullscreen<CR>
 nmap <leader>q :bd!<CR>
 map <F7> :NERDTreeTabsToggle<CR>
@@ -207,6 +210,7 @@ map <F2> :NERDTreeToggle<CR>
 nmap <leader>2 :NERDTreeToggle<CR>
 map <F1> :e $MYVIMRC<CR>
 nmap <leader>1 :e $MYVIMRC<CR>
+nmap <leader>3 :r ~/.vim/mytemplate/main.txt<CR>
 map <A-3> :tabnext<CR>
 map <A-4> :tabprevious<CR>
 map <F3> :cn<CR>
@@ -240,7 +244,7 @@ nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>t :CtrlPMRU<cr>
 nmap <leader>m :CtrlPMixed<cr>
 "nmap <leader>bs :CtrlPMRU<cr>
-let g:ctrlp_match_window = 'max:12'
+let g:ctrlp_match_window = 'max:20'
 
 " Split size change
 nmap <leader>- :resize -5<cr>
@@ -294,6 +298,7 @@ set fileencodings=utf-8,cp949
 "set guifont=Ubuntu\ Mono\ derivative\ Powerline:h18.3
 "set guifontwide=NanumGothicCoding:h23
 set guifont=Ubuntu\ Mono\ derivative\ Powerline:h19
+"set guifont=D2Coding\ for\ Powerline
 "set font=Ubuntu\ Mono\ derivative\ Powerline:h19
 set guifontwide=NanumGothicCoding:h24
 "set guifontwide=NanumGothicCoding:h15:cDEFAULT

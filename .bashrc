@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+#stty stop ''
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -11,7 +13,8 @@ esac
 export TERM=xterm-256color-italic
 # 윈도에서의 XWindowserver인 xming에서의 diplay를 설정해줘야합니다.
 # vim에서의 client-server 기능의 동작을 위해서 필수입니다 (개인적으로 테스트해봤음)
-export DISPLAY=:0
+#export DISPLAY=:0
+export DISPLAY=localhost:0.0
 
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
@@ -134,14 +137,15 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207 -t tmux a'
+alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
 #alias od='ssh -p 8022 odroid@192.168.0.207'
 #alias od='TERM=screen-256color-italic ssh -p 8022 odroid@192.168.0.207'
-alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
+#alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
+alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209 -t tmux a'
 alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
-alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210 -t tmux a'
-alias mac='tmux rename-window "mac";ssh utylee@192.168.0.107'
+alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210'
+alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh utylee@192.168.0.107'
 #vWIN 에서 이름이 변경돼서 꼬이기 때문에 제거했습니다
 #alias win='tmux rename-window "win";ssh utylee@localhost'
 alias win='ssh utylee@localhost'
@@ -168,3 +172,4 @@ eval "$(pyenv init -)"
 pyenv virtualenvwrapper_lazy
 
 source ~/.solarized.dark
+#source ~/.solarized.light
