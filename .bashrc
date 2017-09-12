@@ -137,7 +137,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias t='python .virtualenvs/misc/src/translate_cmd.py '
+alias t='python ~/.virtualenvs/misc/src/translate_cmd.py '
 alias vi='vim'
 alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
 #alias od='ssh -p 8022 odroid@192.168.0.207'
