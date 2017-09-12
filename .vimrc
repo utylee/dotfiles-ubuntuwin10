@@ -265,11 +265,17 @@ colorscheme solarized_sd_utylee
 "let python_no_builtin_highlight = 1  
 "let g:molokai_original = 1
 
-"set air-line theme {dark, molokai, ...}
-let g:airline_theme='molokai'
+"set air-line heme {dark, molokai, ...}
+"let g:airline_theme='molokai'
 "let g:airline_theme='solarized'
-"let g:airline_theme='dark'
+"et g:airline_theme='dark'
 "let g:airline_theme='tomorrow'
+"let g:airline_theme='zenburn'
+
+" 일단 요 두개가 맘에 듬
+"let g:airline_theme='wombat'
+let g:airline_theme='raven'
+
 "let g:airline_theme='jellybeans'
 
 
