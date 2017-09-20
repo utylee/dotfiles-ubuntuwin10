@@ -154,10 +154,10 @@ alias win='ssh utylee@localhost'
 
 alias italic='echo `tput sitm`italic`tput ritm`'
 
-alias t1="source .tmuxset-misc"
-alias t0="source .tmuxset-blog"
-alias t2="source .tmuxset-flask"
-alias t3="source .tmuxset-win"
+alias t1="source ~/.tmuxset-misc"
+alias t0="source ~/.tmuxset-blog"
+alias t2="source ~/.tmuxset-flask"
+alias t3="source ~/.tmuxset-win"
 #windows ssh 연결후의 비밀번호를 입력하기 위한 별도의 단축키입니다(openssh와 방식이 달라서인지 ssh-copy-id가 되질 않습니다)
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
 
