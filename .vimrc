@@ -18,6 +18,7 @@ let vim_markdown_preview_hotkey='<C-m>'
 "set term=screen-256color
 set backspace=indent,eol,start
 
+let g:loaded_python_provider = 1
 
 "osx 터미널 상에서의 인서트모드 커서를 변경합니다.
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -165,6 +166,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 let g:jedi#auto_initialization = 0 
 "let g:jedi#squelch_py_warning = 1
+let g:jedi#force_py_version=3
 
 set noundofile
 set number
@@ -217,10 +219,10 @@ map <F3> :cn<CR>
 map <F4> :cp<CR>
 "ex) :ccl<CR>       "Close the search result windows
 
-"map <c-j> <c-w>j
-"map <c-k> <c-w>k
-"map <c-h> <c-w>h
-"map <c-l> <c-w>l
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-h> <c-w>h
+map <c-l> <c-w>l
 "map <C-T> :tabnew<CR>:wincmd w<CR>
 
 " Setup some default ignores
@@ -280,6 +282,7 @@ let g:airline_theme='raven'
 
 
 let g:jedi#completions_command = "<C-N>"
+let g:ConqueGdb_Leader = ','
 
 "autocmd BufNewFile,BufRead *.qml so c:\vim\vim74\ftplugin\qml.vim
 autocmd BufNewFile,BufRead *.qml setf qml 
