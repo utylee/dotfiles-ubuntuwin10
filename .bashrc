@@ -137,7 +137,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias t='python ~/.virtualenvs/misc/src/translate_cmd.py '
+# 각각 한/영/일 로 번역
+alias t='python ~/.virtualenvs/misc/src/translate_cmd.py ko '
+alias f='python ~/.virtualenvs/misc/src/translate_cmd.py en '
+alias j='python ~/.virtualenvs/misc/src/translate_cmd.py ja '
 alias vi='vim'
 alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
 #alias od='ssh -p 8022 odroid@192.168.0.207'
@@ -158,6 +161,7 @@ alias t1="source ~/.tmuxset-misc"
 alias t0="source ~/.tmuxset-blog"
 alias t2="source ~/.tmuxset-flask"
 alias t3="source ~/.tmuxset-win"
+alias ta="source ~/.tmuxset-azeroth"
 #windows ssh 연결후의 비밀번호를 입력하기 위한 별도의 단축키입니다(openssh와 방식이 달라서인지 ssh-copy-id가 되질 않습니다)
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
 
@@ -175,3 +179,4 @@ pyenv virtualenvwrapper_lazy
 
 source ~/.solarized.dark
 #source ~/.solarized.light
+
