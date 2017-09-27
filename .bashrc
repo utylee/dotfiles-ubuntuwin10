@@ -109,7 +109,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -168,6 +168,8 @@ alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvi
 alias vi0="vim --servername blog --remote "
 alias vi1="vim --servername misc --remote "
 #alias vi1="vim --REMOTE misc"
+
+alias mygrep="grep -rnw . --exclude=*.{o,a} -e "
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
