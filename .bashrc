@@ -165,12 +165,17 @@ alias ta="source ~/.tmuxset-azeroth"
 #windows ssh 연결후의 비밀번호를 입력하기 위한 별도의 단축키입니다(openssh와 방식이 달라서인지 ssh-copy-id가 되질 않습니다)
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
 
+m() {
+	echo $2 | mutt -s "$1" utylee@gmail.com -a "$3"
+}
+
 alias vi0="vim --servername blog --remote "
 alias vi1="vim --servername misc --remote "
 #alias vi1="vim --REMOTE misc"
 
 alias mygrep="grep -rnw . --exclude=*.{o,a} -e "
 
+#export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
