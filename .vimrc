@@ -3,6 +3,18 @@ set nocompatible
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
 
+
+
+let g:ConqueTerm_Interrupt = '<c-c>'
+"nnoremap ,c :let @* = expand("%:p").":".line('.')<cr>
+nnoremap mc :let @+ = expand("%:p").":".line('.')<cr>
+
+"set tags+=/home/utylee/temp/azerothcore/src/tags,~/temp/azerothcore/modules/tags
+set tags+=/home/utylee/temp/TrinityCore/src/tags
+
+" 버퍼를 저장하지 않아도 버퍼간 이동을 가능하게끔합니다
+set hidden
+
 "인터렉티브한 쉘을 실행해서 ! ts 를 먹히게 해준다고 하는데 bashrc 를 실행하면
 "너무 느려져서 삭제하고 아래와 같이 바꿉니다
 "set shell=/bin/bash\ -i
@@ -207,11 +219,13 @@ nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/U
 "nmap <leader>w :exec '!ts python -c \"'getline('.')'\"'<CR>
 nmap <leader>` :set fullscreen<CR>
 nmap <leader>q :bd!<CR>
+nmap <leader>a :bufdo bd<CR>
 map <F7> :NERDTreeTabsToggle<CR>
 map <F2> :NERDTreeToggle<CR>
 nmap <leader>2 :NERDTreeToggle<CR>
 map <F1> :e $MYVIMRC<CR>
-nmap <leader>1 :e $MYVIMRC<CR>
+"nmap <leader>1 :e $MYVIMRC<CR>
+nmap <leader>1 :e ~/todo<CR>
 nmap <leader>3 :r ~/.vim/mytemplate/main.txt<CR>
 map <A-3> :tabnext<CR>
 map <A-4> :tabprevious<CR>
@@ -233,13 +247,17 @@ let g:ctrlp_custom_ignore = {
 
 
 
+
+
+
 " Use the nearest .git directory as the cwd
 " This makes a lot of sense if you are working on a project that is in version
 " control. It also supports works with .svn, .hg, .bzr.
 "let g:ctrlp_working_path_mode = 'r'
 
 " Use a leader instead of the actual named binding
-nmap <leader>f :CtrlP<cr>
+"nmap <leader>f :CtrlP<cr>
+nmap <leader>f :CtrlPCurFile<cr>
 
 " Easy bindings for its various modes
 nmap <leader>b :CtrlPBuffer<cr>
@@ -276,16 +294,166 @@ colorscheme solarized_sd_utylee
 
 " 일단 요 두개가 맘에 듬
 "let g:airline_theme='wombat'
-let g:airline_theme='raven'
+"let g:airline_theme='raven'
+let g:airline_theme='base16_embers'
 
 "let g:airline_theme='jellybeans'
 
 
 let g:jedi#completions_command = "<C-N>"
-let g:ConqueGdb_Leader = ','
+
+
 
 "autocmd BufNewFile,BufRead *.qml so c:\vim\vim74\ftplugin\qml.vim
 autocmd BufNewFile,BufRead *.qml setf qml 
+
+
+
+"filetype plugin on
+"set omnifunc=syntaxcomplete#Complete
+"set complete
+
+
+let g:vebugger_leader=','
+"let g:vebugger_view_source_cmd='edit'
+"let g:ConqueGdb_Leader = ','
+
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_key_list_select_completion = ['', '']
+"let g:ycm_key_list_previous_completion = ['', '']
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_warning_symbol = '>*'
+"
+"nnoremap g :YcmCompleter GoTo
+"" nnoremap gg :YcmCompleter GoToImprecise
+"nnoremap d :YcmCompleter GoToDeclaration
+"nnoremap t :YcmCompleter GetType
+"nnoremap p :YcmCompleter GetParent 
+"let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_auto_trigger = 1 
+"let g:ycm_collect_identifiers_from_tags_files = 1
+
+
+
+""For clang_complete
+"let g:clang_snippets = 1
+"let g:clang_snippets_engine = 'clang_complete'
+""let g:clang_library_path='/usr/lib/llvm-3.8/lib'
+""let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang-3.8.so.1'
+"let g:clang_library_path='/usr/lib/llvm-3.8/lib/libclang-3.8.so.1'
+
+
+
+
+
+
+" For clang
+" disable auto completion for vim-clang
+let g:clang_auto = 0
+" default 'longest' can not work with neocomplete
+let g:clang_c_completeopt = 'menuone,preview'
+let g:clang_cpp_completeopt = 'menuone,preview'
+
+"nvim이 아닐 때만 neocomplete 변수를 넣습니다
+if !has('nvim')
+
+" use neocomplete
+" input patterns
+if !exists('g:neocomplete#force_omni_input_patterns')
+	let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+"for c and c++
+let g:neocomplete#force_omni_input_patterns.c =
+   \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+	\ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+
+let g:clang_c_options = '-std=gnu11'
+let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
+endif
+
+
+
+"nvim이 아닐때만 neocomplete init을 행합니다
+if !has('nvim')
+" For Neocomplete config
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Use complte first result like AutoComplPop 
+let g:neocomplete#enable_auto_select = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+"inoremap <expr><Space>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+endif
+
+
+
 
 
 set langmenu=utf8
@@ -318,4 +486,17 @@ set guifontwide=NanumGothicCoding:h24
 "cd c:\Users\seoru\00-projects\00-python
 "
 "
+
+"fu! Sess()
+	"execute 'source Session.vim'
+"endfunction
+"autocmd VimEnter * call Sess()
+
+"nmap <leader>a :source Session.vim<cr>
+
+
+if has('nvim')
+	set rtp-=~/.vim/bundle/neocomplete.vim
+endif
+
 
