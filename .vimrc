@@ -10,7 +10,16 @@ let g:ConqueTerm_Interrupt = '<c-c>'
 nnoremap mc :let @+ = expand("%:p").":".line('.')<cr>
 
 "set tags+=/home/utylee/temp/azerothcore/src/tags,~/temp/azerothcore/modules/tags
+set tags+=/home/utylee/temp/SkyFire.548/src/tags
 set tags+=/home/utylee/temp/TrinityCore/src/tags
+
+" cpp <---> h 간을 간편하게 바꿔주는 vim 커맨드
+nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+
+" 현재파일의 디렉토리로 변경 %->  상대경로파일명, :p-> 절대경로파일명, :h->
+" 한마디전으로
+
+nmap <leader>c :cd %:p:h<cr> :pwd<cr>
 
 " 버퍼를 저장하지 않아도 버퍼간 이동을 가능하게끔합니다
 set hidden
@@ -229,8 +238,8 @@ nmap <leader>1 :e ~/todo<CR>
 nmap <leader>3 :r ~/.vim/mytemplate/main.txt<CR>
 map <A-3> :tabnext<CR>
 map <A-4> :tabprevious<CR>
-map <F3> :cn<CR>
-map <F4> :cp<CR>
+"map <F3> :cn<CR>
+"map <F4> :cp<CR>
 "ex) :ccl<CR>       "Close the search result windows
 
 map <c-j> <c-w>j

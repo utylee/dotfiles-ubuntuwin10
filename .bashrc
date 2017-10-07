@@ -173,7 +173,7 @@ alias vi0="vim --servername blog --remote "
 alias vi1="vim --servername misc --remote "
 #alias vi1="vim --REMOTE misc"
 
-alias mygrep="grep -rnw . --exclude=*.{o,a} -e "
+alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
 
 #export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export PYENV_ROOT="$HOME/.pyenv"
