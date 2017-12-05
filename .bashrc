@@ -166,7 +166,17 @@ alias ta="source ~/.tmuxset-azeroth"
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
 
 m() {
-	echo $2 | mutt -s "$1" utylee@gmail.com -a "$3"
+	#echo $2 | mutt -s "$1" utylee@gmail.com -a "$3"
+	echo $2 | mutt -s "$1" utylee@gmail.com 
+}
+
+# cmd.exe shutdown
+s() {
+	cmd.exe /c "shutdown -s -t $1"
+}
+# abort
+a() {
+	cmd.exe /c "shutdown -a"
 }
 
 alias vi0="vim --servername blog --remote "
@@ -178,6 +188,7 @@ alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
 #export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="/home/utylee/temp/arduino:$PATH"
 eval "$(pyenv init -)"
 
 # pyenv-virtualenvwrapper sh를 실행하는 듯 합니다. cdv- mkv- workon 등을 사용할 수 있습니다
