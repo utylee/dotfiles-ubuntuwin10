@@ -10,11 +10,19 @@ let g:ConqueTerm_Interrupt = '<c-c>'
 nnoremap mc :let @+ = expand("%:p").":".line('.')<cr>
 
 "set tags+=/home/utylee/temp/azerothcore/src/tags,~/temp/azerothcore/modules/tags
-set tags+=/home/utylee/temp/SkyFire.548/src/tags
-set tags+=/home/utylee/temp/TrinityCore/src/tags
+"set tags+=/home/utylee/temp/TrinityCore/src/tags
+set tags+=/home/utylee/temp/projectLegion/src/tags
+"set tags+=/home/utylee/temp/SkyFire.548/src/tags
 
 " cpp <---> h 간을 간편하게 바꿔주는 vim 커맨드
 nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+nnoremap <leader>h :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+"map <leader>0 :cd /home/utylee/temp/TrinityCore/build/src/server/worldserver<cr>  :GdbStart gdb -f worldserver <cr>
+		"\ :e new <cr> 
+		"\ :GdbStart gdb -f worldserver <cr>
+
+map <leader>0 :cd /home/utylee/temp/projectLegion/build/src/server/worldserver<cr>  :GdbStart gdb -f worldserver <cr>
+
 
 " 현재파일의 디렉토리로 변경 %->  상대경로파일명, :p-> 절대경로파일명, :h->
 " 한마디전으로
@@ -231,11 +239,13 @@ nmap <leader>q :bd!<CR>
 nmap <leader>a :bufdo bd<CR>
 map <F7> :NERDTreeTabsToggle<CR>
 map <F2> :NERDTreeToggle<CR>
-nmap <leader>2 :NERDTreeToggle<CR>
+"nmap <leader>2 :NERDTreeToggle<CR>
+nmap <leader>2 :NERDTree<CR>
+nmap <leader>3 :NERDTreeClose<CR>
 map <F1> :e $MYVIMRC<CR>
 "nmap <leader>1 :e $MYVIMRC<CR>
 nmap <leader>1 :e ~/todo<CR>
-nmap <leader>3 :r ~/.vim/mytemplate/main.txt<CR>
+"nmap <leader>3 :r ~/.vim/mytemplate/main.txt<CR>
 map <A-3> :tabnext<CR>
 map <A-4> :tabprevious<CR>
 "map <F3> :cn<CR>
@@ -266,7 +276,7 @@ let g:ctrlp_custom_ignore = {
 
 " Use a leader instead of the actual named binding
 "nmap <leader>f :CtrlP<cr>
-nmap <leader>f :CtrlPCurFile<cr>
+nmap <leader>f :CtrlPCurWD<cr>
 
 " Easy bindings for its various modes
 nmap <leader>b :CtrlPBuffer<cr>
@@ -316,6 +326,12 @@ let g:jedi#completions_command = "<C-N>"
 "autocmd BufNewFile,BufRead *.qml so c:\vim\vim74\ftplugin\qml.vim
 autocmd BufNewFile,BufRead *.qml setf qml 
 
+if has("autocmd")
+	augroup templates
+		autocmd BufNewFile *.json 0r ~/.vim/template/skeleton.json
+	augroup end
+endif
+
 
 
 "filetype plugin on
@@ -358,80 +374,80 @@ let g:vebugger_leader=','
 
 " For clang
 " disable auto completion for vim-clang
-let g:clang_auto = 0
-" default 'longest' can not work with neocomplete
-let g:clang_c_completeopt = 'menuone,preview'
-let g:clang_cpp_completeopt = 'menuone,preview'
-
-"nvim이 아닐 때만 neocomplete 변수를 넣습니다
-if !has('nvim')
-
+"let g:clang_auto = 0
+"" default 'longest' can not work with neocomplete
+"let g:clang_c_completeopt = 'menuone,preview'
+"let g:clang_cpp_completeopt = 'menuone,preview'
+"
+""nvim이 아닐 때만 neocomplete 변수를 넣습니다
+"if !has('nvim')
+"
 " use neocomplete
 " input patterns
-if !exists('g:neocomplete#force_omni_input_patterns')
-	let g:neocomplete#force_omni_input_patterns = {}
-endif
+"if !exists('g:neocomplete#force_omni_input_patterns')
+	"let g:neocomplete#force_omni_input_patterns = {}
+"endif
 
 "for c and c++
-let g:neocomplete#force_omni_input_patterns.c =
-   \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.cpp =
-	\ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+"let g:neocomplete#force_omni_input_patterns.c =
+   "\ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+"let g:neocomplete#force_omni_input_patterns.cpp =
+	"\ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
 
-let g:clang_c_options = '-std=gnu11'
-let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
-endif
+"let g:clang_c_options = '-std=gnu11'
+"let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
+"endif
 
 
 
 "nvim이 아닐때만 neocomplete init을 행합니다
-if !has('nvim')
+"if !has('nvim')
 " For Neocomplete config
 
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
+"let g:neocomplete#enable_smart_case = 1
 " Use complte first result like AutoComplPop 
-let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#enable_auto_select = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+"let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 " Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+"let g:neocomplete#sources#dictionary#dictionaries = {
+    "\ 'default' : '',
+    "\ 'vimshell' : $HOME.'/.vimshell_hist',
+    "\ 'scheme' : $HOME.'/.gosh_completions'
+        "\ }
 
 " Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+"if !exists('g:neocomplete#keyword_patterns')
+    "let g:neocomplete#keyword_patterns = {}
+"endif
+"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+"inoremap <expr><C-g>     neocomplete#undo_completion()
+"inoremap <expr><C-l>     neocomplete#complete_common_string()
 "inoremap <expr><Space>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+  ""return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  "" For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+"endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+""" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"" Close popup by <Space>.
+""inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+"
 " AutoComplPop like behavior.
 "let g:neocomplete#enable_auto_select = 1
 
@@ -442,24 +458,24 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+  "let g:neocomplete#sources#omni#input_patterns = {}
+"endif
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-endif
+"let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+"endif
 
 
 
