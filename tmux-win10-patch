@@ -1,0 +1,47 @@
+diff --git a/osdep-linux.c b/osdep-linux.c
+index 42712de..6b31931 100644
+--- a/osdep-linux.c
++++ b/osdep-linux.c
+@@ -20,6 +20,12 @@
+ #include <sys/stat.h>
+ #include <sys/param.h>
+
++// https://github.com/Microsoft/BashOnWindows/issues/1063
++#define WIN10_PATCH
++#ifdef WIN10_PATCH
++#include <fcntl.h>
++#endif
++
+ #include <event.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -69,9 +75,29 @@ osdep_get_cwd(int fd)
+        pid_t            pgrp, sid;
+        ssize_t          n;
+
++// https://github.com/Microsoft/BashOnWindows/issues/1063
++#ifdef WIN10_PATCH
++       char            ttypath[MAXPATHLEN + 1];
++       int                     ttyfd;
++
++       if (ptsname_r(fd, ttypath, sizeof(ttypath))) {
++               return (NULL);
++       }
++
++       if ((ttyfd = open(ttypath, O_RDONLY|O_NOCTTY)) == -1) {
++               return (NULL);
++       }
++
++       fd = ttyfd;
++#endif
++
+        if ((pgrp = tcgetpgrp(fd)) == -1)
+                return (NULL);
+
++#ifdef WIN10_PATCH
++       close(ttyfd);
++#endif
++
+        xasprintf(&path, "/proc/%lld/cwd", (long long) pgrp);
+        n = readlink(path, target, MAXPATHLEN);
+        free(path);
