@@ -179,6 +179,18 @@ a() {
 	cmd.exe /c "shutdown -a"
 }
 
+#for arduino, 해당시리얼포트 기기의 권한을 수정하여 사용할 수 있도록 합니다
+p() {
+	#echo $2 | mutt -s "$1" utylee@gmail.com -a "$3"
+	echo sksmsqnwk11 | sudo -S chmod 777 /dev/ttyS4
+
+}
+
+
+samba() {
+	echo sksmsqnwk11 | sudo -S mount -t drvfs '\\192.168.0.207\clark' /home/utylee/media/clark
+}
+
 alias vi0="vim --servername blog --remote "
 alias vi1="vim --servername misc --remote "
 #alias vi1="vim --REMOTE misc"
@@ -188,7 +200,7 @@ alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
 #export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="/home/utylee/temp/arduino:$PATH"
+export PATH="$HOME/temp/arduino-proj:$HOME/temp/arduino:$PATH"
 eval "$(pyenv init -)"
 
 # pyenv-virtualenvwrapper sh를 실행하는 듯 합니다. cdv- mkv- workon 등을 사용할 수 있습니다
