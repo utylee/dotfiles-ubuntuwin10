@@ -147,6 +147,7 @@ alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@
 #alias od='TERM=screen-256color-italic ssh -p 8022 odroid@192.168.0.207'
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
 alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208'
+alias octo='tmux rename-window "octo";TERM=xterm-256color-italic ssh -p 8027 pi@192.168.0.117'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209 -t tmux a'
 alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
 alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210'
@@ -170,6 +171,11 @@ m() {
 	echo $2 | mutt -s "$1" utylee@gmail.com 
 }
 
+ma() {
+	echo $2 | mutt -s "$1" utylee@gmail.com -a "$3"
+	#echo $2 | mutt -s "$1" utylee@gmail.com 
+}
+
 # cmd.exe shutdown
 s() {
 	cmd.exe /c "shutdown -s -t $1"
@@ -189,7 +195,16 @@ p() {
 
 samba() {
 	echo sksmsqnwk11 | sudo -S mount -t drvfs '\\192.168.0.207\clark' /home/utylee/media/clark
+	echo 
 }
+
+# usb remove drive by commandline
+
+usboff() {
+	~/Down/removedrive/x64/RemoveDrive.exe f:
+}
+
+	
 
 alias vi0="vim --servername blog --remote "
 alias vi1="vim --servername misc --remote "
