@@ -241,10 +241,10 @@ map <F7> :NERDTreeTabsToggle<CR>
 map <F2> :NERDTreeToggle<CR>
 "nmap <leader>2 :NERDTreeToggle<CR>
 nmap <leader>2 :NERDTree<CR>
-nmap <leader>3 :NERDTreeClose<CR>
+"nmap <leader>3 :NERDTreeClose<CR>
 map <F1> :e $MYVIMRC<CR>
-"nmap <leader>1 :e $MYVIMRC<CR>
-nmap <leader>1 :e ~/todo<CR>
+nmap <leader>1 :e $MYVIMRC<CR>
+"nmap <leader>1 :e ~/todo<CR>
 "nmap <leader>3 :r ~/.vim/mytemplate/main.txt<CR>
 map <A-3> :tabnext<CR>
 map <A-4> :tabprevious<CR>
@@ -265,8 +265,14 @@ let g:ctrlp_custom_ignore = {
 \}
 
 
+"arduino setup
 
+let g:arduino_serial_baud = 9600
+let g:arduino_serial_port = "/dev/ttyS6"
 
+nmap <leader>v :ArduinoVerify<CR>
+nmap <leader>u :ArduinoUpload<CR>
+nmap <leader>3 :ArduinoSerial<CR>
 
 
 " Use the nearest .git directory as the cwd
