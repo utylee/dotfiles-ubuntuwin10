@@ -161,7 +161,8 @@ alias italic='echo `tput sitm`italic`tput ritm`'
 alias t1="source ~/.tmuxset-misc"
 alias t0="source ~/.tmuxset-blog"
 alias t2="source ~/.tmuxset-flask"
-alias t3="source ~/.tmuxset-win"
+#alias t3="source ~/.tmuxset-win"
+alias t3="source ~/.tmuxset-trader"
 alias ta="source ~/.tmuxset-azeroth"
 #windows ssh 연결후의 비밀번호를 입력하기 위한 별도의 단축키입니다(openssh와 방식이 달라서인지 ssh-copy-id가 되질 않습니다)
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
@@ -204,10 +205,15 @@ usboff() {
 	~/Down/removedrive/x64/RemoveDrive.exe f:
 }
 
+usb() {
+	echo sksmsqnwk11 | sudo -S mount -t drvfs f: /mnt/f
+}
+
 	
 
 alias vi0="vim --servername blog --remote "
 alias vi1="vim --servername misc --remote "
+alias vi2="vim --servername trader --remote "
 #alias vi1="vim --REMOTE misc"
 
 alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
