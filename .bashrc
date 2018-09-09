@@ -207,6 +207,11 @@ usboff() {
 
 usb() {
 	echo sksmsqnwk11 | sudo -S mount -t drvfs f: /mnt/f
+	echo
+}
+
+sim() {
+	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/sim.py $1
 }
 
 	
