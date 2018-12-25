@@ -4,13 +4,19 @@
 #tmux new-session -s vTRADER -d 
 tmux new-window -d -n vTRADER
 # tmux send-keys -t vTRADER "vis" Enter
-tmux send-keys -t vTRADER "vi --servername VIM" Enter
+#tmux send-keys -t vTRADER "vi --servername trader" Enter
 
 # 수평분할을 25%로 합니다 
 tmux split-window -d -t vTRADER -v -p 25  #"workon misc"
 #tmux select-window -d -t vTRADER
-tmux send-keys -t vTRADER.1 "workon tyTrader" Enter
-tmux send-keys -t vTRADER.0 ":Virtu" Tab Space "tyTrader" Enter
+tmux send-keys -t vTRADER.1 "workon tyTrader-win" Enter
+tmux send-keys -t vTRADER.0 "workon tyTrader-win" Enter
+tmux send-keys -t vTRADER.0 "cdv" Tab Enter "cd src" Enter "clear" Enter
+tmux send-keys -t vTRADER.0 "vi --servername trader" Enter
+tmux send-keys -t vTRADER.0 ":Virtu" Tab Space "tyTrader-win" Enter
+tmux send-keys -t vTRADER.0 ":cd ~/.virtualenvs/tyTrader-win/src" Enter
+
+
 tmux send-keys -t vTRADER.1 "cdv" Tab Enter "cd src" Enter "clear" Enter
 
 

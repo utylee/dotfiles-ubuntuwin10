@@ -12,12 +12,13 @@ tmux split-window -d -t vMISC -v -p 25  #"workon misc"
 #misc-3.6을 가리키게 합니다. pyenv와 virtualenvwrapper를 통해 python3.6을 설치해보았습니다
 #tmux send-keys -t vMISC.1 "workon 3.4test" Enter
 tmux send-keys -t vMISC.0 "workon misc" Enter
+tmux send-keys -t vMISC.0 "cdvirtualenv src" Enter
 tmux send-keys -t vMISC.0 "vi --servername misc" Enter
 tmux send-keys -t vMISC.1 "workon misc" Enter
 #tmux send-keys -t vMISC.0 ":Virtu" Tab Space "3.4test" Enter
 tmux send-keys -t vMISC.0 ":Virtu" Tab Space "misc" Enter
-tmux send-keys -t vMISC.0 ":cd .virtualenvs/misc/src" Enter
-tmux send-keys -t vMISC.1 "cdv" Tab Enter "cd src" Enter "clear" Enter
+tmux send-keys -t vMISC.0 ":cd ~/.virtualenvs/misc/src" Enter
+tmux send-keys -t vMISC.1 "cdvirtualenv src" Enter "clear" Enter
 
 
 
