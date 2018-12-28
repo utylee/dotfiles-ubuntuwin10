@@ -27,7 +27,7 @@ map <leader>0 :cd /home/utylee/temp/projectLegion/build/src/server/worldserver<c
 " 현재파일의 디렉토리로 변경 %->  상대경로파일명, :p-> 절대경로파일명, :h->
 " 한마디전으로
 
-nmap <leader>c :cd %:p:h<cr> :pwd<cr>
+nmap <leader>z :cd %:p:h<cr> :pwd<cr>
 
 " 버퍼를 저장하지 않아도 버퍼간 이동을 가능하게끔합니다
 set hidden
@@ -231,6 +231,7 @@ set noshellslash
 "nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>r :redraw!<CR>
 nmap <leader>e :!ts python '%' 2>/dev/null<CR> <CR>
+nmap <leader>c :!ts C-c<CR> <CR>
 nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/Users/utylee/.virtualenvs/win/src/'%' 2>/dev/null<CR> <CR>
 "현재 행을 실행하는 커맨드인데 공백제거가 안돼 아직 제대로 되지 않습니다
 "nmap <leader>w :exec '!ts python -c \"'getline('.')'\"'<CR>
@@ -268,7 +269,7 @@ let g:ctrlp_custom_ignore = {
 "arduino setup
 
 let g:arduino_serial_baud = 9600
-let g:arduino_serial_port = "/dev/ttyS6"
+let g:arduino_serial_port = "/dev/ttyS8"
 
 nmap <leader>v :ArduinoVerify<CR>
 nmap <leader>u :ArduinoUpload<CR>
