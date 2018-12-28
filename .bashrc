@@ -146,7 +146,8 @@ alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@
 #alias od='ssh -p 8022 odroid@192.168.0.207'
 #alias od='TERM=screen-256color-italic ssh -p 8022 odroid@192.168.0.207'
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
-alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208'
+#alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208'
+alias pi='tmux rename-window "pi";ssh -p 8028 pi@192.168.0.211'
 alias octo='tmux rename-window "octo";TERM=xterm-256color-italic ssh -p 8027 pi@192.168.0.117'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209 -t tmux a'
 alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
@@ -202,23 +203,27 @@ samba() {
 # usb remove drive by commandline
 
 usboff() {
-	~/Down/removedrive/x64/RemoveDrive.exe f:
+	~/Down/removedrive/x64/RemoveDrive.exe g:
 }
 
 usb() {
-	echo sksmsqnwk11 | sudo -S mount -t drvfs f: /mnt/f
+	echo sksmsqnwk11 | sudo -S mount -t drvfs g: /mnt/g
 	echo
 }
 
 sim() {
-	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/sim.py $1
+	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/sim.py $1 $2 $3
+}
+
+b() {
+	lua /home/utylee/temp/wowaddon/bfa.lua
 }
 
 	
 
 alias vi0="vim --servername blog --remote "
 alias vi1="vim --servername misc --remote "
-alias vi2="vim --servername trader --remote "
+alias vi2="vim --servername flask --remote "
 #alias vi1="vim --REMOTE misc"
 
 alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
