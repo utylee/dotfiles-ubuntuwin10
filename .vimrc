@@ -4,6 +4,7 @@ set nocompatible
 "behave mswin
 
 
+set timeoutlen=1000 ttimeoutlen=10
 
 let g:ConqueTerm_Interrupt = '<c-c>'
 "nnoremap ,c :let @* = expand("%:p").":".line('.')<cr>
@@ -196,6 +197,11 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:jedi#auto_initialization = 0 
 "let g:jedi#squelch_py_warning = 1
 let g:jedi#force_py_version=3
+
+" emmet-vim 을 html과 css에서만 사용하는 설정
+
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 set noundofile
 set number
