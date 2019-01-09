@@ -15,6 +15,8 @@ export TERM=xterm-256color-italic
 # vim에서의 client-server 기능의 동작을 위해서 필수입니다 (개인적으로 테스트해봤음)
 #export DISPLAY=:0
 export DISPLAY=localhost:0.0
+# git editor를 vim으로 바꾸는 환경변수 차원의 방법이랍니다
+export GIT_EDITOR=vim
 
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
