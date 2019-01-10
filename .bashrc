@@ -152,7 +152,9 @@ alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@
 alias pi='tmux rename-window "pi";ssh -p 8028 pi@192.168.0.211'
 alias octo='tmux rename-window "octo";TERM=xterm-256color-italic ssh -p 8027 pi@192.168.0.117'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209 -t tmux a'
-alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
+#alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
+alias pi2='tmux rename-window "pi2";TERM=xterm-256color ssh -p 8024 pi@192.168.0.209'
+#alias pi2='tmux rename-window "pi2";ssh -p 8024 pi@192.168.0.209'
 alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210'
 alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh utylee@192.168.0.107'
 #vWIN 에서 이름이 변경돼서 꼬이기 때문에 제거했습니다
