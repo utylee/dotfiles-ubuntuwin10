@@ -251,6 +251,7 @@ nmap <leader>2 :NERDTree<CR>
 "nmap <leader>3 :NERDTreeClose<CR>
 map <F1> :e $MYVIMRC<CR>
 nmap <leader>1 :e $MYVIMRC<CR>
+nmap <leader>5 :syntax sync fromstart<CR>
 "nmap <leader>1 :e ~/todo<CR>
 "nmap <leader>3 :r ~/.vim/mytemplate/main.txt<CR>
 map <A-3> :tabnext<CR>
