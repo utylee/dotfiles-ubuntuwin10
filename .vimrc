@@ -4,20 +4,34 @@ set nocompatible
 "behave mswin
 
 
-set timeoutlen=1000 ttimeoutlen=10
+set timeoutlen=1000 ttimeoutlen=0
+set grepprg=rg\ --color=never
 
-let g:ConqueTerm_Interrupt = '<c-c>'
+let g:simple_todo_map_normal_mode_keys = 0
+
+set rtp+=~/.fzf
+let g:fzf_history_dir = '~/.fzf/fzf-history'
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--hidden', <bang>0)
+
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+
+"let g:ConqueTerm_Interrupt = '<c-c>'
 "nnoremap ,c :let @* = expand("%:p").":".line('.')<cr>
 nnoremap mc :let @+ = expand("%:p").":".line('.')<cr>
 
 "set tags+=/home/utylee/temp/azerothcore/src/tags,~/temp/azerothcore/modules/tags
 "set tags+=/home/utylee/temp/TrinityCore/src/tags
-set tags+=/home/utylee/temp/projectLegion/src/tags
+"set tags+=/home/utylee/temp/projectLegion/src/tags
+set tags=tags;/
 "set tags+=/home/utylee/temp/SkyFire.548/src/tags
 
 " cpp <---> h 간을 간편하게 바꿔주는 vim 커맨드
 nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-nnoremap <leader>h :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+"nnoremap <leader>h :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 "map <leader>0 :cd /home/utylee/temp/TrinityCore/build/src/server/worldserver<cr>  :GdbStart gdb -f worldserver <cr>
 		"\ :e new <cr> 
 		"\ :GdbStart gdb -f worldserver <cr>
@@ -32,6 +46,7 @@ nmap <leader>z :cd %:p:h<cr> :pwd<cr>
 
 " 버퍼를 저장하지 않아도 버퍼간 이동을 가능하게끔합니다
 set hidden
+set tags=tags;/
 
 "인터렉티브한 쉘을 실행해서 ! ts 를 먹히게 해준다고 하는데 bashrc 를 실행하면
 "너무 느려져서 삭제하고 아래와 같이 바꿉니다
@@ -159,11 +174,59 @@ execute pathogen#infect()
 
 filetype plugin indent on
 syntax on
+"ncm2
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+set nocompatible
+"python에서 $2 $1 이런게 나와서 일단 아래 vim lsp를 사용하기로 변경
+"let g:LanguageClient_serverCommands = {
+	"\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    "\ }
+
+	"\ 'css': ['css-languageserver', '--stdio'],
+	"\ 'python': ['~/.pyenv/shims/pyls'],
+" ternjs 를 사용하므로 제거
+"\ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+"\ 'javascript': ['javascript-typescript-stdio'],
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+    " pip install python-language-server
+au User lsp_setup call lsp#register_server({
+	\ 'name': 'css-lc',
+	\ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+	\ 'whitelist': ['css'],
+	\ })
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+		\ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
 
 "let g:virtualenv_directory = '/home/utylee/00-Projects/venv-tyTrader'
 set laststatus=2
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#virtualenv#enabled = 1
+let g:airline#extensions#virtualenv#enabled = 0
 "let g:airline_section_a = airline#sections#create(['mode', %{airline#extensions#branch#get_head()}''branch'])
 
 function! AirlineWrapper(ext)
@@ -229,27 +292,33 @@ if has("gui_running")
 	set fullscreen
 endif
 
+
+au BufRead,BufNewFile */etc/nginx/* set ft=nginx
+au BufRead,BufNewFile */nginx/* set ft=nginx
+
 set noshellslash
 "map <F5> : !python3 %<CR>
 "nmap <leader>e :!python3 %<CR>
 "nmap <leader>e :!python3 '%:p'<CR>
 "nmap <leader>e :set shellcmdflag=-ic <CR> :!ts python '%'<CR> <CR> :set shellcmdflag=-c<CR>
 "nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
-nmap <leader>r :redraw!<CR>
-nmap <leader>e :!ts python '%' 2>/dev/null<CR> <CR>
+"nmap <leader>r :redraw!<CR>
+"nmap <leader>e :!ts python '%' 2>/dev/null<CR> <CR>
+nmap <leader>r :Rooter<CR>
+let g:rooter_manual_only = 1
+nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
+nmap <leader>w :!ts cargo build --release<CR> <CR>
 nmap <leader>c :!ts C-c<CR> <CR>
-nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/Users/utylee/.virtualenvs/win/src/'%' 2>/dev/null<CR> <CR>
+"nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/Users/utylee/.virtualenvs/win/src/'%' 2>/dev/null<CR> <CR>
 "현재 행을 실행하는 커맨드인데 공백제거가 안돼 아직 제대로 되지 않습니다
-"nmap <leader>w :exec '!ts python -c \"'getline('.')'\"'<CR>
 nmap <leader>` :set fullscreen<CR>
 nmap <leader>q :bd!<CR>
-nmap <leader>a :bufdo bd<CR>
-map <F7> :NERDTreeTabsToggle<CR>
-map <F2> :NERDTreeToggle<CR>
+nmap <leader>Q :cclose<CR>
+"nmap <leader>a :bufdo bd<CR>
+"map <F7> :NERDTreeTabsToggle<CR>
 "nmap <leader>2 :NERDTreeToggle<CR>
 nmap <leader>2 :NERDTree<CR>
 "nmap <leader>3 :NERDTreeClose<CR>
-map <F1> :e $MYVIMRC<CR>
 nmap <leader>1 :e $MYVIMRC<CR>
 nmap <leader>5 :syntax sync fromstart<CR>
 "nmap <leader>1 :e ~/todo<CR>
@@ -278,7 +347,7 @@ let g:ctrlp_custom_ignore = {
 let g:arduino_serial_baud = 9600
 let g:arduino_serial_port = "/dev/ttyS8"
 
-nmap <leader>v :ArduinoVerify<CR>
+"nmap <leader>v :ArduinoVerify<CR>
 nmap <leader>u :ArduinoUpload<CR>
 nmap <leader>3 :ArduinoSerial<CR>
 
@@ -287,15 +356,26 @@ nmap <leader>3 :ArduinoSerial<CR>
 " This makes a lot of sense if you are working on a project that is in version
 " control. It also supports works with .svn, .hg, .bzr.
 "let g:ctrlp_working_path_mode = 'r'
+nmap <leader>z :cd %:p:h<cr> :pwd<cr>
+nmap <leader>v :Marks<cr>
+nmap <leader>a :Rg<cr>
+nmap <leader>s :Tags<cr>
+nmap <leader>d :ProjectFiles<cr>
+nmap <leader>f :Files<cr>
+nmap <silent> <Leader>g :Rg <C-R><C-W><CR>
+nmap <leader>x :Ag<cr>
+nmap <leader>b :Buffers<cr>
+nmap <leader>t :History<cr>		
+nmap <leader>m :CtrlPMixed<cr>
 
 " Use a leader instead of the actual named binding
 "nmap <leader>f :CtrlP<cr>
-nmap <leader>f :CtrlPCurWD<cr>
+"nmap <leader>f :CtrlPCurWD<cr>
 
 " Easy bindings for its various modes
-nmap <leader>b :CtrlPBuffer<cr>
-nmap <leader>t :CtrlPMRU<cr>
-nmap <leader>m :CtrlPMixed<cr>
+"nmap <leader>b :CtrlPBuffer<cr>
+"nmap <leader>t :CtrlPMRU<cr>
+"nmap <leader>m :CtrlPMixed<cr>
 "nmap <leader>bs :CtrlPMRU<cr>
 let g:ctrlp_match_window = 'max:20'
 
@@ -533,9 +613,5 @@ set guifontwide=NanumGothicCoding:h24
 
 "nmap <leader>a :source Session.vim<cr>
 
-
-if has('nvim')
-	set rtp-=~/.vim/bundle/neocomplete.vim
-endif
 
 

@@ -145,6 +145,7 @@ alias f='python ~/.virtualenvs/misc/src/translate_cmd.py en '
 alias j='python ~/.virtualenvs/misc/src/translate_cmd.py ja '
 alias vi='vim'
 alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
+alias hc='tmux rename-window "hc";TERM=xterm-256color-italic ssh -X -p 8026 odroid@192.168.0.212'
 #alias od='ssh -p 8022 odroid@192.168.0.207'
 #alias od='TERM=screen-256color-italic ssh -p 8022 odroid@192.168.0.207'
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
@@ -245,3 +246,6 @@ pyenv virtualenvwrapper_lazy
 source ~/.solarized.dark
 #source ~/.solarized.light
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore'
