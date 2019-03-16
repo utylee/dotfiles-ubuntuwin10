@@ -164,11 +164,13 @@ alias win='ssh utylee@localhost'
 
 alias italic='echo `tput sitm`italic`tput ritm`'
 
+alias tr0="source ~/.tmuxset-rust"
 alias t1="source ~/.tmuxset-misc"
 alias t0="source ~/.tmuxset-blog"
-alias t2="source ~/.tmuxset-flask"
-#alias t3="source ~/.tmuxset-win"
-alias t3="source ~/.tmuxset-trader"
+#alias t2="source ~/.tmuxset-flask"
+alias t2="source ~/.tmuxset-win"
+#alias t3="source ~/.tmuxset-trader"
+alias t3="source ~/.tmuxset-tweb"
 alias ta="source ~/.tmuxset-azeroth"
 #windows ssh 연결후의 비밀번호를 입력하기 위한 별도의 단축키입니다(openssh와 방식이 달라서인지 ssh-copy-id가 되질 않습니다)
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
@@ -226,17 +228,50 @@ b() {
 
 	
 
-alias vi0="vim --servername blog --remote "
-alias vi1="vim --servername misc --remote "
-alias vi2="vim --servername flask --remote "
+vir() {
+	filename=$PWD/$1
+	tmux send-keys -t vRust.0 ":e $filename" C-m
+	tmux select-window -t vRust
+	tmux select-pane -t vRust.0
+}
+vi0() {
+	filename=$PWD/$1
+	tmux send-keys -t vBLOG.0 ":e $filename" C-m
+	tmux select-window -t vBLOG
+	tmux select-pane -t vBLOG.0
+}
+vi1() {
+	filename=$PWD/$1
+	tmux send-keys -t vMISC.0 ":e $filename" C-m
+	tmux select-window -t vMISC
+	tmux select-pane -t vMISC.0
+}
+vi4() {
+	filename=$PWD/$1
+	tmux send-keys -t vTRADER.0 ":e $filename" C-m
+	tmux select-window -t vTRADER
+	tmux select-pane -t vTRADER.0
+}
+vi3() {
+	filename=$PWD/$1
+	tmux send-keys -t vTRWEB.0 ":e $filename" C-m
+	tmux select-window -t vTRWEB
+	tmux select-pane -t vTRWEB.0
+}
+
+#alias vi0="vim --servername blog --remote "
+#alias vi1="vim --servername misc --remote "
+#alias vi2="vim --servername flask --remote "
 #alias vi1="vim --REMOTE misc"
+alias dt='tmux detach -a'
 
 alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
 
 #export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="$HOME/temp/arduino-proj:$HOME/temp/arduino:$PATH"
+#export PATH="/usr/local/clang_7.0.1/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
+export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
+#export PATH="$HOME/temp/arduino-proj:$HOME/temp/arduino:$PATH"
 eval "$(pyenv init -)"
 
 # pyenv-virtualenvwrapper sh를 실행하는 듯 합니다. cdv- mkv- workon 등을 사용할 수 있습니다
@@ -249,3 +284,13 @@ source ~/.solarized.dark
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore'
+export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --no-ignore'
+#export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob ""'
+#export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
+#export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
+#alias ag='ag --path-to-ignore /home/odroid/.ignore'
+#export FZF_DEFAULT_COMMAND='ag --hidden --ignore={"*css","*min.css","*min.js"} -g ""'
+#export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
+#export FZF_DEFAULT_COMMAND='ag -l --path-to-ignore ~/.ignore --nocolor --hidden -g ""'
+
+#export FZF_DEFAULT_COMMAND='ag --ignore={"*json","*.min.css","*.min.js"}'

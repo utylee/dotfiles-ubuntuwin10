@@ -4,7 +4,8 @@
 #tmux new-session -s vMISC -d 
 tmux new-window -d -n vWIN
 #새 윈도우7 vm으로 변경하면서 64비트 운영체제라 폴더명이 다르다
-tmux send-keys -t vWIN "cd /Volumes/C/Users/utylee/.virtualenvs/tyTrader-win/src" Enter
+#tmux send-keys -t vWIN "cd /Volumes/C/Users/utylee/.virtualenvs/tyTrader-win/src" Enter
+tmux send-keys -t vWIN "cd .virtualenvs/tyTrader-win/src" Enter
 #tmux send-keys -t vWIN "cd /Volumes/C/cygwin/home/utylee/.virtualenvs/tyTrader-win/src" Enter
 #tmux send-keys -t vWIN "cd /Volumes/C/cygwin64/home/utylee/" Enter
 tmux send-keys -t vWIN "vi --servername WIN" Enter
