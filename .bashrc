@@ -252,6 +252,12 @@ vi4() {
 	tmux select-window -t vTRADER
 	tmux select-pane -t vTRADER.0
 }
+vi2() {
+	filename=$PWD/$1
+	tmux send-keys -t vWIN.0 ":e $filename" C-m
+	tmux select-window -t vWIN
+	tmux select-pane -t vWIN.0
+}
 vi3() {
 	filename=$PWD/$1
 	tmux send-keys -t vTRWEB.0 ":e $filename" C-m
