@@ -19,7 +19,8 @@ set record = ''
 
 #set imap_user = "utylee@gmail.com"
 #set imap_pass = "sksmsqnwk11"
-set smtp_url = "smtp://utylee@smtp.gmail.com:587/"
+#set smtp_url = "smtp://utylee@smtp.gmail.com:587/"
+set smtp_url = "smtps://utylee@gmail.com@smtp.gmail.com:465/"
 #set smtp_pass = "sksmsqnwk11"
 #set from = "utylee@gmail.com"
 #set realname = "Tae yoon Lee"
