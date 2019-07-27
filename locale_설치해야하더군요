@@ -1,0 +1,5 @@
+
+sudo dpkg-reconfigure locales
+로 ko_KR.UTF8 을 추가해서 설치해줘야했습니다.
+
+또한 .inputrc  도 변경해줘야했습니다.

@@ -13,8 +13,8 @@ esac
 export TERM=xterm-256color-italic
 # 윈도에서의 XWindowserver인 xming에서의 diplay를 설정해줘야합니다.
 # vim에서의 client-server 기능의 동작을 위해서 필수입니다 (개인적으로 테스트해봤음)
-#export DISPLAY=:0
-export DISPLAY=localhost:0.0
+export DISPLAY=:0
+#export DISPLAY=localhost:0.0
 # git editor를 vim으로 바꾸는 환경변수 차원의 방법이랍니다
 export GIT_EDITOR=vim
 
@@ -154,7 +154,7 @@ alias pi='tmux rename-window "pi";ssh -p 8028 pi@192.168.0.211'
 alias octo='tmux rename-window "octo";TERM=xterm-256color-italic ssh -p 8027 pi@192.168.0.117'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209 -t tmux a'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
-alias pi2='tmux rename-window "pi2";TERM=xterm-256color ssh -p 8024 pi@192.168.0.209'
+alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
 #alias pi2='tmux rename-window "pi2";ssh -p 8024 pi@192.168.0.209'
 alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210'
 alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh utylee@192.168.0.107'
@@ -287,11 +287,13 @@ pyenv virtualenvwrapper_lazy
 source ~/.solarized.dark
 #source ~/.solarized.light
 
+export LC_ALL=ko_KR.UTF-8
 
+export FZF_COMPLETION_TRIGGER='**'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore'
-export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --no-ignore'
-#export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob ""'
+#export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore'
+export FZF_CTRL_T_COMMAND='rg --files /home/utylee --hidden --follow --no-ignore'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob ""'
 #export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
 #export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
 #alias ag='ag --path-to-ignore /home/odroid/.ignore'

@@ -1,1 +1,4 @@
 set editing-mode vi
+# mac에서 접속할 시 한글입력 안되던 문제 수정
+set convert-meta off
+
