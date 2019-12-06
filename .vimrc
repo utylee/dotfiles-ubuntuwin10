@@ -6,6 +6,7 @@ set nocompatible
 
 set timeoutlen=1000 ttimeoutlen=0
 set grepprg=rg\ --color=never
+"set grepprg=rg\ --vimgrep
 
 let g:simple_todo_map_normal_mode_keys = 0
 
@@ -21,7 +22,7 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 "let g:ConqueTerm_Interrupt = '<c-c>'
 "nnoremap ,c :let @* = expand("%:p").":".line('.')<cr>
-nnoremap mc :let @+ = expand("%:p").":".line('.')<cr>
+nnoremap ,c :let @+ = expand("%:p").":".line('.')<cr>
 
 "set tags+=/home/utylee/temp/azerothcore/src/tags,~/temp/azerothcore/modules/tags
 "set tags+=/home/utylee/temp/TrinityCore/src/tags
@@ -257,6 +258,20 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "endfunction
 "call airline#add_statusline_func('MyOverride')
 
+let g:airline_mode_map = {
+\ '__' : '-',
+\ 'n'  : 'N',
+\ 'i'  : 'I',
+\ 'R'  : 'R',
+\ 'v'  : 'V',
+\ 'V'  : 'V-L',
+\ 'c'  : 'C',
+\ 's'  : 'S',
+\ 'S' : 'S-L',
+\ }
+
+
+
 let g:jedi#auto_initialization = 0 
 "let g:jedi#squelch_py_warning = 1
 let g:jedi#force_py_version=3
@@ -305,7 +320,8 @@ set noshellslash
 "nmap <leader>r :redraw!<CR>
 "nmap <leader>e :!ts python '%' 2>/dev/null<CR> <CR>
 nmap <leader>r :Rooter<CR>
-let g:rooter_manual_only = 1
+"let g:rooter_manual_only = 1
+let g:rooter_patterns = ['Rakefile', '.git/']
 nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>w :!ts cargo build --release<CR> <CR>
 nmap <leader>c :!ts C-c<CR> <CR>
@@ -358,11 +374,12 @@ nmap <leader>3 :ArduinoSerial<CR>
 "let g:ctrlp_working_path_mode = 'r'
 nmap <leader>z :cd %:p:h<cr> :pwd<cr>
 nmap <leader>v :Marks<cr>
-nmap <leader>a :Rg<cr>
+"nmap <leader>a :Rg<cr>
+nmap <leader>a :Ag<cr>
 nmap <leader>s :Tags<cr>
 nmap <leader>d :ProjectFiles<cr>
 nmap <leader>f :Files<cr>
-nmap <silent> <Leader>g :Rg <C-R><C-W><CR>
+nmap <silent> <Leader>g :Ag <C-R><C-W><CR>
 nmap <leader>x :Ag<cr>
 nmap <leader>b :Buffers<cr>
 nmap <leader>t :History<cr>		
@@ -593,12 +610,14 @@ set fileencodings=utf-8,cp949
 "set guifont=Ubuntu\ Mono:h15:cANSI
 "set guifont=Ubuntu\ Mono\ derivative\ Powerline:h18.3
 "set guifontwide=NanumGothicCoding:h23
-set guifont=Ubuntu\ Mono\ derivative\ Powerline:h19
 "set guifont=D2Coding\ for\ Powerline
 "set font=Ubuntu\ Mono\ derivative\ Powerline:h19
-set guifontwide=NanumGothicCoding:h24
 "set guifontwide=NanumGothicCoding:h15:cDEFAULT
 "set guifontwide=Ubuntu:h15:cDEFAULT
+
+"current
+"set guifont=Ubuntu\ Mono\ derivative\ Powerline:h19
+"set guifontwide=NanumGothicCoding:h24
 
 "cd c:\_GoogleDrive\
 "cd c:\Users\utylee\00-projects
