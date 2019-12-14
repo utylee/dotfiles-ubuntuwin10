@@ -226,7 +226,7 @@ sim() {
 	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/sim.py $1 $2 $3
 }
 ra() {
-	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/raider.py $1 $2 
+	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/raider.py $1 $2 $3 
 }
 
 b() {
@@ -271,6 +271,18 @@ vi3() {
 	tmux select-window -t vTRWEB
 	tmux select-pane -t vTRWEB.0
 }
+# wow에서 던전에서 필요없는 애드온을 임시로 뺴놓습니다. 애드온 사용 언첵할 필요없이
+#	저렇게 빼놓은 후 reload addon 을 하는 것만으로도 사용량이 없어지는 것을 addons cpu usage에서 확인하였습니다
+addout() {
+	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/HandyNotes /mnt/c/Temp/
+	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/GatherMate2 /mnt/c/Temp/
+	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/Auctionator/ /mnt/c/Temp/
+}
+addin() {
+	mv /mnt/c/Temp/HandyNotes /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+	mv /mnt/c/Temp/GatherMate2 /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+	mv /mnt/c/Temp/Auctionator /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+}
 
 #alias vi0="vim --servername blog --remote "
 #alias vi1="vim --servername misc --remote "
@@ -299,10 +311,14 @@ export LC_ALL=ko_KR.UTF-8
 export FZF_COMPLETION_TRIGGER='**'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 #export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore'
-export FZF_CTRL_T_COMMAND='rg --files /home/utylee --hidden --follow --no-ignore'
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob ""'
+
+### <191206 
+#export FZF_CTRL_T_COMMAND='rg --files /home/utylee --hidden --follow --no-ignore'
+#export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob ""'
+### --->
+
 #export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
-#export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
 #alias ag='ag --path-to-ignore /home/odroid/.ignore'
 #export FZF_DEFAULT_COMMAND='ag --hidden --ignore={"*css","*min.css","*min.js"} -g ""'
 #export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
