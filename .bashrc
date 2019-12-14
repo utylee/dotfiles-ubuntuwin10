@@ -277,11 +277,22 @@ addout() {
 	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/HandyNotes /mnt/c/Temp/
 	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/GatherMate2 /mnt/c/Temp/
 	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/Auctionator/ /mnt/c/Temp/
+	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/Paku_Totems/ /mnt/c/Temp/
+	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/ACU/ /mnt/c/Temp/
+	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/AAP-Core/ /mnt/c/Temp/
+	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/WorldQuestTracker/ /mnt/c/Temp/
+	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/Overachiever/ /mnt/c/Temp/
+
 }
 addin() {
 	mv /mnt/c/Temp/HandyNotes /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
 	mv /mnt/c/Temp/GatherMate2 /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
 	mv /mnt/c/Temp/Auctionator /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+	mv /mnt/c/Temp/Paku_Totems /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+	mv /mnt/c/Temp/ACU /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+	mv /mnt/c/Temp/AAP-Core /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+	mv /mnt/c/Temp/WorldQuestTracker /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+	mv /mnt/c/Temp/Overachiever /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
 }
 
 #alias vi0="vim --servername blog --remote "
