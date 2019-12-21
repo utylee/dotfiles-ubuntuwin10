@@ -5,14 +5,26 @@ set nocompatible
 
 
 set timeoutlen=1000 ttimeoutlen=0
-set grepprg=rg\ --color=never
+"set grepprg=rg\ --color=never
 "set grepprg=rg\ --vimgrep
 
 let g:simple_todo_map_normal_mode_keys = 0
 
 set rtp+=~/.fzf
 let g:fzf_history_dir = '~/.fzf/fzf-history'
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--hidden', <bang>0)
+
+"command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--hidden', <bang>0)
+" Ag 검색시 파일명이 아닌 컨텐츠에서만 검색코자할 때 쓰는 옵션입니다
+" https://github.com/junegunn/fzf.vim/issues/346
+" 거기에서 두번째 파라미터로 ag의 옵션을 넣어줬습니다 ag 옵션을 제거하고
+" 사용하게끔 했더군요
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, ' --path-to-ignore ~/.ignore', {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+"command! -bang -nargs=* Ag
+"\ call fzf#vim#ag(<q-args>,
+"\                 <bang>0 ? fzf#vim#with_preview('up:60%')
+"\                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+"\                 <bang>0)
 
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
@@ -375,15 +387,18 @@ nmap <leader>3 :ArduinoSerial<CR>
 nmap <leader>z :cd %:p:h<cr> :pwd<cr>
 nmap <leader>v :Marks<cr>
 "nmap <leader>a :Rg<cr>
-nmap <leader>a :Ag<cr>
+nmap <leader>x :Rg<cr>
 nmap <leader>s :Tags<cr>
 nmap <leader>d :ProjectFiles<cr>
 nmap <leader>f :Files<cr>
-nmap <silent> <Leader>g :Ag <C-R><C-W><CR>
-nmap <leader>x :Ag<cr>
+nmap <silent> <Leader>g :Rg <C-R><C-W><CR>
+"nmap <silent> <Leader>g :Ag <C-R><C-W><CR>
+nmap <leader>a :Ag<cr>
+nmap <leader>l :Lines<cr>
 nmap <leader>b :Buffers<cr>
 nmap <leader>t :History<cr>		
 nmap <leader>m :CtrlPMixed<cr>
+
 
 " Use a leader instead of the actual named binding
 "nmap <leader>f :CtrlP<cr>
