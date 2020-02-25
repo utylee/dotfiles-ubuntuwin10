@@ -18,6 +18,7 @@ set ssl_force_tls = yes
 # G to get mail
 bind index G imap-fetch-mail
 set editor = "vim"
+#set editor="vim +13 -c 'set nobackup' -c 'set noswapfile' -c 'set nowritebackup' -c 'set tw=72 ft=mail noautoindent'"
 set charset = "utf-8"
 set record = ''
 
