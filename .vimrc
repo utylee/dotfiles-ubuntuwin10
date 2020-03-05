@@ -8,6 +8,8 @@ set timeoutlen=1000 ttimeoutlen=0
 "set grepprg=rg\ --color=never
 "set grepprg=rg\ --vimgrep
 
+set grepprg=ag
+
 let g:simple_todo_map_normal_mode_keys = 0
 
 set rtp+=~/.fzf
@@ -334,8 +336,11 @@ set noshellslash
 nmap <leader>r :Rooter<CR>
 "let g:rooter_manual_only = 1
 let g:rooter_patterns = ['Rakefile', '.git/']
+"stop vim-rooter change dir automatically
+let g:rooter_manual_only = 1   
 nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
-nmap <leader>w :!ts cargo build --release<CR> <CR>
+"nmap <leader>w :!ts cargo build --release<CR> <CR>
+nmap <leader>w :!ts cargo run -j4<CR> <CR>
 nmap <leader>c :!ts C-c<CR> <CR>
 "nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/Users/utylee/.virtualenvs/win/src/'%' 2>/dev/null<CR> <CR>
 "현재 행을 실행하는 커맨드인데 공백제거가 안돼 아직 제대로 되지 않습니다
@@ -389,9 +394,10 @@ nmap <leader>v :Marks<cr>
 "nmap <leader>a :Rg<cr>
 nmap <leader>x :Rg<cr>
 nmap <leader>s :Tags<cr>
-nmap <leader>d :ProjectFiles<cr>
+nmap <leader>d :BTags<cr>
+nmap <leader>g :ProjectFiles<cr>
 nmap <leader>f :Files<cr>
-nmap <silent> <Leader>g :Rg <C-R><C-W><CR>
+nmap <silent> <Leader>h :Ag <C-R><C-W><CR>
 "nmap <silent> <Leader>g :Ag <C-R><C-W><CR>
 nmap <leader>a :Ag<cr>
 nmap <leader>l :Lines<cr>
