@@ -9,6 +9,7 @@ set timeoutlen=1000 ttimeoutlen=0
 "set grepprg=rg\ --vimgrep
 
 set grepprg=ag
+set updatetime=1000
 
 let g:simple_todo_map_normal_mode_keys = 0
 
@@ -190,9 +191,9 @@ execute pathogen#infect()
 filetype plugin indent on
 syntax on
 "ncm2
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-set nocompatible
+"autocmd BufEnter * call ncm2#enable_for_buffer()
+"set completeopt=noinsert,menuone,noselect
+"set nocompatible
 "python에서 $2 $1 이런게 나와서 일단 아래 vim lsp를 사용하기로 변경
 "let g:LanguageClient_serverCommands = {
 	"\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
