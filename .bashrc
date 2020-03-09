@@ -17,6 +17,7 @@ export DISPLAY=:0
 #export DISPLAY=localhost:0.0
 # git editor를 vim으로 바꾸는 환경변수 차원의 방법이랍니다
 export GIT_EDITOR=vim
+export GPG_TTY=$(tty)
 
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
@@ -140,9 +141,11 @@ if ! shopt -oq posix; then
 fi
 
 # 각각 한/영/일 로 번역
+alias we='curl http://utylee.dlinkddns.com:9010;echo -e "\n"'
 alias t='python ~/.virtualenvs/misc/src/translate_cmd.py ko '
 alias f='python ~/.virtualenvs/misc/src/translate_cmd.py en '
 alias j='python ~/.virtualenvs/misc/src/translate_cmd.py ja '
+alias c='tmux rename-window "cmd";cmd.exe'
 alias vi='vim'
 alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
 alias hc='tmux rename-window "hc";TERM=xterm-256color-italic ssh -X -p 8026 odroid@192.168.0.212'
@@ -283,7 +286,7 @@ addout() {
 	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/WorldQuestTracker/ /mnt/c/Temp/
 	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/Overachiever/ /mnt/c/Temp/
 	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/Accountant_Classic/ /mnt/c/Temp/
-
+	mv /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/TradeSkillMaster/ /mnt/c/Temp/
 }
 addin() {
 	mv /mnt/c/Temp/HandyNotes /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
@@ -295,6 +298,27 @@ addin() {
 	mv /mnt/c/Temp/WorldQuestTracker /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
 	mv /mnt/c/Temp/Overachiever /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
 	mv /mnt/c/Temp/Accountant_Classic/ /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+	mv /mnt/c/Temp/TradeSkillMaster/ /mnt/c/Program\ Files\ \(x86\)/World\ of\ Warcraft/_retail_/Interface/AddOns/
+}
+
+bye() {
+	~/utylee/goodbyedpi-0.1.5/x86_64/goodbyedpi.exe -1
+}
+
+a0() {
+	cd ~/utylee 
+	audioswitch.exe 0
+	cd -
+}
+a1() {
+	cd ~/utylee 
+	audioswitch.exe 2
+	cd -
+}
+a2() {
+	cd ~/utylee 
+	audioswitch.exe 1
+	cd -
 }
 
 #alias vi0="vim --servername blog --remote "
@@ -302,6 +326,9 @@ addin() {
 #alias vi2="vim --servername flask --remote "
 #alias vi1="vim --REMOTE misc"
 alias dt='tmux detach -a'
+#alias a0='cd ~ ;audioswitch.exe 0 ;cd -'	# realtek
+#alias a1='audioswitch.exe 1'	# focusrite
+#alias a2='audioswitch.exe 2'	# focusrite
 
 alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
 
@@ -332,8 +359,13 @@ export FZF_COMPLETION_TRIGGER='**'
 
 #export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
 export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
+#export FZF_DEFAULT_COMMAND='ag -g ""'
+#alias ag='ag --hidden --path-to-ignore ~/.ignore '
+#export FZF_DEFAULT_COMMAND='ag --hidden --ignore "*tags" --ignore={"*css","*min.css","*min.js"} -g ""'
+#export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
+#export FZF_DEFAULT_COMMAND='ag'
+#alias ag='ag --hidden --ignore={"*tags","*css","*min.css","*min.js"} -g ""'
 #alias ag='ag --path-to-ignore /home/odroid/.ignore'
-#export FZF_DEFAULT_COMMAND='ag --hidden --ignore={"*css","*min.css","*min.js"} -g ""'
 #export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
 #export FZF_DEFAULT_COMMAND='ag -l --path-to-ignore ~/.ignore --nocolor --hidden -g ""'
 
