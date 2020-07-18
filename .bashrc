@@ -141,7 +141,7 @@ if ! shopt -oq posix; then
 fi
 
 # 각각 한/영/일 로 번역
-alias we='curl http://utylee.dlinkddns.com:9010;echo -e "\n"'
+alias we='curl http://utylee.duckdns.org:9010;echo -e "\n"'
 alias t='python ~/.virtualenvs/misc/src/translate_cmd.py ko '
 alias f='python ~/.virtualenvs/misc/src/translate_cmd.py en '
 alias j='python ~/.virtualenvs/misc/src/translate_cmd.py ja '
@@ -302,7 +302,8 @@ addin() {
 }
 
 bye() {
-	~/utylee/goodbyedpi-0.1.5/x86_64/goodbyedpi.exe -1
+	cd ~/utylee/goodbyedpi-0.1.5/x86_64/
+	./goodbyedpi.exe -1
 }
 
 a0() {
