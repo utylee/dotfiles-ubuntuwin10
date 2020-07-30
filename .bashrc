@@ -178,6 +178,10 @@ alias ta="source ~/.tmuxset-azeroth"
 #windows ssh 연결후의 비밀번호를 입력하기 위한 별도의 단축키입니다(openssh와 방식이 달라서인지 ssh-copy-id가 되질 않습니다)
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
 
+up() {
+	/home/utylee/temp/youtube-upload/bin/youtube-upload --title="$2" "$1"
+}
+
 hos() {
 	python2 ~/temp/heroprotocol/heroprotocol.py --details "$1" > output.txt
 }
