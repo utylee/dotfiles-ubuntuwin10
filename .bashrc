@@ -179,7 +179,7 @@ alias ta="source ~/.tmuxset-azeroth"
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
 
 up() {
-	/home/utylee/temp/youtube-upload/bin/youtube-upload --title="$2" "$1"
+	/home/utylee/temp/youtube-upload/bin/youtube-upload --title="$2" --chunksize 1048576 "$1"
 }
 
 hos() {
