@@ -10,6 +10,7 @@ case $- in
       *) return;;
 esac
 
+PATH="$HOME/.local/bin:$PATH"
 export TERM=xterm-256color-italic
 # 윈도에서의 XWindowserver인 xming에서의 diplay를 설정해줘야합니다.
 # vim에서의 client-server 기능의 동작을 위해서 필수입니다 (개인적으로 테스트해봤음)
