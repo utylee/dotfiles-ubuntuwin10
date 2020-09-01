@@ -240,6 +240,12 @@ sim() {
 ra() {
 	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/raider.py $1 $2 $3 
 }
+fx() {
+	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/forex-test.py 0 $1
+}
+xf() {
+	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/forex-test.py 1 $1
+}
 
 b() {
 	lua /home/utylee/temp/wowaddon/bfa.lua
