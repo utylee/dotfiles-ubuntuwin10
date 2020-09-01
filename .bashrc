@@ -205,6 +205,10 @@ s() {
 a() {
 	cmd.exe /c "shutdown -a"
 }
+# reboot 
+re() {
+	cmd.exe /c "shutdown -r"
+}
 
 #for arduino, 해당시리얼포트 기기의 권한을 수정하여 사용할 수 있도록 합니다
 p() {
@@ -376,3 +380,4 @@ export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
 #export FZF_DEFAULT_COMMAND='ag -l --path-to-ignore ~/.ignore --nocolor --hidden -g ""'
 
 #export FZF_DEFAULT_COMMAND='ag --ignore={"*json","*.min.css","*.min.js"}'
+source ~/qmk_utils/activate_wsl.sh

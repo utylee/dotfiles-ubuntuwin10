@@ -190,9 +190,10 @@ execute pathogen#infect()
 
 filetype plugin indent on
 syntax on
+
 "ncm2
-"autocmd BufEnter * call ncm2#enable_for_buffer()
-"set completeopt=noinsert,menuone,noselect
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
 "set nocompatible
 "python에서 $2 $1 이런게 나와서 일단 아래 vim lsp를 사용하기로 변경
 "let g:LanguageClient_serverCommands = {
