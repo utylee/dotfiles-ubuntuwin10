@@ -10,10 +10,11 @@ tmux split-window -d -t vTRWEB -v -p 25  #"workon misc"
 #tmux select-window -d -t vMISC
 
 #misc-3.6을 가리키게 합니다. pyenv와 virtualenvwrapper를 통해 python3.6을 설치해보았습니다
-tmux send-keys -t vTRWEB.0 "cd ~/.virtualenvs/tradeweb/src/" Enter
+tmux send-keys -t vTRWEB.0 "cd ~/.virtualenvs/traderweb/src/" Enter
+tmux send-keys -t vTRWEB.1 "cd ~/.virtualenvs/traderweb/src/" Enter
+tmux send-keys -t vTRWEB.0 "workon traderweb" Enter
+tmux send-keys -t vTRWEB.1 "workon traderweb" Enter
 tmux send-keys -t vTRWEB.0 "vi" Enter
-tmux send-keys -t vTRWEB.1 "cd ~/.virtualenvs/tradeweb/src/" Enter
-tmux send-keys -t vTRWEB.1 "workon tradeweb" Enter
 #tmux send-keys -t vTRWEB.1 "cdv" Tab Enter "cd src" Enter "clear" Enter
 
 
