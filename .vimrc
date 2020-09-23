@@ -400,6 +400,7 @@ nmap <leader>d :BTags<cr>
 nmap <leader>g :ProjectFiles<cr>
 nmap <leader>f :Files<cr>
 nmap <silent> <Leader>h :Tags <C-R><C-W><CR>
+nmap <silent> <Leader>g :BTags <C-R><C-W><CR>
 nmap <silent> <Leader>j :Ag <C-R><C-W><CR>
 "nmap <silent> <Leader>g :Ag <C-R><C-W><CR>
 nmap <leader>a :Ag<cr>
