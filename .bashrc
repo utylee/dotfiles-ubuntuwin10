@@ -175,6 +175,7 @@ alias t0="source ~/.tmuxset-blog"
 alias t2="source ~/.tmuxset-win"
 #alias t3="source ~/.tmuxset-trader"
 alias t3="source ~/.tmuxset-tweb"
+alias t4="source ~/.tmuxset-trsrv"
 alias ta="source ~/.tmuxset-azeroth"
 #windows ssh 연결후의 비밀번호를 입력하기 위한 별도의 단축키입니다(openssh와 방식이 달라서인지 ssh-copy-id가 되질 않습니다)
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
@@ -288,6 +289,12 @@ vi3() {
 	tmux send-keys -t vTRWEB.0 ":e $filename" C-m
 	tmux select-window -t vTRWEB
 	tmux select-pane -t vTRWEB.0
+}
+vi4() {
+	filename=$PWD/$1
+	tmux send-keys -t vTRSRV.0 ":e $filename" C-m
+	tmux select-window -t vTRSRV
+	tmux select-pane -t vTRSRV.0
 }
 # wow에서 던전에서 필요없는 애드온을 임시로 뺴놓습니다. 애드온 사용 언첵할 필요없이
 #	저렇게 빼놓은 후 reload addon 을 하는 것만으로도 사용량이 없어지는 것을 addons cpu usage에서 확인하였습니다

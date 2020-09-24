@@ -342,7 +342,8 @@ let g:rooter_patterns = ['Rakefile', '.git/']
 let g:rooter_manual_only = 1   
 nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 "nmap <leader>w :!ts cargo build --release<CR> <CR>
-nmap <leader>w :!ts cargo run -j4<CR> <CR>
+"nmap <leader>w :!ts cargo run -j4<CR> <CR>
+nmap <leader>w :!ts ~/utylee/.virtualenvs/trsrv/Scripts/python.exe c:/Users/utylee/.virtualenvs/trsrv/src/'%' 2>/dev/null<CR> <CR>
 nmap <leader>c :!ts C-c<CR> <CR>
 "nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/Users/utylee/.virtualenvs/win/src/'%' 2>/dev/null<CR> <CR>
 "현재 행을 실행하는 커맨드인데 공백제거가 안돼 아직 제대로 되지 않습니다
