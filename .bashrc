@@ -238,6 +238,7 @@ usb() {
 sim() {
 	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/sim.py $1 $2 $3
 }
+#sim f, r, s
 ra() {
 	/home/utylee/.virtualenvs/misc/bin/python /home/utylee/.virtualenvs/misc/src/raider.py $1 $2 $3 
 }
