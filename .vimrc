@@ -245,6 +245,8 @@ let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal 
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#virtualenv#enabled = 0
+let g:airline#extensions#tagbar#flags = 'f'
+
 "let g:airline_section_a = airline#sections#create(['mode', %{airline#extensions#branch#get_head()}''branch'])
 
 function! AirlineWrapper(ext)
@@ -262,6 +264,10 @@ let g:airline_section_b = airline#section#create(['%{virtualenv#statusline()}'])
 "let g:airline_section_b = ['branch']
 "let g:virtualenv_stl_format = '[%n]'
 "let g:Powerline_symbols = 'fancy'
+
+"디렉토리 없이 파일명만 표시하게 합니다
+"let g:airline_section_c = '%t'
+
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
@@ -393,7 +399,6 @@ nmap <leader>3 :ArduinoSerial<CR>
 " This makes a lot of sense if you are working on a project that is in version
 " control. It also supports works with .svn, .hg, .bzr.
 "let g:ctrlp_working_path_mode = 'r'
-nmap <leader>z :cd %:p:h<cr> :pwd<cr>
 nmap <leader>v :Marks<cr>
 "nmap <leader>a :Rg<cr>
 "nmap <leader>g :ProjectFiles<cr>
