@@ -59,6 +59,7 @@ map <leader>0 :cd /home/utylee/temp/projectLegion/build/src/server/worldserver<c
 " 한마디전으로
 
 nmap <leader>z :cd %:p:h<cr> :pwd<cr>
+nmap <leader>Z :ProsessionDelete<cr>
 
 " 버퍼를 저장하지 않아도 버퍼간 이동을 가능하게끔합니다
 set hidden
