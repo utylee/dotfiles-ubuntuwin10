@@ -359,8 +359,13 @@ alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
 #export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export PYENV_ROOT="$HOME/.pyenv"
 #export PATH="/usr/local/clang_7.0.1/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
-export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
-#export PATH="$HOME/temp/arduino-proj:$HOME/temp/arduino:$PATH"
+#export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
+#export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
+export PATH=/usr/local/clang_11.0.1/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH
+#export PATH=/usr/local/clang_11.0.0/bin:$PATH
+export CC=/usr/local/clang_11.0.0/bin/clang
+export CXX=/usr/local/clang_11.0.0/bin/clang++
+export LD_LIBRARY_PATH=/usr/local/clang_11.0.0/lib
 eval "$(pyenv init -)"
 
 # pyenv-virtualenvwrapper sh를 실행하는 듯 합니다. cdv- mkv- workon 등을 사용할 수 있습니다
