@@ -400,23 +400,26 @@ nmap <leader>3 :ArduinoSerial<CR>
 " control. It also supports works with .svn, .hg, .bzr.
 "let g:ctrlp_working_path_mode = 'r'
 nmap <leader>v :Marks<cr>
+nmap <leader>m :Marks<cr>
 "nmap <leader>a :Rg<cr>
 "nmap <leader>g :ProjectFiles<cr>
 nmap <leader>x :Rg<cr>
 nmap <leader>s :Tags<cr>
 nmap <leader>d :BTags<cr>
-nmap <leader>; :BLines<cr>
+"nmap <leader>; :BLines<cr>
+nmap <leader>; :Lines<cr>
 nmap <leader>f :Files<cr>
 nmap <silent> <Leader>g :BTags <C-R><C-W><CR>
 nmap <silent> <Leader>h :Tags <C-R><C-W><CR>
 nmap <silent> <Leader>j :Ag <C-R><C-W><CR>
-nmap <silent> <Leader>l :BLines <C-R><C-W><CR>
+nmap <silent> <Leader>l :Lines <C-R><C-W><CR>
+"nmap <silent> <Leader>l :BLines <C-R><C-W><CR>
 "nmap <leader>l :BLines<cr>
 "nmap <silent> <Leader>g :Ag <C-R><C-W><CR>
 nmap <leader>a :Ag<cr>
 nmap <leader>b :Buffers<cr>
 nmap <leader>t :History<cr>		
-nmap <leader>m :CtrlPMixed<cr>
+"nmap <leader>m :CtrlPMixed<cr>
 
 
 " Use a leader instead of the actual named binding
