@@ -2,6 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+
 #stty stop ''
 
 # If not running interactively, don't do anything
@@ -142,7 +143,11 @@ if ! shopt -oq posix; then
 fi
 
 # 각각 한/영/일 로 번역
-alias we='curl http://utylee.duckdns.org:9010;echo -e "\n"'
+alias td='tmux detach -a'
+alias dt='tmux detach -a'
+# dns lookup으로 속도가 느려서 직접 ip를 지정해주기로했습니다
+#alias we='curl http://utylee.duckdns.org:9010;echo -e "\n"'
+alias we='curl http://192.168.0.212:9010;echo -e "\n"'
 alias t='python ~/.virtualenvs/misc/src/translate_cmd.py ko '
 alias f='python ~/.virtualenvs/misc/src/translate_cmd.py en '
 alias j='python ~/.virtualenvs/misc/src/translate_cmd.py ja '
@@ -154,13 +159,16 @@ alias hc='tmux rename-window "hc";TERM=xterm-256color-italic ssh -X -p 8026 odro
 #alias od='TERM=screen-256color-italic ssh -p 8022 odroid@192.168.0.207'
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208'
-alias pi='tmux rename-window "pi";ssh -p 8028 pi@192.168.0.211'
+
+alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8028 pi@192.168.0.211'
+
 alias octo='tmux rename-window "octo";TERM=xterm-256color-italic ssh -p 8027 pi@192.168.0.117'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209 -t tmux a'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
 alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209'
 #alias pi2='tmux rename-window "pi2";ssh -p 8024 pi@192.168.0.209'
 alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210'
+#alias pi4='tmux rename-window "pi4";TERM=xterm-256color-italic ssh pi@192.168.0.211'
 alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh utylee@192.168.0.107'
 #vWIN 에서 이름이 변경돼서 꼬이기 때문에 제거했습니다
 #alias win='tmux rename-window "win";ssh utylee@localhost'
@@ -332,24 +340,26 @@ bye() {
 a0() {
 	cd ~/utylee 
 	audioswitch.exe 0
-	cd -
+	cd - 2 > /dev/null
+	echo 'digital'
 }
 a1() {
 	cd ~/utylee 
 	audioswitch.exe 2
-	cd -
+	cd - 2 > /dev/null
+	echo 'USB Focusrite'
 }
 a2() {
 	cd ~/utylee 
 	audioswitch.exe 1
-	cd -
+	cd - 2 > /dev/null
+	echo 'Realtek'
 }
 
 #alias vi0="vim --servername blog --remote "
 #alias vi1="vim --servername misc --remote "
 #alias vi2="vim --servername flask --remote "
 #alias vi1="vim --REMOTE misc"
-alias dt='tmux detach -a'
 #alias a0='cd ~ ;audioswitch.exe 0 ;cd -'	# realtek
 #alias a1='audioswitch.exe 1'	# focusrite
 #alias a2='audioswitch.exe 2'	# focusrite
@@ -358,15 +368,23 @@ alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
 
 #export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export PYENV_ROOT="$HOME/.pyenv"
+
 #export PATH="/usr/local/clang_7.0.1/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
 #export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
 #export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
-export PATH=/usr/local/clang_11.0.1/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH
+export CLANGHOME=/usr/local/clang+llvm-11.0.1-x86_64-linux-gnu-ubuntu-16.04
+export PATH=$CLANGHOME/bin:$HOME/.cargo/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH
 #export PATH=/usr/local/clang_11.0.0/bin:$PATH
-export CC=/usr/local/clang_11.0.0/bin/clang
-export CXX=/usr/local/clang_11.0.0/bin/clang++
-export LD_LIBRARY_PATH=/usr/local/clang_11.0.0/lib
+#export CC=/usr/local/clang_11.0.0/bin/clang
+#export CXX=/usr/local/clang_11.0.0/bin/clang++
+export CC=$CLANGHOME/bin/clang
+export CXX=$CLANGHOME/bin/clang++
+export LD_LIBRARY_PATH="$CLANGHOME/lib:$LD_LIBRARY_PATH"
+#export LD_LIBRARY_PATH=/usr/local/clang_11.0.0/lib
 eval "$(pyenv init -)"
+
+# blinking cursor
+echo -ne "\x1b[1 q"
 
 # pyenv-virtualenvwrapper sh를 실행하는 듯 합니다. cdv- mkv- workon 등을 사용할 수 있습니다
 # 로딩시간이 좀 걸리는 게 문제입니다 ^^
