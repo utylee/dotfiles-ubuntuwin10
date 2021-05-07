@@ -193,7 +193,8 @@ filetype plugin indent on
 syntax on
 
 "ncm2
-autocmd BufEnter * call ncm2#enable_for_buffer()
+"coc.nvim 으로 교체합니다	
+"autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 "set nocompatible
 "python에서 $2 $1 이런게 나와서 일단 아래 vim lsp를 사용하기로 변경
@@ -215,6 +216,10 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+"let g:ale_completion_enabled = 1
+"set omnifunc=ale#completion#OmniFunc
+
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
     " pip install python-language-server
@@ -606,10 +611,11 @@ let g:vebugger_leader=','
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
 "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 "autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
