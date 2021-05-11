@@ -148,9 +148,8 @@ alias dt='tmux detach -a'
 # dns lookup으로 속도가 느려서 직접 ip를 지정해주기로했습니다
 #alias we='curl http://utylee.duckdns.org:9010;echo -e "\n"'
 alias we='curl http://192.168.0.212:9010;echo -e "\n"'
-alias t='python ~/.virtualenvs/misc/src/translate_cmd.py ko '
-alias f='python ~/.virtualenvs/misc/src/translate_cmd.py en '
-alias j='python ~/.virtualenvs/misc/src/translate_cmd.py ja '
+#alias t='python ~/.virtualenvs/misc/src/translate_cmd.py ko '
+#alias f='python ~/.virtualenvs/misc/src/translate_cmd.py en '
 alias c='tmux rename-window "cmd";cmd.exe'
 alias vi='vim'
 alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
@@ -260,6 +259,14 @@ xf() {
 
 b() {
 	lua /home/utylee/temp/wowaddon/bfa.lua
+}
+
+#translate-shell
+t() {
+	trans -b $1
+}
+f() {
+	trans -b $1 :en
 }
 
 	
@@ -398,7 +405,10 @@ export LC_ALL=ko_KR.UTF-8
 
 export FZF_COMPLETION_TRIGGER='**'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-#export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore'
+export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --no-ignore'
+#export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
+#export FZF_CTRL_T_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
 
 ### <191206 
 #export FZF_CTRL_T_COMMAND='rg --files /home/utylee --hidden --follow --no-ignore'
@@ -406,7 +416,6 @@ export FZF_COMPLETION_TRIGGER='**'
 ### --->
 
 #export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
-export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
 #export FZF_DEFAULT_COMMAND='ag -g ""'
 #alias ag='ag --hidden --path-to-ignore ~/.ignore '
 #export FZF_DEFAULT_COMMAND='ag --hidden --ignore "*tags" --ignore={"*css","*min.css","*min.js"} -g ""'
