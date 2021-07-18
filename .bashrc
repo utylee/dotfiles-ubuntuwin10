@@ -154,13 +154,14 @@ alias c='tmux rename-window "cmd";cmd.exe'
 alias vi='vim'
 alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
 alias hc='tmux rename-window "hc";TERM=xterm-256color-italic ssh -X -p 8026 odroid@192.168.0.212'
-alias hc2='tmux rename-window "hc2";TERM=xterm-256color-italic ssh -X -p 22 odroid@192.168.0.213'
+alias hc2='tmux rename-window "hc2";TERM=xterm-256color-italic ssh -X -p 8030 odroid@192.168.0.213'
 #alias od='ssh -p 8022 odroid@192.168.0.207'
 #alias od='TERM=screen-256color-italic ssh -p 8022 odroid@192.168.0.207'
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208'
 
 alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8028 pi@192.168.0.211'
+alias pi5g='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8028 pi@192.168.0.221'
 
 alias octo='tmux rename-window "octo";TERM=xterm-256color-italic ssh -p 8027 pi@192.168.0.117'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209 -t tmux a'
@@ -193,7 +194,8 @@ up() {
 }
 
 hos() {
-	python2 ~/temp/heroprotocol/heroprotocol.py --details "$1" > output.txt
+	#python2 ~/temp/heroprotocol/heroprotocol.py --details "$1" > output.txt
+	python -m heroprotocol --details "$1" > /mnt/e/hos_output.txt
 }
 
 m() {
@@ -265,6 +267,11 @@ b() {
 t() {
 	trans -b $1
 }
+
+tt() {
+	trans $1
+}
+
 f() {
 	trans -b $1 :en
 }
