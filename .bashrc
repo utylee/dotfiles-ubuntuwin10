@@ -160,8 +160,8 @@ alias hc2='tmux rename-window "hc2";TERM=xterm-256color-italic ssh -X -p 8030 od
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208'
 
-alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8028 pi@192.168.0.211'
-alias pi5g='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8028 pi@192.168.0.221'
+#alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8028 pi@192.168.0.211'
+alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8028 pi@192.168.0.221'
 
 alias octo='tmux rename-window "octo";TERM=xterm-256color-italic ssh -p 8027 pi@192.168.0.117'
 #alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@192.168.0.209 -t tmux a'
@@ -196,6 +196,20 @@ up() {
 hos() {
 	#python2 ~/temp/heroprotocol/heroprotocol.py --details "$1" > output.txt
 	python -m heroprotocol --details "$1" > /mnt/e/hos_output.txt
+}
+
+# utylee copy
+uc() {
+	curl http://192.168.0.212:9212/c/"$1"
+	#curl http://utylee.duckdns.org:9212/c/"$1"
+}
+
+ur() {
+	curl http://192.168.0.212:9212/r
+}
+
+uv() {
+	curl http://192.168.0.212:9212/vt
 }
 
 m() {
