@@ -147,14 +147,17 @@ alias td='tmux detach -a'
 alias dt='tmux detach -a'
 # dns lookup으로 속도가 느려서 직접 ip를 지정해주기로했습니다
 #alias we='curl http://utylee.duckdns.org:9010;echo -e "\n"'
-alias we='curl http://192.168.0.212:9010;echo -e "\n"'
+alias we='curl http://192.168.0.202:9010;echo -e "\n"'
 #alias t='python ~/.virtualenvs/misc/src/translate_cmd.py ko '
 #alias f='python ~/.virtualenvs/misc/src/translate_cmd.py en '
 alias c='tmux rename-window "cmd";cmd.exe'
 alias vi='vim'
-alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
-alias hc='tmux rename-window "hc";TERM=xterm-256color-italic ssh -X -p 8026 odroid@192.168.0.212'
-alias hc2='tmux rename-window "hc2";TERM=xterm-256color-italic ssh -X -p 8030 odroid@192.168.0.213'
+#alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8022 odroid@192.168.0.207'
+#alias hc='tmux rename-window "hc";TERM=xterm-256color-italic ssh -X -p 8026 odroid@192.168.0.212'
+#alias hc2='tmux rename-window "hc2";TERM=xterm-256color-italic ssh -X -p 8030 odroid@192.168.0.213'
+alias od='tmux rename-window "od";TERM=xterm-256color-italic ssh -p 8821 odroid@192.168.0.201'
+alias hc='tmux rename-window "hc";TERM=xterm-256color-italic ssh -X -p 8822 odroid@192.168.0.202'
+alias hc2='tmux rename-window "hc2";TERM=xterm-256color-italic ssh -X -p 8823 odroid@192.168.0.203'
 #alias od='ssh -p 8022 odroid@192.168.0.207'
 #alias od='TERM=screen-256color-italic ssh -p 8022 odroid@192.168.0.207'
 #alias pi='tmux rename-window "pi";TERM=xterm-256color-italic ssh -p 8023 pi@192.168.0.208 -t tmux a'
@@ -170,7 +173,8 @@ alias pi2='tmux rename-window "pi2";TERM=xterm-256color-italic ssh -p 8024 pi@19
 #alias pi2='tmux rename-window "pi2";ssh -p 8024 pi@192.168.0.209'
 alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@192.168.0.210'
 #alias pi4='tmux rename-window "pi4";TERM=xterm-256color-italic ssh pi@192.168.0.211'
-alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh utylee@192.168.0.107'
+#alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh utylee@192.168.0.107'
+alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh -p 8817 utylee@192.168.0.107'
 #vWIN 에서 이름이 변경돼서 꼬이기 때문에 제거했습니다
 #alias win='tmux rename-window "win";ssh utylee@localhost'
 alias win='ssh utylee@localhost'
@@ -250,7 +254,7 @@ p() {
 
 
 samba() {
-	echo sksmsqnwk11 | sudo -S mount -t drvfs '\\192.168.0.207\clark' /home/utylee/media/clark
+	echo sksmsqnwk11 | sudo -S mount -t drvfs '\\192.168.0.201\clark' /home/utylee/media/clark
 	echo 
 }
 
