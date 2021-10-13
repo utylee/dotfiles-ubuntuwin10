@@ -405,21 +405,19 @@ a2() {
 
 alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
 
-#export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export PYENV_ROOT="$HOME/.pyenv"
 
 #export PATH="/usr/local/clang_7.0.1/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
 #export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
 #export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
-export CLANGHOME=/usr/local/clang+llvm-11.0.1-x86_64-linux-gnu-ubuntu-16.04
+export CLANGHOME=/usr/local/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04
+#export CLANGHOME=/usr/local/clang+llvm-11.0.1-x86_64-linux-gnu-ubuntu-16.04
 export PATH=$CLANGHOME/bin:$HOME/.cargo/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH
-#export PATH=/usr/local/clang_11.0.0/bin:$PATH
-#export CC=/usr/local/clang_11.0.0/bin/clang
-#export CXX=/usr/local/clang_11.0.0/bin/clang++
+export PATH="/mnt/c/Windows/System32/WindowsPowerShell/v1.0:$PATH"
 export CC=$CLANGHOME/bin/clang
 export CXX=$CLANGHOME/bin/clang++
 export LD_LIBRARY_PATH="$CLANGHOME/lib:$LD_LIBRARY_PATH"
-#export LD_LIBRARY_PATH=/usr/local/clang_11.0.0/lib
 eval "$(pyenv init -)"
 
 # blinking cursor
@@ -432,7 +430,8 @@ pyenv virtualenvwrapper_lazy
 source ~/.solarized.dark
 #source ~/.solarized.light
 
-export LC_ALL=ko_KR.UTF-8
+#export LC_ALL=ko_KR.UTF-8
+export LC_ALL=en_US.UTF-8
 
 export FZF_COMPLETION_TRIGGER='**'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -458,4 +457,11 @@ export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --no-ignore'
 #export FZF_DEFAULT_COMMAND='ag -l --path-to-ignore ~/.ignore --nocolor --hidden -g ""'
 
 #export FZF_DEFAULT_COMMAND='ag --ignore={"*json","*.min.css","*.min.js"}'
-source ~/qmk_utils/activate_wsl.sh
+#source ~/qmk_utils/activate_wsl.sh
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
