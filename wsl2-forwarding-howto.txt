@@ -1,0 +1,12 @@
+* 다음 사이트에 정리가 잘 되어 있었습니다
+https://codeac.tistory.com/118
+
+
+* ssh 를 부팅과함께 실행하는 명령어입니다
+C:\Windows\System32\bash.exe -c "echo sksmsqnwk11 | sudo -S service ssh --full-restart"
+
+* 권한문제없이 ps1 스크립트를 실행하는 옵션을 포함합니다
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -File c:\wsl2-network.ps1
+
+
+
