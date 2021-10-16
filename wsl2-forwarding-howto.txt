@@ -1,6 +1,9 @@
 * 다음 사이트에 정리가 잘 되어 있었습니다
 https://codeac.tistory.com/118
 
+* wsl2 wsl1 간의 변환방법이 정리된 사이트입니다
+https://www.lainyzine.com/ko/article/how-to-install-wsl2-and-use-linux-on-windows-10/
+
 
 * ssh 를 부팅과함께 실행하는 명령어입니다
 C:\Windows\System32\bash.exe -c "echo sksmsqnwk11 | sudo -S service ssh --full-restart"

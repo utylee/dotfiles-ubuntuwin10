@@ -175,6 +175,8 @@ alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@19
 #alias pi4='tmux rename-window "pi4";TERM=xterm-256color-italic ssh pi@192.168.0.211'
 #alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh utylee@192.168.0.107'
 alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh -p 8817 utylee@192.168.0.107'
+alias wsl2='tmux rename-window "wsl2";TERM=xterm-256color-italic ssh -p 2224 utylee@192.168.0.204'
+#alias mac='tmux rename-window "mac";TERM=xterm-256color-italic mosh --ssh "ssh -p 22" utylee@192.168.0.107'
 #vWIN 에서 이름이 변경돼서 꼬이기 때문에 제거했습니다
 #alias win='tmux rename-window "win";ssh utylee@localhost'
 alias win='ssh utylee@localhost'
@@ -193,6 +195,14 @@ alias ta="source ~/.tmuxset-azeroth"
 #windows ssh 연결후의 비밀번호를 입력하기 위한 별도의 단축키입니다(openssh와 방식이 달라서인지 ssh-copy-id가 되질 않습니다)
 alias t3p='tmux send-keys -t vWIN.1 "sksmsqnwk11" Enter "workon win" Enter "cdvirtualenv"'
 
+fix_wsl2_interop() {
+    for i in $(pstree -np -s $$ | grep -o -E '[0-9]+'); do
+        if [[ -e "/run/WSL/${i}_interop" ]]; then
+            export WSL_INTEROP=/run/WSL/${i}_interop
+        fi
+    done
+}
+
 up() {
 	/home/utylee/temp/youtube-upload/bin/youtube-upload --title="$2" --chunksize 1048576 "$1"
 }
@@ -208,18 +218,18 @@ uc() {
 	#b="${b//\%/_u_pe_}"		#%는 잘 받아지는 것 같습니다
 	b="${b//\&/_u_im_}"
 	b="${b//\ /_u_sp_}"
-	curl http://192.168.0.212:9202/c/"$b"
+	curl http://192.168.0.202:9202/c/"$b"
 	#curl http://192.168.0.212:9212/c/"$1"
 	#curl http://utylee.duckdns.org:9212/c/"$1"
 }
 alias ua=uc
 
 ur() {
-	curl http://192.168.0.212:9202/r
+	curl http://192.168.0.202:9202/r
 }
 
 uv() {
-	curl http://192.168.0.212:9202/vt
+	curl http://192.168.0.202:9202/vt
 }
 
 m() {
@@ -405,19 +415,22 @@ a2() {
 
 alias mygrep="grep -rn . --exclude={*.o,*.a,tags} -e "
 
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+#export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export PYENV_ROOT="$HOME/.pyenv"
 
 #export PATH="/usr/local/clang_7.0.1/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
 #export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
 #export PATH="/usr/local/clang+llvm-7.0.1-x86_64-linux-gnu-ubuntu-16.04/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH"
-export CLANGHOME=/usr/local/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04
-#export CLANGHOME=/usr/local/clang+llvm-11.0.1-x86_64-linux-gnu-ubuntu-16.04
+export CLANGHOME=/usr/local/clang+llvm-11.0.1-x86_64-linux-gnu-ubuntu-16.04
 export PATH=$CLANGHOME/bin:$HOME/.cargo/bin:/mnt/c/Users/.virtualenvs/win/Scripts/:$HOME/temp/arduino-proj:$HOME/temp/arduino:$PYENV_ROOT/bin:$PATH
-export PATH="/mnt/c/Windows/System32/WindowsPowerShell/v1.0:$PATH"
+#export PATH=/usr/local/clang_11.0.0/bin:$PATH
+#export CC=/usr/local/clang_11.0.0/bin/clang
+#export CXX=/usr/local/clang_11.0.0/bin/clang++
 export CC=$CLANGHOME/bin/clang
 export CXX=$CLANGHOME/bin/clang++
 export LD_LIBRARY_PATH="$CLANGHOME/lib:$LD_LIBRARY_PATH"
+#export LD_LIBRARY_PATH=/usr/local/clang_11.0.0/lib
+export PATH="/home/utylee/.pyenv/shims:$PATH"
 eval "$(pyenv init -)"
 
 # blinking cursor
@@ -430,8 +443,7 @@ pyenv virtualenvwrapper_lazy
 source ~/.solarized.dark
 #source ~/.solarized.light
 
-#export LC_ALL=ko_KR.UTF-8
-export LC_ALL=en_US.UTF-8
+export LC_ALL=ko_KR.UTF-8
 
 export FZF_COMPLETION_TRIGGER='**'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -458,10 +470,5 @@ export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --no-ignore'
 
 #export FZF_DEFAULT_COMMAND='ag --ignore={"*json","*.min.css","*.min.js"}'
 #source ~/qmk_utils/activate_wsl.sh
-. "$HOME/.cargo/env"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+fix_wsl2_interop
