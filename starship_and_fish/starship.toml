@@ -1,0 +1,39 @@
+add_newline = false
+
+format = """
+[wsl2](bold fg:#e034a1)\
+$username \
+$git_branch$git_commit$directory[>](#2abfb0 bold) \
+"""
+#format = """$character"""
+right_format = """$time"""
+[line_break]
+disabled = true 
+
+[directory]
+truncation_length = 4
+truncate_to_repo = false
+truncation_symbol = "…/"
+home_symbol = "~"
+#format = "[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+#format = "[ $symbol$branch ](fg:#222222 bg:#8ab028)"
+#format = "[ $symbol$branch ](fg:#222222 bg:#216c70)"
+#format = "[ $symbol$branch ](fg:#222222 bg:#8f3928)"
+format = "[ $symbol$branch ](fg:#222222 bg:#9c341f) "
+#9c341f
+#8f3928
+#15474a
+
+[username]
+style_user = "bold"
+style_root = "white bold"
+format = "[$user](#666666 italic)"
+disabled = false
+show_always = true
+
+[time]
+disabled = false
+#format = '[🕙$time](#555555) '
+format = '[$time](#555555) '
