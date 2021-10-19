@@ -10,6 +10,14 @@ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 * install fisher pyenv plugin
 fisher install daenney/pyenv
 
+* virtualfish 를 설치합니다. virtualenvwrapper가 되지 않아 fish용 대안입니다
+(https://github.com/justinmayer/virtualfish)
+pip install virtualfish
+vf install
+vf new myvirtualenv
+vf activate
+vf cd 
+
 * starship prompt
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
