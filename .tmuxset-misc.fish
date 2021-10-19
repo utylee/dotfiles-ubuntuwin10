@@ -9,7 +9,7 @@ tmux split-window -d -t vMISC -v -p 25  #"workon misc"
 tmux send-keys -t vMISC.0 "vf activate misc" Enter
 tmux send-keys -t vMISC.0 "vf cd" Enter
 tmux send-keys -t vMISC.0 "cd src" Enter
-tmux send-keys -t vMISC.0 "vi --servername misc" Enter
+tmux send-keys -t vMISC.0 "vi" Enter
 tmux send-keys -t vMISC.1 "vf activate  misc" Enter
 tmux send-keys -t vMISC.0 ":Virtu" Tab Space "misc" Enter
 tmux send-keys -t vMISC.0 ":cd ~/.virtualenvs/misc/src" Enter

@@ -8,7 +8,7 @@ tmux split-window -d -t vBLOG -v -p 25
 tmux send-keys -t vBLOG.0 "vf activate blog" Enter
 tmux send-keys -t vBLOG.0 "vf cd" Enter
 tmux send-keys -t vBLOG.0 "cd src" Enter
-tmux send-keys -t vBLOG.0 "vi --servername blog" Enter
+tmux send-keys -t vBLOG.0 "vi" Enter
 tmux send-keys -t vBLOG.1 "vf activate blog" Enter
 tmux send-keys -t vBLOG.0 ":Virtu" Tab Space "blog" Enter
 tmux send-keys -t vBLOG.0 ":cd ~/.virtualenvs/blog/src" Enter
