@@ -1,0 +1,9 @@
+* install fisher
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+
+* install fisher pyenv plugin
+fisher install daenney/pyenv
+
+* starship prompt
+sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+
