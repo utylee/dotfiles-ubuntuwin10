@@ -5,8 +5,11 @@ end
 set fish_greeting ''
 fish_vi_key_bindings
 set -x PATH $PATH /usr/local/node-v14.18.1-linux-x64/bin /mnt/c/Windows/System32 /mnt/c/Windows/System32/WindowsPowrShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts
-set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --no-ignore'
-set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
-#set -U pure_enable_single_line_prompt true
+set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --no-ignore"
+#set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
+set -gx FZF_CTRL_T_COMMAND "find . -depth"
+set -gx FZF_ALT_C_COMMAND "find . -depth"
+#set -gx FZF_ALT_C_COMMAND "rg --hidden --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq"
+#set -gx FZF_ALT_C_COMMAND "rg --hidden --files --null | xargs -0 dirname | uniq"
 
 starship init fish | source
