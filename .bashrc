@@ -175,7 +175,7 @@ alias pi3='tmux rename-window "pi3";TERM=xterm-256color-italic ssh -p 8025 pi@19
 #alias pi4='tmux rename-window "pi4";TERM=xterm-256color-italic ssh pi@192.168.0.211'
 #alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh utylee@192.168.0.107'
 alias mac='tmux rename-window "mac";TERM=xterm-256color-italic ssh -p 8817 utylee@192.168.0.107'
-alias wsl2='tmux rename-window "wsl2";TERM=xterm-256color-italic ssh -p 2224 utylee@192.168.0.204'
+alias wsl2='tmux rename-window "wsl2";TERM=xterm-256color-italic ssh -p 8824 utylee@192.168.0.204'
 #alias mac='tmux rename-window "mac";TERM=xterm-256color-italic mosh --ssh "ssh -p 22" utylee@192.168.0.107'
 #vWIN 에서 이름이 변경돼서 꼬이기 때문에 제거했습니다
 #alias win='tmux rename-window "win";ssh utylee@localhost'
