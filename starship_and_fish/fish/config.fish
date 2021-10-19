@@ -14,6 +14,7 @@ set -gx FZF_ALT_C_COMMAND "find . -depth"
 
 set -gx WORKON_HOME $HOME/.virtualenvs
 
-echo -ne   '\eP\e]12;#207dab\a' 
+#echo -ne '\eP\e]12;#207dab\a'	# wsl1
+echo -ne '\eP\e]12;#e034a1\a'	# wsl2
 
 starship init fish | source
