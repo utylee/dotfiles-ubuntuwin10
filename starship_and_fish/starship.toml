@@ -1,9 +1,9 @@
 add_newline = false
 
 format = """
-[wsl2](bold fg:#e034a1)\
-$username \
-$git_branch$git_commit$directory[>](#2abfb0 bold) \
+[wsl](bold fg:#296685)\
+$username\
+$git_branch$git_commit $directory[>](#2abfb0 bold) \
 """
 #format = """$character"""
 right_format = """$time"""
@@ -15,15 +15,21 @@ truncation_length = 4
 truncate_to_repo = false
 truncation_symbol = "…/"
 home_symbol = "~"
-#format = "[$path]($style)[$read_only]($read_only_style) "
+#format = "[$path]($style)[$read_only]($read_only_style)"
 
 [git_branch]
 #format = "[ $symbol$branch ](fg:#222222 bg:#8ab028)"
 #format = "[ $symbol$branch ](fg:#222222 bg:#216c70)"
 #format = "[ $symbol$branch ](fg:#222222 bg:#8f3928)"
-format = "[ $symbol$branch ](fg:#222222 bg:#9c341f) "
+format = " [ $symbol$branch ](fg:#222222 bg:#9c341f)"
 #9c341f
 #8f3928
+#15474a
+
+[git_commit]
+commit_hash_length = 6
+#tag_symbol = "🔖"
+format = "[$hash$tag](#9c341f bold)"
 #15474a
 
 [username]
