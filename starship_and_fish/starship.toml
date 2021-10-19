@@ -22,14 +22,15 @@ home_symbol = "~"
 #format = "[ $symbol$branch ](fg:#222222 bg:#216c70)"
 #format = "[ $symbol$branch ](fg:#222222 bg:#8f3928)"
 format = " [ $symbol$branch ](fg:#222222 bg:#9c341f)"
+only_attached = true
 #9c341f
 #8f3928
 #15474a
 
 [git_commit]
-commit_hash_length = 6
+commit_hash_length = 8
 #tag_symbol = "🔖"
-format = "[$hash$tag](#9c341f bold)"
+format = " [ $hash$tag ](fg:#333333 bold bg:#ab513f)"
 #15474a
 
 [username]
