@@ -110,7 +110,7 @@ set -g status-bg "#47273c"
 #set-window-option -g window-status-current-bg red
 
 #set-window-option -g window-status-current-style bg=#1a6e96	#wsl1
-set-window-option -g window-status-current-style bg=#e034a1		#wsl2
+set-window-option -g window-status-current-style bg="#c4278b"		#wsl2
 #set-window-option -g window-status-current-style bg=red
 set-window-option -g mode-keys vi
 set-window-option -g automatic-rename
