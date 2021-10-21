@@ -93,8 +93,9 @@ bind -n C-u swap-pane -t 0 \; select-pane -t 0
 # 윈도우 swap 좌우
 #bind-key -n C-S-Left swap-window -t -1
 #bind-key -n C-S-Right swap-window -t +1
-bind-key < swap-window -t -1
-bind-key > swap-window -t +1
+# -d 를 새버전에서는 추가해줘야합니다
+bind-key < swap-window -t -1 -d
+bind-key > swap-window -t +1 -d
 
 bind | split-window -h
 bind - split-window -v
@@ -102,11 +103,14 @@ bind u swap-pane -t 0 \; select-pane -t 0
 bind r source-file ~/.tmux.conf
 
 set -g status-fg white
-set -g status-bg black
+#set -g status-bg black
+set -g status-bg "#47273c"
+#572d46
 
 #set-window-option -g window-status-current-bg red
 
-set-window-option -g window-status-current-style bg=#e034a1
+#set-window-option -g window-status-current-style bg=#1a6e96	#wsl1
+set-window-option -g window-status-current-style bg=#e034a1		#wsl2
 #set-window-option -g window-status-current-style bg=red
 set-window-option -g mode-keys vi
 set-window-option -g automatic-rename
@@ -116,5 +120,6 @@ set-window-option -g automatic-rename
 
 set-option -g xterm-keys on
 setw -g xterm-keys on
+
 #setw -g aggressive-resize off
 
