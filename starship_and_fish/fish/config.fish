@@ -1,9 +1,14 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+	# CURSOR
+	echo -ne '\eP\e]12;#207dab\a'	# wsl1
+	#echo -ne '\eP\e]12;#e034a1\a'	# wsl2
 end
 
 set fish_greeting ''
 fish_vi_key_bindings
+
+#set -gx EDITOR /usr/bin/vi
 
 # PATH
 set CLANGHOME /usr/local/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04
@@ -24,8 +29,5 @@ set -gx FZF_ALT_C_COMMAND "find . -depth"
 # VENV
 set -gx WORKON_HOME $HOME/.virtualenvs
 
-# CURSOR
-echo -ne '\eP\e]12;#207dab\a'	# wsl1
-#echo -ne '\eP\e]12;#e034a1\a'	# wsl2
 
 starship init fish | source
