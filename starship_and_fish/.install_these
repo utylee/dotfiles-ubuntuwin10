@@ -1,6 +1,6 @@
 * install fish-shell
 git clone https://github.com/fish-shell/fish-shell.git
-cd fish-shell; cmake .; make; sudo make install 
+cd fish-shell; mkdir build ; cd build ; cmake ..; make; sudo make install 
 echo /usr/local/bin/fish >>/etc/shells
 chsh -s /usr/local/bin/fish
 
