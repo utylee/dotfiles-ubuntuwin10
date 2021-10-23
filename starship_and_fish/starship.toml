@@ -13,8 +13,9 @@ $python\
 [W2](bold fg:#e034a1)\
 $username\
 $git_branch$git_commit\
-$directory[>](#2abfb0 bold) \
+$directory[>](#e034a1 bold) \
 """
+#원래는 민트 칼라 부호였습니다 directory[>](#2abfb0 bold) \
 #format = """
 #$username\
 #$git_branch$git_commit$directory[>](#2abfb0 bold) \

@@ -1,8 +1,15 @@
 * install fish-shell
 git clone https://github.com/fish-shell/fish-shell.git
 cd fish-shell; mkdir build ; cd build ; cmake ..; make; sudo make install 
+	*if MACOS
+		mkdir build; cd build
+		cmake .. -G Xcode -DBUILD_DOCS=OFF -DCMAKE_BUILD_TYPE=RelWithDebInfo
+		xcodebuild
+		xcodebuild -scheme install
+		잘 안됩니다. 빌드는 됐는데 debug 빌드로 나오고 찝찝합니다.그냥 brew install 합시다 
 echo /usr/local/bin/fish >>/etc/shells
 chsh -s /usr/local/bin/fish
+
 
 * install fisher
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
@@ -20,4 +27,6 @@ vf cd
 
 * starship prompt
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+	* 이미 fish 상태라면 아래아래처럼 합니다
+	sh -c (curl -fsSL https://starship.rs/install.sh)
 
