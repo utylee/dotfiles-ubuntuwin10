@@ -1,23 +1,83 @@
-if status is-interactive
-	echo -ne   '\eP\e]10;#839496\a'  # Foreground   -> base0
-	echo -ne   '\eP\e]11;#002B36\a'  # Background   -> base03
+# http://ethanschoonover.com/solarized#the-values
 
-	echo -ne   '\eP\e]12;#DC322F\a'  # Cursor       -> red
+# Use these settings if you've applied a Solarized theme to your terminal (for
+# example, if "ls -G" produces Solarized output). i.e. if "blue" is #268bd2, not
+# whatever the default is. (See "../etc/Solarized Dark.terminal" for OS X.)
 
-	echo -ne  '\eP\e]4;0;#073642\a'  # black        -> Base02
-	echo -ne  '\eP\e]4;8;#002B36\a'  # bold black   -> Base03
-	echo -ne  '\eP\e]4;1;#DC322F\a'  # red          -> red
-	echo -ne  '\eP\e]4;9;#CB4B16\a'  # bold red     -> orange
-	echo -ne  '\eP\e]4;2;#859900\a'  # green        -> green
-	echo -ne '\eP\e]4;10;#586E75\a'  # bold green   -> base01 *
-	echo -ne  '\eP\e]4;3;#B58900\a'  # yellow       -> yellow
-	echo -ne '\eP\e]4;11;#657B83\a'  # bold yellow  -> base00 *
-	echo -ne  '\eP\e]4;4;#268BD2\a'  # blue         -> blue
-	echo -ne '\eP\e]4;12;#839496\a'  # bold blue    -> base0 *
-	echo -ne  '\eP\e]4;5;#D33682\a'  # magenta      -> magenta
-	echo -ne '\eP\e]4;13;#6C71C4\a'  # bold magenta -> violet
-	echo -ne  '\eP\e]4;6;#2AA198\a'  # cyan         -> cyan
-	echo -ne '\eP\e]4;14;#93A1A1\a'  # bold cyan    -> base1 *
-	echo -ne  '\eP\e]4;7;#EEE8D5\a'  # white        -> Base2
-	echo -ne '\eP\e]4;15;#FDF6E3\a' # bold white -> Base3
-end
+#set -l base03  "--bold black"
+#set -l base02  "black"
+#set -l base01  "--bold green"
+#set -l base00  "--bold yellow"
+#set -l base0   "--bold blue"
+#set -l base1   "--bold cyan"
+#set -l base2   "white"
+#set -l base3   "--bold white"
+#set -l yellow  "yellow"
+#set -l orange  "--bold red"
+#set -l red     "red"
+#set -l magenta "magenta"
+#set -l violet  "--bold magenta"
+#set -l blue    "blue"
+#set -l cyan    "cyan"
+#set -l green   "green"
+
+# Use these settings if your terminal supports term256 and your terminal hasn't
+# been configured with a Solarized theme.i.e. if "blue" is the default blue, not
+# Solarized blue.
+#
+set -l rgb_base03  002b36
+set -l rgb_base02  073642
+set -l rgb_base01  586e75
+set -l rgb_base00  657b83
+set -l rgb_base0   839496
+set -l rgb_base1   93a1a1
+set -l rgb_base2   eee8d5
+set -l rgb_base3   fdf6e3
+set -l rgb_yellow  b58900
+set -l rgb_orange  cb4b16
+set -l rgb_red     dc322f
+set -l rgb_magenta d33682
+set -l rgb_violet  6c71c4
+set -l rgb_blue    268bd2
+set -l rgb_cyan    2aa198
+set -l rgb_green   859900
+
+# Used by fish's completion; see
+# http://fishshell.com/docs/2.0/index.html#variables-color
+
+
+set -U fish_color_normal      "$rgb_base0 --background=$rgb_base03"
+#set -U fish_color_normal      $rgb_base0
+set -U fish_color_command     $rgb_base0
+set -U fish_color_quote       $rgb_cyan
+set -U fish_color_redirection $rgb_base0
+set -U fish_color_end         $rgb_base0
+set -U fish_color_error       $rgb_red
+set -U fish_color_param       $rgb_blue
+set -U fish_color_comment     $rgb_base01
+set -U fish_color_match       $rgb_cyan
+set -U fish_color_search_match "--background=$rgb_base02"
+set -U fish_color_operator    $rgb_orange
+set -U fish_color_escape      $rgb_cyan
+
+#set -g fish_color_normal      $base0
+#set -g fish_color_command     $base0
+#set -g fish_color_quote       $cyan
+#set -g fish_color_redirection $base0
+#set -g fish_color_end         $base0
+#set -g fish_color_error       $red
+#set -g fish_color_param       $blue
+#set -g fish_color_comment     $base01
+#set -g fish_color_match       $cyan
+#set -g fish_color_search_match "--background=$base02"
+#set -g fish_color_operator    $orange
+#set -g fish_color_escape      $cyan
+
+# Used by fish_prompt
+
+set -g fish_color_ssh $rgb_base00
+
+set -g __fish_git_prompt_color_branch      $rgb_cyan
+set -g __fish_git_prompt_color_dirtystate  $rgb_base3
+set -g __fish_git_prompt_color_stagedstate $rgb_green
+set -g __fish_git_prompt_color_upstream    $rgb_cyan
