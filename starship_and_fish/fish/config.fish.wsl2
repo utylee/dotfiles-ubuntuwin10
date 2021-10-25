@@ -7,6 +7,7 @@ end
 
 set fish_greeting ''
 fish_vi_key_bindings
+set -Ux fish_term24bit 1
 
 #set -gx EDITOR /usr/bin/vi
 
@@ -22,7 +23,7 @@ set -gx LD_LIBRARY_PATH $LD_LIBRARY_PATH $CLANGHOME/lib
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --color=always --follow --hidden --exclude .git'
 set -gx FZF_DEFAULT_OPTS "--ansi"
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-set -gx FZF_ALT_C_COMMAND "fd --type d --color=always"
+set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
 #
 #set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --no-ignore"
 #set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
