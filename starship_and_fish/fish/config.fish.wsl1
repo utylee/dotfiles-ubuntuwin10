@@ -7,22 +7,24 @@ end
 
 set fish_greeting ''
 fish_vi_key_bindings
+set -Ux fish_term24bit 1
 
 #set -gx EDITOR /usr/bin/vi
 
 # PATH
 set CLANGHOME /usr/local/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04
-set -x PATH $PATH $CLANGHOME/bin
-set -x PATH $PATH /usr/local/node-v14.18.1-linux-x64/bin /mnt/c/Windows/System32/WindowsPowrShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts
+set -x PATH $CLANGHOME/bin $PATH
+set -x PATH /usr/local/node-v14.18.1-linux-x64/bin /mnt/c/Windows/System32/WindowsPowrShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
 set -gx CC $CLANGHOME/bin/clang
 set -gx CXX $CLANGHOME/bin/clang++
 set -gx LD_LIBRARY_PATH $LD_LIBRARY_PATH $CLANGHOME/lib 
 
 # FZF
+#set -gx FZF_DEFAULT_COMMAND 'fd --type file  --follow --hidden --exclude .git'
 set -gx FZF_DEFAULT_COMMAND 'fd --type file --color=always --follow --hidden --exclude .git'
 set -gx FZF_DEFAULT_OPTS "--ansi"
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-set -gx FZF_ALT_C_COMMAND "fd --type d --color=always"
+set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
 #
 #set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --no-ignore"
 #set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
@@ -34,5 +36,6 @@ set -gx FZF_ALT_C_COMMAND "fd --type d --color=always"
 # VENV
 set -gx WORKON_HOME $HOME/.virtualenvs
 
+#source ~/.mintty-colors-solarized/mintty-solarized-dark.sh
 
 starship init fish | source
