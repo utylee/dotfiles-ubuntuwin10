@@ -16,8 +16,8 @@ format = """
 $python\
 [W2](bold fg:#e034a1)\
 $username\
-$git_branch$git_commit\
 $directory\
+$git_branch$git_commit\
 $character\
 """
 [character]
@@ -81,6 +81,7 @@ commit_hash_length = 8
 #tag_symbol = "🔖"
 #format = " [ $hash$tag ](fg:#333333 bold bg:#ab513f)"
 #format = "[ $hash$tag ](fg:#333333 bold bg:#74358f)"
+#format = "[ $hash$tag ](fg:8 bg:13)"
 format = "[ $hash$tag ](fg:8 bg:13)"
 #15474a
 
