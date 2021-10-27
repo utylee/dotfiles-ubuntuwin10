@@ -3,7 +3,6 @@ set nocompatible
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
 
-
 set timeoutlen=1000 ttimeoutlen=0
 "set grepprg=rg\ --color=never
 "set grepprg=rg\ --vimgrep
@@ -17,6 +16,32 @@ set rtp+=~/.fzf
 let g:fzf_history_dir = '~/.fzf/fzf-history'
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = []
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'query':   ['fg', 'Ignore'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Ignore'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+let g:terminal_ansi_colors = [
+    \ '#073642', '#dc322f', '#859900', '#b58900',
+    \ '#268bd2', '#d33682', '#2aa198', '#eee8d5',
+    \ '#002b36', '#cb4b16', '#586e75', '#657b83',
+    \ '#839496', '#6c71c4', '#93a1a1', '#fdf6e3']
+
+"set t_Co=16
+"let g:solarized_termcolors=16
+
 
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--hidden', <bang>0)
 " Ag 검색시 파일명이 아닌 컨텐츠에서만 검색코자할 때 쓰는 옵션입니다
@@ -357,7 +382,8 @@ let g:rooter_manual_only = 1
 nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 "nmap <leader>w :!ts cargo build --release<CR> <CR>
 "nmap <leader>w :!ts cargo run -j4<CR> <CR>
-nmap <leader>w :!ts ~/utylee/.virtualenvs/trsrv/Scripts/python.exe c:/Users/utylee/.virtualenvs/trsrv/src/'%' 2>/dev/null<CR> <CR>
+"nmap <leader>w :!ts ~/utylee/.virtualenvs/trsrv/Scripts/python.exe c:/Users/utylee/.virtualenvs/trsrv/src/'%' 2>/dev/null<CR> <CR>
+nmap <leader>w :!ts python.exe '%'<CR> <CR>
 nmap <leader>c :!ts C-c<CR> <CR>
 "nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/Users/utylee/.virtualenvs/win/src/'%' 2>/dev/null<CR> <CR>
 "현재 행을 실행하는 커맨드인데 공백제거가 안돼 아직 제대로 되지 않습니다
