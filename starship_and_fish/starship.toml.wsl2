@@ -82,7 +82,7 @@ commit_hash_length = 8
 #format = " [ $hash$tag ](fg:#333333 bold bg:#ab513f)"
 #format = "[ $hash$tag ](fg:#333333 bold bg:#74358f)"
 #format = "[ $hash$tag ](fg:8 bg:13)"
-format = "[ $hash$tag ](fg:8 bg:13)"
+format = "[ detached from \\( $hash$tag \\) ](fg:8 bg:13)"
 #15474a
 
 [username]
