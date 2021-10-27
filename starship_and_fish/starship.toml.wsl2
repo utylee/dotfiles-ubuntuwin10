@@ -22,7 +22,9 @@ $character\
 """
 [character]
 success_symbol = "[❯](bold #e034a1)"
-vicmd_symbol = "[❮](bold #e034a1)"
+error_symbol = "[✗](fg:1)"
+vicmd_symbol = "[❮](fg:14 bold)"
+#vicmd_symbol = "[❮](bold #e034a1)"
 
 #[>](#e034a1 bold) \
 #원래는 민트 칼라 부호였습니다 directory[>](#2abfb0 bold) \
