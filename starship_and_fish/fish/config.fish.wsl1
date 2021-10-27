@@ -35,6 +35,7 @@ set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
 #
 # VENV
 set -gx WORKON_HOME $HOME/.virtualenvs
+eval (dircolors -c ~/.dircolors)
 
 #source ~/.mintty-colors-solarized/mintty-solarized-dark.sh
 
