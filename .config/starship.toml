@@ -10,8 +10,9 @@ $character\
 """
 [character]
 success_symbol = "[❯](bold #207dab)"
-error_symbol = "[✗](fg:1)"
-vicmd_symbol = "[❮](fg:14 bold)"
+#error_symbol = "[✗](fg:1)"
+error_symbol = "[❯](fg:1)"
+vicmd_symbol = "[N](fg:14 bold)"
 #vicmd_symbol = "[❮](bold #207dab)"
 
 #format = """
@@ -63,7 +64,8 @@ truncate_to_repo = false
 truncation_symbol = "…/"
 home_symbol = "~"
 #format = " [$path]($style)[$read_only]($read_only_style)"
-format = " [$path](fg:6)[$read_only]($read_only_style)"  #cyan
+#format = " [$path](fg:6)[$read_only]($read_only_style)"  #cyan
+format = " [$path](fg:2)[$read_only]($read_only_style)"  #green
 
 [git_branch]
 #format = "[ $symbol$branch ](fg:#222222 bg:#8ab028)"

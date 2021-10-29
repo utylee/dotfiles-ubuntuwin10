@@ -20,6 +20,16 @@ fisher install daenney/pyenv
 * install z plugin
 fisher install jethrokuan/z
 
+* install ghq
+git clone https://github.com/x-motemen/ghq
+	* go install and build
+		.다운로드 후 /usr/local/ 에 넣고 bin폴더를 path를 걸어줍니다
+		.프로젝트 폴더내에서 go build를 하면 해당 바이너리를 go install을 하면 ~/go/bin 폴더에 설치
+			됩니다
+		.go 폴더를 숨김폴더로 변경합니다 
+			go env -w GOPATH="/home/utylee/.go"
+
+
 #* virtualfish 를 설치합니다. virtualenvwrapper가 되지 않아 fish용 대안입니다
 #(https://github.com/justinmayer/virtualfish)
 #pip install virtualfish
