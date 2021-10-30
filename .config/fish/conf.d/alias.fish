@@ -1,4 +1,4 @@
-if status --is-login
+if status is-interactive
 	function ll
 		ls -lha $argv
 	end
@@ -50,8 +50,9 @@ if status --is-login
 	end
 
 	function cdg
-		set -l toplevel (git rev-parse --show-toplevel > /dev/null 2>&1)
-		if ! test -z toplevel
+		set -l toplevel (git rev-parse --show-toplevel)
+		#if ! test -z toplevel
+		if test $status -eq 0
 			cd $toplevel
 		end
 	end

@@ -1,4 +1,4 @@
-if status --is-login
+if status is-interactive 
 	set -l rustup_path $HOME/.cargo/bin
 
 	set -q CARGO_HOME

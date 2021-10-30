@@ -1,4 +1,4 @@
-if status --is-login
+if status is-interactive
 	if test -z "$Z_DATA"
 		if test -z "$XDG_DATA_HOME"
 			set -U Z_DATA_DIR "$HOME/.local/share/z"
