@@ -49,6 +49,7 @@ function bye
 end
 
 
+alias g='git'
 alias td="dt"
 alias t1="source ~/.tmuxset-misc.fish"
 alias t0="source ~/.tmuxset-blog.fish"
