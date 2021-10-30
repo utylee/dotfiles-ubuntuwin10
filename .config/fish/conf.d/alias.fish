@@ -56,6 +56,7 @@ if status is-interactive
 			cd $toplevel
 		end
 	end
+	alias gcd='cdg'
 
 	alias g='git'
 	alias td="dt"
