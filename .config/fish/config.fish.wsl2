@@ -2,11 +2,14 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 	# CURSOR
 	#echo -ne '\eP\e]12;#207dab\a'	# wsl1
+	set fish_greeting ''
+	fish_vi_key_bindings
 	echo -ne '\eP\e]12;#e034a1\a'	# wsl2
+	fix_wsl2_interop
+	eval (dircolors -c ~/.dircolors)
+	starship init fish | source
 end
 
-set fish_greeting ''
-fish_vi_key_bindings
 set -Ux fish_term24bit 1
 
 set -gx EDITOR /usr/bin/vi
@@ -41,9 +44,7 @@ set -gx FZF_CTRL_R_OPTS "--reverse --height 50%"
 #
 # VENV
 set -gx WORKON_HOME $HOME/.virtualenvs
-eval (dircolors -c ~/.dircolors)
 
 
 #source ~/.mintty-colors-solarized/mintty-solarized-dark.sh
 
-starship init fish | source
