@@ -1,7 +1,8 @@
 # http://ethanschoonover.com/solarized#the-values
 
 
-if status is-interactive 
+if status is-login 
+#if status is-interactive 
 	# Use these settings if you've applied a Solarized theme to your terminal (for
 	# example, if "ls -G" produces Solarized output). i.e. if "blue" is #268bd2, not
 	# whatever the default is. (See "../etc/Solarized Dark.terminal" for OS X.)
@@ -111,5 +112,4 @@ if status is-interactive
 	#set -g __fish_git_prompt_color_dirtystate  $rgb_base3
 	#set -g __fish_git_prompt_color_stagedstate $rgb_green
 	#set -g __fish_git_prompt_color_upstream    $rgb_cyan
-
 end
