@@ -1,13 +1,13 @@
 if status is-interactive
-	starship init fish | source
-	set fish_greeting ''
-	fish_vi_key_bindings
-end
-if status is-login
-    # Commands to run in interactive sessions can go here
 	# CURSOR
 	#echo -ne '\eP\e]12;#207dab\a'	# wsl1
 	echo -ne '\eP\e]12;#e034a1\a'	# wsl2
+	set fish_greeting ''
+	fish_vi_key_bindings
+	starship init fish | source
+end
+if status is-login
+    # Commands to run in interactive sessions can go here
 	fix_wsl2_interop
 	eval (dircolors -c ~/.dircolors)
 end
