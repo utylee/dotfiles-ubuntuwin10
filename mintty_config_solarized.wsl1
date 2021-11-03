@@ -1,7 +1,7 @@
 # To use common configuration in %APPDATA%\mintty, simply remove this file
-Font=Input
+Font=Cascadia Code PL SemiLight
 FontHeight=14
-FontWeight=400
+FontWeight=350
 CursorType=block
 CursorBlinks=yes
 Term=xterm-256color-italic
@@ -32,3 +32,5 @@ BoldAsFont=no
 BoldAsColour=yes
 Columns=108
 Rows=41
+Locale=
+FontSmoothing=full
