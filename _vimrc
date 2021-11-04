@@ -109,8 +109,10 @@ set autochdir
 "nnoremap ,cd :cd %:p:h<CR> 
 
 if has("gui_running")
-	set lines=48
-	set columns=114
+	set lines=35
+	set columns=100
+	"set lines=48
+	"set columns=114
 	au GUIEnter * winpos 500 50
 endif
 
@@ -197,7 +199,13 @@ set fileencodings=utf-8,cp949
 "set guifont=D2Coding:h13:cANSI
 "set guifont=GohuFont:h14:cANSI
 "set guifont=Input\ Mono:h12:cDEFAULT
-set guifont=InputMonoNarrow_Light:h12:cDEFAULT
+
+"set guifont=InputMonoNarrow_Light:h12:cDEFAULT
+"set guifont=Cascadia\ Mono\ PL:h14:cDEFAULT
+set guifont=Cascadia\ Mono\ PL\ SemiLight:h14:cDEFAULT
+"아래옵션이 오히려 SemiLight 폰트를 로딩못하게 합니다
+"set renderoptions=type:directx,gamma:1.25,contrast:0.25,level:0.75,geom:1,renmode:5,taamode:1
+
 "set guifont=Input:h12:cDEFAULT
 "set guifont=Input:h12:cANSI
 "set guifont=Imma2:h12:cDEFAULT
@@ -205,7 +213,6 @@ set guifont=InputMonoNarrow_Light:h12:cDEFAULT
 "set guifontwide=나눔고딕코딩:h13.8:cDEFAULT
 "set guifontwide=Inconsolata\ for\ Powerline:h14:cDEFAULT
 "set renderoptions=type:directx,gamma:1.0,contrast:0.2,level:1.0,geom:1,renmode:5,taamode:1
-set renderoptions=type:directx,gamma:1.25,contrast:0.25,level:0.75,geom:1,renmode:5,taamode:1
 "cd c:\_GoogleDrive\
 "cd c:\Users\utylee\00-projects
 "cd c:\Users\seoru\00-projects\00-python
