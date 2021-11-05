@@ -15,7 +15,9 @@ chsh -s /usr/local/bin/fish
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 
 * install fisher pyenv plugin
-fisher install daenney/pyenv
+fisher install utylee/pyenv 
+	: 기존 pyenv가 scp 나 ssh-copy-id 등에서 문제를 일으켜서 코드를 직접 추가해줬습니다.
+ #fisher install daenney/pyenv
 
 * install z plugin
 fisher install jethrokuan/z
@@ -25,7 +27,7 @@ git clone https://github.com/x-motemen/ghq
 	* go install and build
 		.다운로드 후 /usr/local/ 에 넣고 bin폴더를 path를 걸어줍니다
 		.go 폴더를 숨김폴더로 변경합니다 
-			go env -w GOPATH="/home/utylee/.go"
+			go env -w GOPATH="/home/odroid/.go"
 		.프로젝트 폴더내에서 go build를 하면 해당 바이너리를 go install을 하면 ~/go/bin 폴더에 설치
 			됩니다
 
