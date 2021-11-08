@@ -11,6 +11,9 @@ set timeoutlen=1000 ttimeoutlen=0
 "set grepprg=rg\ --color=never
 "set grepprg=rg\ --vimgrep
 
+" 밑줄_이 아닌 하이픈- 으로도 파싱을 해주는 것 아닐까 합니다
+set iskeyword+=-
+
 set grepprg=ag
 set updatetime=1000
 
