@@ -3,6 +3,10 @@ set nocompatible
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
 
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
 set timeoutlen=1000 ttimeoutlen=0
 "set grepprg=rg\ --color=never
 "set grepprg=rg\ --vimgrep
@@ -86,7 +90,7 @@ map <leader>0 :cd /home/utylee/temp/projectLegion/build/src/server/worldserver<c
 " 한마디전으로
 
 nmap <leader>z :cd %:p:h<cr> :pwd<cr>
-nmap <leader>Z :ProsessionDelete<cr>
+nmap <leader>Z :ProsessionDelete<cr> :cd %:p:h<cr> :pwd<cr>
 
 " 버퍼를 저장하지 않아도 버퍼간 이동을 가능하게끔합니다
 set hidden
@@ -274,24 +278,89 @@ let g:lsp_signs_enabled = 1         " enable signs
 let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
 
 "let g:virtualenv_directory = '/home/utylee/00-Projects/venv-tyTrader'
-set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#virtualenv#enabled = 0
-let g:airline#extensions#tagbar#flags = 'f'
 
-"let g:airline_section_a = airline#sections#create(['mode', %{airline#extensions#branch#get_head()}''branch'])
 
-function! AirlineWrapper(ext)
-	let head = airline#extensions#branch#head()
-	return empty(head) ? '' : printf(' %s', airline#extensions#branch#get_head())
+function! StatusLine(current, width)
+  let l:s = ''
+
+  if a:current
+    let l:s .= crystalline#mode() . crystalline#right_mode_sep('')
+  else
+    let l:s .= '%#CrystallineInactive#'
+  endif
+  let l:s .= ' %f%h%w%m%r '
+  if a:current
+    let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()}'
+  endif
+
+  let l:s .= '%='
+  if a:current
+    let l:s .= crystalline#left_sep('', 'Fill') . ' %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""}'
+    let l:s .= crystalline#left_mode_sep('')
+  endif
+  if a:width > 80
+    let l:s .= ' %{&ft}[%{&fenc!=#""?&fenc:&enc}][%{&ff}] %l/%L %c%V %P '
+  else
+    let l:s .= ' '
+  endif
+
+  return l:s
 endfunction
 
+function! TabLine()
+  let l:vimlabel = has('nvim') ?  ' NVIM ' : ' VIM '
+  return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%#CrystallineTab# ' . l:vimlabel
+endfunction
 
-let g:airline_section_a = airline#section#create(['mode', ' ', '%{airline#extensions#branch#get_head()}'])
+let g:crystalline_enable_sep = 1
+let g:crystalline_statusline_fn = 'StatusLine'
+let g:crystalline_tabline_fn = 'TabLine'
+"let g:crystalline_theme = 'default'
+"let g:crystalline_theme = 'molokai'
+let g:crystalline_theme = 'onedark'
+
+set showtabline=2
+set guioptions-=e
+set laststatus=2
+
+
+"set laststatus=2
+"let g:airline_theme='base16_embers'
+"let g:airline_powerline_fonts = 1
+"let g:airline#extensions#virtualenv#enabled = 0
+"let g:airline#extensions#tagbar#flags = 'f'
+"function! AirlineWrapper(ext)
+	"let head = airline#extensions#branch#head()
+	"return empty(head) ? '' : printf(' %s', airline#extensions#branch#get_head())
+"endfunction
+"let g:airline_section_a = airline#section#create(['mode', ' ', '%{airline#extensions#branch#get_head()}'])
+"let g:airline_section_b = airline#section#create(['%{virtualenv#statusline()}'])
+"" Enable the list of buffers
+"let g:airline#extensions#tabline#enabled = 1
+"
+"" Show just the filename
+"let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline_mode_map = {
+"\ '__' : '-',
+"\ 'n'  : 'N',
+"\ 'i'  : 'I',
+"\ 'R'  : 'R',
+"\ 'v'  : 'V',
+"\ 'V'  : 'V-L',
+"\ 'c'  : 'C',
+"\ 's'  : 'S',
+"\ 'S' : 'S-L',
+"\ }
+
+
+
+
+
+""let g:airline_section_a = airline#sections#create(['mode', %{airline#extensions#branch#get_head()}''branch'])
+
 "let g:airline_section_a = airline#section#create(['mode', '%{AirlineWrapper()}'])
 "let g:airline_section_b = airline#section#create([g:airline_symbols.branch, ' ', '%{fugitive#head()}', ' ', ' %{virtualenv#statusline()}'])
 "let g:airline_section_b = airline#section#create(['%{airline#extensions#branch#get_head()}', ' %{virtualenv#statusline()}'])
-let g:airline_section_b = airline#section#create(['%{virtualenv#statusline()}'])
 "let g:airline_section_b = airline#section#create(['branch'])
 "let g:airline_section_b = ['branch']
 "let g:virtualenv_stl_format = '[%n]'
@@ -301,11 +370,6 @@ let g:airline_section_b = airline#section#create(['%{virtualenv#statusline()}'])
 "let g:airline_section_c = '%t'
 
 
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
 
 "function! MyOverride(...)
 "	call a:l.add_section('StatusLine', 'all')
@@ -313,17 +377,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 "endfunction
 "call airline#add_statusline_func('MyOverride')
 
-let g:airline_mode_map = {
-\ '__' : '-',
-\ 'n'  : 'N',
-\ 'i'  : 'I',
-\ 'R'  : 'R',
-\ 'v'  : 'V',
-\ 'V'  : 'V-L',
-\ 'c'  : 'C',
-\ 's'  : 'S',
-\ 'S' : 'S-L',
-\ }
 
 
 
@@ -332,9 +385,8 @@ let g:jedi#auto_initialization = 0
 let g:jedi#force_py_version=3
 
 " emmet-vim 을 html과 css에서만 사용하는 설정
-
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css,js EmmetInstall
 
 set noundofile
 set number
@@ -374,9 +426,10 @@ set noshellslash
 "nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 "nmap <leader>r :redraw!<CR>
 "nmap <leader>e :!ts python '%' 2>/dev/null<CR> <CR>
-nmap <leader>r :Rooter<CR>
+nmap <leader>r :Rooter<CR> :pwd<cr>
 "let g:rooter_manual_only = 1
-let g:rooter_patterns = ['Rakefile', '.git/']
+"let g:rooter_patterns = ['Rakefile', '.git/']
+let g:rooter_patterns = ['.git', 'Makefile', 'Rakefile']
 "stop vim-rooter change dir automatically
 let g:rooter_manual_only = 1   
 nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
@@ -495,7 +548,6 @@ colorscheme solarized_sd_utylee
 " 일단 요 두개가 맘에 듬
 "let g:airline_theme='wombat'
 "let g:airline_theme='raven'
-let g:airline_theme='base16_embers'
 
 "let g:airline_theme='jellybeans'
 
