@@ -7,7 +7,9 @@ if &shell =~# 'fish$'
     set shell=sh
 endif
 
-set timeoutlen=1000 ttimeoutlen=0
+"10ms is more reasonable value
+set timeoutlen=1000 ttimeoutlen=10
+
 "set grepprg=rg\ --color=never
 "set grepprg=rg\ --vimgrep
 
