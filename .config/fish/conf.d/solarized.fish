@@ -1,8 +1,8 @@
 # http://ethanschoonover.com/solarized#the-values
 
 
-if status is-login 
-#if status is-interactive 
+#if status is-login 
+if status is-interactive 
 	# Use these settings if you've applied a Solarized theme to your terminal (for
 	# example, if "ls -G" produces Solarized output). i.e. if "blue" is #268bd2, not
 	# whatever the default is. (See "../etc/Solarized Dark.terminal" for OS X.)
@@ -82,7 +82,8 @@ if status is-login
 	#set -U fish_color_operator    $rgb_orange
 	#set -U fish_color_escape      $rgb_cyan
 
-	set -U fish_color_normal      $base0
+	set -U fish_color_normal      $base0 
+	#set -U fish_color_normal      $base0 --background=$base02
 	set -U fish_color_command     $base0
 	set -U fish_color_quote       $cyan
 	set -U fish_color_redirection $base0
@@ -91,9 +92,12 @@ if status is-login
 	set -U fish_color_param       $blue
 	set -U fish_color_comment     $base01
 	set -U fish_color_match       $cyan
-	set -U fish_color_search_match "--background=$base02"
+	#set -U fish_color_search_match "--background=$base02"
+	set -U fish_color_search_match --background=$base03 --italics
 	set -U fish_color_operator    $orange
 	set -U fish_color_escape      $cyan
+	set -U fish_pager_color_prefix $base3 
+	set -U fish_pager_color_completion $brwhite
 
 	# Used by fish_prompt
 
