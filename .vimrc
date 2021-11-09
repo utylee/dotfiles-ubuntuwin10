@@ -116,7 +116,8 @@ let vim_markdown_preview_hotkey='<C-m>'
 "set term=screen-256color
 set backspace=indent,eol,start
 
-let g:loaded_python_provider = 1
+" maybe nvim config?
+"let g:loaded_python_provider = 1
 
 "osx 터미널 상에서의 인서트모드 커서를 변경합니다.
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
