@@ -82,22 +82,22 @@ if status is-interactive
 	#set -U fish_color_operator    $rgb_orange
 	#set -U fish_color_escape      $rgb_cyan
 
-	set -U fish_color_normal      $base0 
+	set fish_color_normal      $base0 
 	#set -U fish_color_normal      $base0 --background=$base02
-	set -U fish_color_command     $base0
-	set -U fish_color_quote       $cyan
-	set -U fish_color_redirection $base0
-	set -U fish_color_end         $base0
-	set -U fish_color_error       $red
-	set -U fish_color_param       $blue
-	set -U fish_color_comment     $base01
-	set -U fish_color_match       $cyan
-	#set -U fish_color_search_match "--background=$base02"
-	set -U fish_color_search_match --background=$base03 --italics
-	set -U fish_color_operator    $orange
-	set -U fish_color_escape      $cyan
-	set -U fish_pager_color_prefix $base3 
-	set -U fish_pager_color_completion $brwhite
+	set fish_color_command     $base0
+	set fish_color_quote       $cyan
+	set fish_color_redirection $base0
+	set fish_color_end         $base0
+	set fish_color_error       $red
+	set fish_color_param       $blue
+	set fish_color_comment     $base01
+	set fish_color_match       $cyan
+	set fish_color_search_match --background=$base02 --italics
+	#set fish_color_search_match --background=$base03 --italics
+	set fish_color_operator    $orange
+	set fish_color_escape      $cyan
+	set fish_pager_color_prefix $base3 
+	set fish_pager_color_completion $brwhite
 
 	# Used by fish_prompt
 
