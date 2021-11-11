@@ -20,7 +20,9 @@ fisher install utylee/pyenv
  #fisher install daenney/pyenv
 
 * install z plugin
-fisher install jethrokuan/z
+## XXXX fisher install jethrokuan/z
+# set -U 부분을 if문에 넣어서 set -U 의 무한 증식 리스크를 없애보기로 합니다
+fisher install utylee/z
 
 * install ghq
 git clone https://github.com/x-motemen/ghq
