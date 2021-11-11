@@ -1,3 +1,3 @@
 function tt
-    trans $argv[1]
+    trans :ko $argv[1]
 end

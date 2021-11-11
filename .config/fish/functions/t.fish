@@ -1,3 +1,3 @@
 function t 
-    trans -b $argv[1]
+    trans -b :ko $argv[1]
 end
