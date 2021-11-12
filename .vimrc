@@ -451,8 +451,8 @@ nmap <leader>q :bd!<CR>
 nmap <leader>Q :cclose<CR>
 "nmap <leader>a :bufdo bd<CR>
 "map <F7> :NERDTreeTabsToggle<CR>
-"nmap <leader>2 :NERDTreeToggle<CR>
-nmap <leader>2 :NERDTree<CR>
+""nmap <leader>2 :NERDTreeToggle<CR>
+"nmap <leader>2 :NERDTree<CR>
 "nmap <leader>3 :NERDTreeClose<CR>
 nmap <leader>1 :e $MYVIMRC<CR>
 nmap <leader>5 :syntax sync fromstart<CR>
@@ -502,15 +502,20 @@ nmap <leader>f :Files<cr>
 "nmap <leader>; :BLines<cr>
 nmap <leader>k :BLines<cr>
 nmap <leader>l :Lines<cr>
-nmap <silent> <Leader>g :BTags <C-R><C-W><CR>
-nmap <silent> <Leader>h :Tags <C-R><C-W><CR>
-nmap <silent> <Leader>j :Rg <C-R><C-W><CR>
-nmap <silent> <Leader>; :Lines <C-R><C-W><CR>
-"nmap <silent> <Leader>l :BLines <C-R><C-W><CR>
-"nmap <leader>l :BLines<cr>
-"nmap <silent> <Leader>g :Ag <C-R><C-W><CR>
 nmap <leader>b :Buffers<cr>
 nmap <leader>t :History<cr>		
+
+nmap <silent> <leader>ud :BTags <C-R><C-W><CR>
+nmap <silent> <Leader>us :Tags <C-R><C-W><CR>
+nmap <silent> <Leader>ua :Rg <C-R><C-W><CR>
+nmap <silent> <Leader>ul :Lines <C-R><C-W><CR>
+nmap <silent> <Leader>uk :BLines <C-R><C-W><CR>
+
+"nmap <silent> <Leader>g :BTags <C-R><C-W><CR>
+"nmap <silent> <Leader>h :Tags <C-R><C-W><CR>
+"nmap <silent> <Leader>j :Rg <C-R><C-W><CR>
+"nmap <silent> <Leader>; :Lines <C-R><C-W><CR>
+"nmap <silent> <Leader>l :BLines <C-R><C-W><CR>
 "nmap <leader>m :CtrlPMixed<cr>
 
 
