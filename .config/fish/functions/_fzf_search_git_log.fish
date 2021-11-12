@@ -11,6 +11,7 @@ function _fzf_search_git_log --description "Search the output of git log and pre
                 --tiebreak=index \
                 --preview='git show --color=always {1}' \
 				--multi \
+				--reverse \
                 --query=(commandline --current-token) \
                 $fzf_git_log_opts
         )

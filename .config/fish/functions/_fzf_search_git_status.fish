@@ -8,6 +8,8 @@ function _fzf_search_git_status --description "Search the output of git status. 
             _fzf_wrapper --ansi \
                 --multi \
                 --query=(commandline --current-token) \
+				--reverse \
+				--height 50% \
                 $fzf_git_status_opts
         )
         if test $status -eq 0

@@ -511,6 +511,12 @@ nmap <silent> <Leader>ua :Rg <C-R><C-W><CR>
 nmap <silent> <Leader>ul :Lines <C-R><C-W><CR>
 nmap <silent> <Leader>uk :BLines <C-R><C-W><CR>
 
+" for vim-fugitive
+nmap <leader>gd :Gdiffsplit<cr>
+nmap <leader>gb :Git blame<cr>
+nmap <leader>gw :Gwrite<cr>
+nmap <leader>gr :Gread<cr>
+
 "nmap <silent> <Leader>g :BTags <C-R><C-W><CR>
 "nmap <silent> <Leader>h :Tags <C-R><C-W><CR>
 "nmap <silent> <Leader>j :Rg <C-R><C-W><CR>
