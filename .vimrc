@@ -447,8 +447,15 @@ nmap <leader>c :!ts C-c<CR> <CR>
 "nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/Users/utylee/.virtualenvs/win/src/'%' 2>/dev/null<CR> <CR>
 "현재 행을 실행하는 커맨드인데 공백제거가 안돼 아직 제대로 되지 않습니다
 nmap <leader>` :set fullscreen<CR>
-nmap <leader>q :bd!<CR>
-nmap <leader>Q :cclose<CR>
+
+"nmap <leader>q :bd!<CR>
+"nmap <leader>Q :cclose<CR>
+"Add for all buffer close
+nmap <leader>qq :bd!<CR>
+nmap <leader>qa :%bd!<CR>
+nmap <leader>qc :cclose<CR>
+
+
 "nmap <leader>a :bufdo bd<CR>
 "map <F7> :NERDTreeTabsToggle<CR>
 ""nmap <leader>2 :NERDTreeToggle<CR>
@@ -516,6 +523,10 @@ nmap <leader>gd :Gdiffsplit<cr>
 nmap <leader>gb :Git blame<cr>
 nmap <leader>gw :Gwrite<cr>
 nmap <leader>gr :Gread<cr>
+"from fzf
+nmap <leader>gc :BCommits<cr>
+nmap <leader>gx :Commits<cr>
+
 
 "nmap <silent> <Leader>g :BTags <C-R><C-W><CR>
 "nmap <silent> <Leader>h :Tags <C-R><C-W><CR>
