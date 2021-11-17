@@ -298,6 +298,12 @@ function! StatusLine(current, width)
   if a:current
     let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()}'
   endif
+  if a:current
+	let l:s .= ' %{tagbar#currenttag(" %s\ ","")}'
+	"let l:s .= crystalline#right_sep('', 'Fill') 
+	""set statusline+=%{tagbar#currenttag('[%s]\ ','')}
+  endif
+
 
   let l:s .= '%='
   if a:current
