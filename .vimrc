@@ -457,10 +457,11 @@ nmap <leader>` :set fullscreen<CR>
 "nmap <leader>q :bd!<CR>
 "nmap <leader>Q :cclose<CR>
 "Add for all buffer close
-nmap <leader>qq :bd!<CR>
-nmap <leader>qa :%bd!<CR>
-nmap <leader>qc :cclose<CR>
-
+nmap <leader>q :bd!<CR>
+nmap ,q :%bd!<CR>
+nmap ,c :cclose<CR>
+" ;의 반대방향 역할을 하는 ,키를 더블클릭으로 사용하기 위함입니다
+nmap ,, ,
 
 "nmap <leader>a :bufdo bd<CR>
 "map <F7> :NERDTreeTabsToggle<CR>
