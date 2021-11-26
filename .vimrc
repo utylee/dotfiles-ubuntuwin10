@@ -460,8 +460,9 @@ nmap <leader>` :set fullscreen<CR>
 nmap <leader>q :bd!<CR>
 nmap ,q :%bd!<CR>
 nmap ,c :cclose<CR>
+nmap ,r :syntax sync fromstart<CR>
 " ;의 반대방향 역할을 하는 ,키를 더블클릭으로 사용하기 위함입니다
-nmap ,, ,
+nnoremap ,, ,
 
 "nmap <leader>a :bufdo bd<CR>
 "map <F7> :NERDTreeTabsToggle<CR>
@@ -512,7 +513,10 @@ nmap <leader>a :Rg<cr>
 nmap <leader>x :Ag<cr>
 nmap <leader>s :Tags<cr>
 nmap <leader>d :BTags<cr>
-nmap <leader>f :Files<cr>
+command! Dirs call fzf#run(fzf#wrap({'source': 'fd --type d --hidden --color=always', 'sink': 'edit'}))
+nmap <leader>fa :Files<cr>
+nmap <leader>ff :Dirs<cr>
+"nmap <leader>f :Files<cr>
 "nmap <leader>; :BLines<cr>
 nmap <leader>k :BLines<cr>
 nmap <leader>l :Lines<cr>
