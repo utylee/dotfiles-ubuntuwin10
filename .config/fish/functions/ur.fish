@@ -1,3 +1,3 @@
 function ur
-	curl http://192.168.0.202:9202/r
+	curl http://192.168.1.205:9205/r
 end
