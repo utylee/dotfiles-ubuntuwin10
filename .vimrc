@@ -588,6 +588,7 @@ nmap <silent> <Leader>uk :BLines <C-R><C-W><CR>
 
 " for vim-fugitive
 nmap <leader>gd :Gdiffsplit<cr>
+nmap <leader>gv :Gvdiffsplit<cr>
 nmap <leader>gb :Git blame<cr>
 nmap <leader>gw :Gwrite<cr>
 nmap <leader>gr :Gread<cr>
