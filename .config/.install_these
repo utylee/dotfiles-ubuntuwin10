@@ -46,3 +46,35 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 	* 이미 fish 상태라면 아래아래처럼 합니다
 	sh -c (curl -fsSL https://starship.rs/install.sh)
 
+* pyenv build dependencies 혹은 기본 설치해야할 것들
+sudo apt-get update; sudo apt-get install make build-essential \
+libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
+wget curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
+libpq-dev libcurl4-openssl-dev
+
+* nginx compile dependencies:
+apt-get install libperl-dev libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev google-perftools libgoogle-perftools-dev 
+#아래 몇개 설치한 건 빼고 위에 축약본입니다
+#apt-get install make libperl-dev libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev google-perftools libgoogle-perftools-dev gcc g++
+
+* nginx service 등록
+git clone https://github.com/Fleshgrinder/nginx-sysvinit-script.git
+sudo make install
+
+
+* 참고: 
+.결국 아래를 포기하고 그냥 mpd와 vlc 혹은 웹재생을 선택하기로 했습니다.
+ owntone 뮤직서버 설치시 avahi-daemon을 같이 설치해야되는데, 
+와우 설치 다운로드 시 dns 접속 요청을 엄청하는데 mDNS 때문에
+이 서버가 네트워크 dns 부하를 다 받는 것 같다.
+따라서 설정을 변경해줘야 하는데 nsswitch.conf의 host를 
+hosts: files dns 로만 남겨두고 지워야하는 것 같다.
+물론 이와중에 한번 행 걸리긴 했다ㄷㄷㄷ
+
+.etc/avahi/avahi.conf에서 ipv6설정도 한번 꺼봤습니다
+.공유기의 lan설정의 고급설정에서 igmp snooping도 켜봤습니다.
+그 순간 역시나 변함없이 멈춤이 발생했습니다
+
+
+
+
