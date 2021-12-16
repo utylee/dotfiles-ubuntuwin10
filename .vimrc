@@ -452,16 +452,21 @@ set laststatus=2
 "endfunction
 "call airline#add_statusline_func('MyOverride')
 
-
-
-
 let g:jedi#auto_initialization = 0 
 "let g:jedi#squelch_py_warning = 1
 let g:jedi#force_py_version=3
 
 " emmet-vim 을 html과 css에서만 사용하는 설정
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,js EmmetInstall
+
+"let g:user_emmet_install_global = 0
+"autocmd FileType html,css EmmetInstall
+let g:user_emmet_leader_key='<C-Q>'
+
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.js"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.erb'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
 
 set noundofile
 set number
@@ -501,17 +506,25 @@ set noshellslash
 "nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 "nmap <leader>r :redraw!<CR>
 "nmap <leader>e :!ts python '%' 2>/dev/null<CR> <CR>
-nmap <leader>r :Rooter<CR> :pwd<cr>
+"nmap <leader>r :Rooter<CR> :pwd<cr>
 "let g:rooter_manual_only = 1
 "let g:rooter_patterns = ['Rakefile', '.git/']
 let g:rooter_patterns = ['.git', 'Makefile', 'Rakefile']
 "stop vim-rooter change dir automatically
 let g:rooter_manual_only = 1   
-nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
+"nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
+
 "nmap <leader>w :!ts cargo build --release<CR> <CR>
 "nmap <leader>w :!ts cargo run -j4<CR> <CR>
 "nmap <leader>w :!ts ~/utylee/.virtualenvs/trsrv/Scripts/python.exe c:/Users/utylee/.virtualenvs/trsrv/src/'%' 2>/dev/null<CR> <CR>
-nmap <leader>w :!ts python.exe '%'<CR> <CR>
+
+nmap <leader>ee :!ts python '%:p' 2>/dev/null<CR> <CR>
+nmap <leader>er :!ts npm run dev<CR> <CR>
+"nmap <leader>er :!ts cargo run -j6<CR> <CR>
+nmap <leader>ew :!ts tsc '%:p' 2>/dev/null<CR> <CR>
+nmap <leader>w :!ts cargo run -j6<CR> <CR>
+
+"nmap <leader>w :!ts python.exe '%'<CR> <CR>
 nmap <leader>c :!ts C-c<CR> <CR>
 "nmap <leader>w :!ts /mnt/c/Users/utylee/.virtualenvs/win/Scripts/python.exe c:/Users/utylee/.virtualenvs/win/src/'%' 2>/dev/null<CR> <CR>
 "현재 행을 실행하는 커맨드인데 공백제거가 안돼 아직 제대로 되지 않습니다
