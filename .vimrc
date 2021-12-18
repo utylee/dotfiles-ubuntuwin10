@@ -7,6 +7,8 @@ if &shell =~# 'fish$'
     set shell=sh
 endif
 
+runtime macros/matchit.vim
+
 "10ms is more reasonable value
 set timeoutlen=1000 ttimeoutlen=10
 
@@ -112,7 +114,10 @@ nmap ,d <Plug>(coc-codeaction)
 "coc-prettier settings
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap ;f  <Plug>(coc-format-selected)
-nmap ;f  <Plug>(coc-format-selected)
+"nmap ;f  <Plug>(coc-format-selected)
+
+" 파일저장시 자동 수정이 아닌 수동 수정으로 변경합니다
+nmap ;f  :Prettier<CR>
 
 
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--hidden', <bang>0)
@@ -462,6 +467,9 @@ let g:jedi#force_py_version=3
 "autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-Q>'
 
+" emmet-vim 에서 태그제거가 그 내용까지 제거가돼서 vim vanilla로 구현
+noremap <C-Y>k vat<Esc>da>`<da>
+
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.js"
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.erb'
 let g:closetag_emptyTags_caseSensitive = 1
@@ -480,7 +488,7 @@ set noswapfile
 set noea 
 
 " 현재 파일의 디렉토리로 이동
-set autochdir
+"set autochdir
 " 만약 플러긴에서 문제가 생긴다면 아래대안을 사용할 것
 "nnoremap ,cd :cd %:p:h<CR> 
 
