@@ -1,4 +1,7 @@
 #perl 관련옵션이 컴파일 중 에러가 나서 실제로 perl 관련 컨피그는 제거하고 컴파일했습니다
+
+# 아래 사이트를 참고해서 서비스 스크립트까지 설치하도록 합니다
+# https://github.com/utylee/nginx-sysvinit-script
 ./configure \
 --sbin-path=/usr/local/sbin/nginx \
 --prefix=/usr/share/nginx \
