@@ -7,7 +7,15 @@ if &shell =~# 'fish$'
     set shell=sh
 endif
 
+let g:netrw_keepdir=0
 runtime macros/matchit.vim
+
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
+
 
 "10ms is more reasonable value
 set timeoutlen=1000 ttimeoutlen=10
