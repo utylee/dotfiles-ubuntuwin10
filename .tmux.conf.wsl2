@@ -1,7 +1,11 @@
 #set-option -g default-terminal "screen-256color-italic"
 #set-option -g default-terminal "xterm-256color"
-set-option -g default-terminal "xterm-256color-italic"
-set-option -ga terminal-overrides ",xterm-256color-italic:Tc"
+
+# set-option -g default-terminal "xterm-256color-italic"
+# set-option -ga terminal-overrides ",xterm-256color-italic:Tc"
+
+set-option -g default-terminal "xterm-256color"
+set-option -ga terminal-overrides ",xterm-256color:Tc"
 #set-option -g default-command "tmux rename-window base"
 set -g prefix C-a
 bind-key a send-prefix
