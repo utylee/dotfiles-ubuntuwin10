@@ -135,6 +135,11 @@ nmap ;f  :Prettier<CR>
 " 사용하게끔 했더군요
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, ' --path-to-ignore ~/.ignore', {'options': '--delimiter : --nth 4..'}, <bang>0)
 
+" fzf 에서 Rg 실행시 옵션과 파일명이 아닌 컨텐츠에서의 검색만을 하도록 하는
+" 옵션입니다
+" https://github.com/junegunn/fzf.vim/issues/346
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
 "command! -bang -nargs=* Ag
 "\ call fzf#vim#ag(<q-args>,
 "\                 <bang>0 ? fzf#vim#with_preview('up:60%')
