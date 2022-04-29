@@ -5,5 +5,5 @@ function ua
 	set b (string replace ' ' '_u_sp_' "$b")
 	#echo $b
 	# curl http://192.168.1.205:9205/c/"$b"
-	curl http://192.168.1.203/api/add/"$b"
+	curl http://192.168.1.203/memo/api/add/"$b"
 end
