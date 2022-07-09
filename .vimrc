@@ -16,7 +16,6 @@ augroup remember_folds
   autocmd BufWinEnter * silent! loadview
 augroup END
 
-
 "10ms is more reasonable value
 set timeoutlen=1000 ttimeoutlen=10
 
