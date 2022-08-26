@@ -1,15 +1,43 @@
+그런데 아래의 방법이 작업스케쥴러상 종종 실행이 안되는 
+안되는 문제가 발생해 startup폴더에 vbs를 넣는 방식을 사용합니다.
+startup-vbs폴더 내를 참조
+
+
+
 * 다음 사이트에 정리가 잘 되어 있었습니다
 https://codeac.tistory.com/118
+http://utylee.duckdns.org/WSL2%2C%20%EC%99%B8%EB%B6%80%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%EC%99%80%20%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0.htm
+
 
 * wsl2 wsl1 간의 변환방법이 정리된 사이트입니다
 https://www.lainyzine.com/ko/article/how-to-install-wsl2-and-use-linux-on-windows-10/
 
+
+
+*** 작업 스케쥴러에 아래를 각각 등록합니다
 
 * ssh 를 부팅과함께 실행하는 명령어입니다
 C:\Windows\System32\bash.exe -c "echo sksmsqnwk11 | sudo -S service ssh --full-restart"
 
 * 권한문제없이 ps1 스크립트를 실행하는 옵션을 포함합니다
 C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -File c:\wsl2-network.ps1
+
+
+*** 또한 wsl2시작 프로그램 등록방법은 아래와같이 visudo를 이용합니다
+
+-- sudo EDITOR=vi visudo 를 실행하고,
+
+
+# Members of the admin group may gain root privileges
+%admin ALL=(ALL) ALL
+
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
+%sudo ALL=NOPASSWD: /etc/init.d/ssh
+%sudo ALL=NOPASSWD: /etc/init.d/nginx
+%sudo ALL=NOPASSWD: /etc/init.d/postgresql
+%sudo ALL=NOPASSWD: /etc/init.d/docker
+
 
 
 
