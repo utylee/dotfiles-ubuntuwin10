@@ -7,11 +7,14 @@ function mrm
 		echo '0: writing, 1:arranging, 2:mixing'
 	else
 		if test $argv[1] -eq 0
-			curl http://utylee.duckdns.org/midea/remove/writing/$argv[2]
+		    curl http://192.168.1.202:9007/remove/writing/$argv[2]
+			# curl http://utylee.duckdns.org/midea/remove/writing/$argv[2]
 		else if test $argv[1] -eq 1
-			curl http://utylee.duckdns.org/midea/remove/arranging/$argv[2]
+		    curl http://192.168.1.202:9007/remove/arranging/$argv[2]
+			# curl http://utylee.duckdns.org/midea/remove/arranging/$argv[2]
 		else if test $argv[1] -eq 2
-			curl http://utylee.duckdns.org/midea/remove/mixing/$argv[2]
+		    curl http://192.168.1.202:9007/remove/mixing/$argv[2]
+			# curl http://utylee.duckdns.org/midea/remove/mixing/$argv[2]
 		end
 	end
 end
