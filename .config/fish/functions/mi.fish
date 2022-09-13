@@ -11,9 +11,12 @@ function mi
 		    curl http://192.168.1.202:9007/pick/writing
 			# curl http://utylee.duckdns.org/midea/pick/writing
 		else if test $argv[1] -eq 1
+		    curl http://192.168.1.202:9007/pick/sounding
+			# curl http://utylee.duckdns.org/midea/pick/sounding
+		else if test $argv[1] -eq 2
 		    curl http://192.168.1.202:9007/pick/arranging
 			# curl http://utylee.duckdns.org/midea/pick/arranging
-		else if test $argv[1] -eq 2
+		else if test $argv[1] -eq 3
 		    curl http://192.168.1.202:9007/pick/mixing
 			# curl http://utylee.duckdns.org/midea/pick/mixing
 		end

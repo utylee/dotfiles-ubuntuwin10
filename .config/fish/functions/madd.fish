@@ -4,7 +4,7 @@ function madd
 	# test -z 는 zero인지를 판별하는 문구입니다
 	if test -z $argv[1]
 	# if not set -q argv[1]
-		echo '0: writing, 1:arranging, 2:mixing'
+		echo '0: writing, 1: sounding, 2:arranging, 3:mixing'
 	else
 		set b $argv[2]
 		set b (string replace -a '?' '_u_qa_' "$b")
@@ -17,11 +17,14 @@ function madd
 		    # curl http://192.168.1.202:9007/add/writing/$argv[2]
 			# curl http://utylee.duckdns.org/midea/add/writing/$argv[2]
 		else if test $argv[1] -eq 1
+		    echo http://193.168.1.202:9007/add/sounding/"$b"
+		    curl http://192.168.1.202:9007/add/sounding/"$b"
+		else if test $argv[1] -eq 2
 		    echo http://193.168.1.202:9007/add/arranging/"$b"
 		    curl http://192.168.1.202:9007/add/arranging/"$b"
 		    # curl http://192.168.1.202:9007/add/arranging/$argv[2]
 			# curl http://utylee.duckdns.org/midea/add/arranging/$argv[2]
-		else if test $argv[1] -eq 2
+		else if test $argv[1] -eq 3
 		    echo http://193.168.1.202:9007/add/mixing/"$b"
 		    curl http://192.168.1.202:9007/add/mixing/"$b"
 		    # curl http://192.168.1.202:9007/add/mixing/$argv[2]
