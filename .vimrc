@@ -377,7 +377,8 @@ function! StatusLine(current, width)
   endif
   let l:s .= ' %f%h%w%m%r '
   if a:current
-    let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()}'
+    " let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()}'
+    let l:s .= crystalline#right_sep('', 'Fill') . ' %{FugitiveHead()}'
   endif
   if a:current
 	let l:s .= ' %{tagbar#currenttag(" %s\ ","")}'
@@ -541,10 +542,12 @@ let g:rooter_manual_only = 1
 
 " nmap <leader>ee :!ts python '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>ee :!tmux send-keys -t 1 "python %:p" Enter<CR><CR>
+" nmap <leader>ew :!ts tsc '%:p' 2>/dev/null<CR> <CR>
+nmap <leader>ew :!tmux send-keys -t 1 "/home/utylee/utylee/.virtualenvs/win/Scripts/python.exe  %:p" Enter<CR><CR>
+nmap <leader>et :!ts tsc '%:p' 2>/dev/null<CR> <CR>
 " nmap <leader>ee :!ls 2>/dev/null<CR>
 nmap <leader>er :!ts npm run dev<CR> <CR>
 "nmap <leader>er :!ts cargo run -j6<CR> <CR>
-nmap <leader>ew :!ts tsc '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>w :!ts cargo run -j6<CR> <CR>
 
 "nmap <leader>w :!ts python.exe '%'<CR> <CR>
