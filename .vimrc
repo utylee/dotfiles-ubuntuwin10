@@ -16,6 +16,7 @@ augroup remember_folds
   autocmd BufWinEnter * silent! loadview
 augroup END
 
+
 "10ms is more reasonable value
 set timeoutlen=1000 ttimeoutlen=10
 
@@ -538,7 +539,9 @@ let g:rooter_manual_only = 1
 "nmap <leader>w :!ts cargo run -j4<CR> <CR>
 "nmap <leader>w :!ts ~/utylee/.virtualenvs/trsrv/Scripts/python.exe c:/Users/utylee/.virtualenvs/trsrv/src/'%' 2>/dev/null<CR> <CR>
 
-nmap <leader>ee :!ts python '%:p' 2>/dev/null<CR> <CR>
+" nmap <leader>ee :!ts python '%:p' 2>/dev/null<CR> <CR>
+nmap <leader>ee :!tmux send-keys -t 1 "python %:p" Enter<CR><CR>
+" nmap <leader>ee :!ls 2>/dev/null<CR>
 nmap <leader>er :!ts npm run dev<CR> <CR>
 "nmap <leader>er :!ts cargo run -j6<CR> <CR>
 nmap <leader>ew :!ts tsc '%:p' 2>/dev/null<CR> <CR>
