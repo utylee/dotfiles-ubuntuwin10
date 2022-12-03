@@ -703,11 +703,14 @@ let g:rooter_manual_only = 1
 nmap <leader>ee :!tmux send-keys -t 1 "python %:p" Enter<CR><CR>
 " nmap <leader>ew :!ts tsc '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>ew :!tmux send-keys -t 1 "/home/utylee/utylee/.virtualenvs/win/Scripts/python.exe  %:p" Enter<CR><CR>
-nmap <leader>et :!ts tsc '%:p' 2>/dev/null<CR> <CR>
+" nmap <leader>et :!ts tsc '%:p' 2>/dev/null<CR> <CR>
+nmap <leader>et :!tmux send-keys -t 1 "tsc '%:p' 2>/dev/null" Enter<CR> <CR>
 " nmap <leader>ee :!ls 3>/dev/null<CR>
-nmap <leader>er :!ts npm run dev<CR> <CR>
+" nmap <leader>er :!ts npm run dev<CR> <CR>
+nmap <leader>er :!tmux send-keys -t 1 "npm run dev" Enter<CR><CR>
 "nmap <leader>er :!ts cargo run -j6<CR> <CR>
-nmap <leader>w :!ts cargo run -j6<CR> <CR>
+" nmap <leader>w :!ts cargo run -j6<CR> <CR>
+nmap <leader>w :!tmux send-keys -t 1 "cargo run -j6" Enter<CR> <CR>
 
 "nmap <leader>w :!ts python.exe '%'<CR> <CR>
 " nmap <leader>c :!ts C-c<CR> <CR>
