@@ -33,7 +33,7 @@ let g:simple_todo_map_normal_mode_keys = 0
 
 set rtp+=~/.fzf
 let g:fzf_history_dir = '~/.fzf/fzf-history'
-let g:fzf_layout = { 'down': '40%' }
+let g:fzf_layout = { 'down': '100%' }
 let g:fzf_preview_window = []
 
 let g:fzf_colors =
@@ -195,7 +195,23 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+" let g:lightline = {
+"       \ 'colorscheme': 'wombat',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'cocstatus': 'coc#status',
+"       \   'currentfunction': 'CocCurrentFunction'
+"       \ },
+"       \ }
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -274,7 +290,7 @@ command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 "autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "" Symbol renaming.
-"nmap ,e <Plug>(coc-rename)
+nmap ,e <Plug>(coc-rename)
 "nmap ,d <Plug>(coc-codeaction)
 
 ""coc-prettier settings
@@ -535,12 +551,14 @@ function! StatusLine(current, width)
     let l:s .= '%#CrystallineInactive#'
   endif
   let l:s .= ' %f%h%w%m%r '
+  " if a:current
+  "   " let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()}'
+  "   let l:s .= crystalline#right_sep('', 'Fill') . ' %{FugitiveHead()}'
+  " endif
   if a:current
-    " let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()}'
-    let l:s .= crystalline#right_sep('', 'Fill') . ' %{FugitiveHead()}'
-  endif
-  if a:current
-	let l:s .= ' %{tagbar#currenttag(" %s\ ","")}'
+	" let l:s .= '%{coc#status()}%{get(b:,"coc_current_function","")}'
+	" let l:s .= '%{coc#status()}'
+	let l:s .= crystalline#right_sep('', 'Fill') . ' %{tagbar#currenttag(" %s\ ","")}'
 	"let l:s .= crystalline#right_sep('', 'Fill') 
 	""set statusline+=%{tagbar#currenttag('[%s]\ ','')}
   endif
