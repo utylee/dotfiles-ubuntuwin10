@@ -1,0 +1,19 @@
+{
+  "coc.source.file.ignoreHidden": false,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "typescript",
+    "typescriptreact",
+    "json"
+  ],
+  "suggest.insertMode": "insert",
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "javascript": "javascriptreact"
+  },
+  "typescript.format.enable": false,
+  "javascript.format.enable": false,
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": ["--max-line-length=82"]
+}
