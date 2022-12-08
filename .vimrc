@@ -550,7 +550,8 @@ function! StatusLine(current, width)
   else
     let l:s .= '%#CrystallineInactive#'
   endif
-  let l:s .= ' %f%h%w%m%r '
+  " let l:s .= ' %f%h%w%m%r '
+  let l:s .= ' %t '
   " if a:current
   "   " let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()}'
   "   let l:s .= crystalline#right_sep('', 'Fill') . ' %{FugitiveHead()}'
@@ -570,7 +571,8 @@ function! StatusLine(current, width)
     let l:s .= crystalline#left_mode_sep('')
   endif
   if a:width > 80
-    let l:s .= ' %{&ft}[%{&fenc!=#""?&fenc:&enc}][%{&ff}] %l/%L %c%V %P '
+    " let l:s .= ' %{&ft}[%{&fenc!=#""?&fenc:&enc}][%{&ff}] %l/%L %c%V %P '
+    let l:s .= ' [%{&fenc!=#""?&fenc:&enc}/%{&ff}] %l/%L %c%V %P '
   else
     let l:s .= ' '
   endif
@@ -581,8 +583,16 @@ endfunction
 function! TabLine()
   let l:vimlabel = has('nvim') ?  ' NVIM ' : ' VIM '
   return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%#CrystallineTab# ' . l:vimlabel
+   " return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%t ' . l:vimlabel
 endfunction
 
+let g:crystalline_mode_labels = {
+        \ 'n': ' N ',
+        \ 'i': ' I ',
+        \ 'v': ' VISUAL ',
+        \ 'R': ' REPLACE ',
+        \ '': '',
+        \ }
 let g:crystalline_enable_sep = 1
 let g:crystalline_statusline_fn = 'StatusLine'
 let g:crystalline_tabline_fn = 'TabLine'
@@ -706,11 +716,12 @@ set noshellslash
 "nmap <leader>r :redraw!<CR>
 "nmap <leader>e :!ts python '%' 2>/dev/null<CR> <CR>
 "nmap <leader>r :Rooter<CR> :pwd<cr>
-"let g:rooter_manual_only = 1
 "let g:rooter_patterns = ['Rakefile', '.git/']
 let g:rooter_patterns = ['.git', 'Makefile', 'Rakefile']
+
 "stop vim-rooter change dir automatically
-let g:rooter_manual_only = 1   
+"let g:rooter_manual_only = 1   
+
 "nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 
 "nmap <leader>w :!ts cargo build --release<CR> <CR>
