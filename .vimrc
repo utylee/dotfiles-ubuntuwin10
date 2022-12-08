@@ -689,7 +689,7 @@ set noswapfile
 set noea 
 
 " 현재 파일의 디렉토리로 이동
-"set autochdir
+set autochdir
 " 만약 플러긴에서 문제가 생긴다면 아래대안을 사용할 것
 "nnoremap ,cd :cd %:p:h<CR> 
 
@@ -720,7 +720,7 @@ set noshellslash
 let g:rooter_patterns = ['.git', 'Makefile', 'Rakefile']
 
 "stop vim-rooter change dir automatically
-"let g:rooter_manual_only = 1   
+let g:rooter_manual_only = 1   
 
 "nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 
