@@ -139,15 +139,18 @@ augroup end
 
 " Applying code actions to the selected code block.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" xmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap ;a  <Plug>(coc-codeaction-selected)
+nmap ;a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for apply code actions at the cursor position.
-nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+nmap ;ac  <Plug>(coc-codeaction-cursor)
 " Remap keys for apply code actions affect whole buffer.
-nmap <leader>as  <Plug>(coc-codeaction-source)
+nmap ;as  <Plug>(coc-codeaction-source)
 " Apply the most preferred quickfix action to fix diagnostic on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap ;qf  <Plug>(coc-fix-current)
 
 " Remap keys for apply refactor code actions.
 nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
@@ -197,9 +200,9 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " provide custom statusline: lightline.vim, vim-airline.
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction
+" function! CocCurrentFunction()
+"     return get(b:, 'coc_current_function', '')
+" endfunction
 
 " let g:lightline = {
 "       \ 'colorscheme': 'wombat',
@@ -542,6 +545,9 @@ syntax on
 "let g:virtualenv_directory = '/home/utylee/00-Projects/venv-tyTrader'
 
 
+" vim-surround를 반복하게 해주는 vim-repeat 설정
+silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+
 function! StatusLine(current, width)
   let l:s = ''
 
@@ -717,7 +723,7 @@ set noshellslash
 "nmap <leader>e :!ts python '%' 2>/dev/null<CR> <CR>
 "nmap <leader>r :Rooter<CR> :pwd<cr>
 "let g:rooter_patterns = ['Rakefile', '.git/']
-let g:rooter_patterns = ['.git', 'Makefile', 'Rakefile']
+let g:rooter_patterns = ['.git', 'Makefile', 'Rakefile', 'package.json']
 
 "stop vim-rooter change dir automatically
 let g:rooter_manual_only = 1   
@@ -808,7 +814,6 @@ nmap <leader>3 :ArduinoSerial<CR>
 nmap <leader>v :Marks<cr>
 nmap <leader>m :Marks<cr>
 nmap <leader>a :Rg<cr>
-"nmap <leader>g :ProjectFiles<cr>
 nmap <leader>x :Ag<cr>
 nmap <leader>s :Tags<cr>
 nmap <leader>d :BTags<cr>
