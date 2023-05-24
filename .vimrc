@@ -158,7 +158,8 @@ xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 
 " Run the Code Lens action on the current line.
-nmap <leader>cl  <Plug>(coc-codelens-action)
+" nmap <leader>cl  <Plug>(coc-codelens-action)
+nmap ;cl  <Plug>(coc-codelens-action)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -560,12 +561,16 @@ function! StatusLine(current, width)
   let l:s .= ' %t '
   " if a:current
   "   " let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()}'
-  "   let l:s .= crystalline#right_sep('', 'Fill') . ' %{FugitiveHead()}'
+    " let l:s .= crystalline#right_sep('', 'Fill') . ' %{FugitiveHead()}'
+    " let l:s .= crystalline#right_sep('', '') . ' %{FugitiveHead()}'
   " endif
+  " let l:s .= '%='
   if a:current
 	" let l:s .= '%{coc#status()}%{get(b:,"coc_current_function","")}'
 	" let l:s .= '%{coc#status()}'
 	let l:s .= crystalline#right_sep('', 'Fill') . ' %{tagbar#currenttag(" %s\ ","")}'
+	" let l:s .= crystalline#right_mode_sep('') . ' %{tagbar#currenttag(" %s\ ","")}'
+	" let l:s .= ' %{tagbar#currenttag(" %s\ ","")}'
 	"let l:s .= crystalline#right_sep('', 'Fill') 
 	""set statusline+=%{tagbar#currenttag('[%s]\ ','')}
   endif
