@@ -3,6 +3,7 @@ tmux new-window -d -n vMISC
 
 # 수평분할을 25%로 합니다 
 tmux split-window -d -t vMISC -v -p 25  #"workon misc"
+# tmux split-window -d -t vMISC -v -l 12  #"workon misc"
 
 
 tmux select-window -t vMISC
