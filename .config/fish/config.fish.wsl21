@@ -1,0 +1,64 @@
+if status is-interactive
+	fix_wsl2_interop
+	set fish_greeting ''
+	fish_vi_key_bindings
+	#echo -ne '\eP\e]12;#e034a1\a'	# wsl2
+	echo -ne '\eP\e]12;#ab2294\a'	# wsl21
+	starship init fish | source
+end
+if status is-login
+    # Commands to run in interactive sessions can go here
+	# CURSOR
+	#echo -ne '\eP\e]12;#207dab\a'	# wsl1
+	eval (dircolors -c ~/.dircolors)
+end
+
+#set -Ux fish_term24bit 1
+set -x fish_term24bit 1
+
+set -x EDITOR /usr/bin/vi
+set -x GHQ_ROOT /home/utylee/.ghq
+#set -gx EDITOR /usr/bin/vi
+#set -gx GHQ_ROOT /home/utylee/.ghq
+
+# PATH
+set CLANGHOME /usr/local/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04
+set -l GOHOME /usr/local/go1.17.2
+set -l NODEHOME /usr/local/node-v18.16.0-linux-x64
+set -x PATH $CLANGHOME/bin $PATH
+set -x PATH $HOME/.go/bin $GOHOME/bin $NODEHOME/bin /home/utylee/utylee/bin $PATH
+#fish_add_path $CLANGHOME/bin
+#fish_add_path $HOME/.go/bin /usr/local/go1.17.2/bin /usr/local/node-v14.18.1-linux-x64/bin ~/utylee/bin
+
+# ssh 접속일 경우는 path를 직접 추가해줘야합니다. wsl login shell이 아니라 어쩔수없다합니다 
+test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python38/ /mnt/c/Python38/Scripts $PATH
+#test -z $SSH_CLIENT; or fish_add_path /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python38/ /mnt/c/Python38/Scripts
+
+set -x CC $CLANGHOME/bin/clang
+set -x CXX $CLANGHOME/bin/clang++
+set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH $CLANGHOME/lib 
+
+# FZF
+# fzf을 직접입력해 파일명 탐색 명내용 
+set -x FZF_DEFAULT_COMMAND 'fd --type file --color=always --follow --hidden --exclude .git'
+set -x FZF_DEFAULT_OPTS "--ansi"
+#
+#set -gx FZF_CTRL_T_COMMAND "fd --type d --hidden --color=always"
+set -x FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set -x FZF_CTRL_F_COMMAND "fd --type d --hidden --color=always . $HOME"
+set -x FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
+set -x FZF_CTRL_R_OPTS "--reverse --height 50%"
+#set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+
+#set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --no-ignore"
+#set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
+#set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
+#set -gx FZF_ALT_C_COMMAND "find . -depth"
+##set -gx FZF_ALT_C_COMMAND "rg --hidden --files --null | xargs -0 dirname | uniq"
+##set -gx FZF_ALT_C_COMMAND "rg --hidden --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq"
+#
+## VENV
+#set -x WORKON_HOME $HOME/.virtualenvs
+
+#source ~/.mintty-colors-solarized/mintty-solarized-dark.sh
+
