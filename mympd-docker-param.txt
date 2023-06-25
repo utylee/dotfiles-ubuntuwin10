@@ -1,0 +1,12 @@
+docker run -d \
+                                             --name=mympd \
+                                             --net="host" \
+                                             -e TZ=Asia/Seoul \
+                                             -e UMASK_SET=022 \
+                                             -e MYMPD_SSL=false \
+                                           -e MYMPD_HTTP_PORT=88 \
+                                           -e MPD_HOST=192.168.1.202 \
+                                           -v /home/utylee/temp/docker_volumes/mympd/workdir/:/var/lib/mympd/ \
+                                           -v /home/utylee/temp/docker_volumes/mympd/cachedir/:/var/cache/mympd/ \
+                                            --restart unless-stopped \
+                                             ghcr.io/jcorporation/mympd/mympd:9.4.1
