@@ -27,18 +27,15 @@ upstream api_hydro {
 }
 
 upstream uploader {
-	# server localhost:9999 fail_timeout=0;
-	server 192.168.1.102:9999 fail_timeout=0;
-	# server http://192.168.1.203/hydro/api fail_timeout=0;
 	# server unix:/tmp/api_hydro_1.sock fail_timeout=0;
+	server localhost:9999 fail_timeout=0;
+	# server http://192.168.1.203/hydro/api fail_timeout=0;
 }
  
 upstream api_uploader {
-	server localhost:9992 fail_timeout=0;
-	# server 192.168.1.203:9992 fail_timeout=0;
-	# server 192.168.1.203/api_uploader fail_timeout=0;
-	# server http://192.168.1.203/hydro/api fail_timeout=0;
 	# server unix:/tmp/api_hydro_1.sock fail_timeout=0;
+	server localhost:9992 fail_timeout=0;
+	# server http://192.168.1.203/hydro/api fail_timeout=0;
 }
 
 
