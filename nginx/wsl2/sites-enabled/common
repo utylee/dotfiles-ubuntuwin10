@@ -26,18 +26,35 @@ upstream api_hydro {
 	# server http://192.168.1.203/hydro/api fail_timeout=0;
 }
 
-upstream uploader {
+upstream youtube {
 	# server unix:/tmp/api_hydro_1.sock fail_timeout=0;
-	server localhost:9999 fail_timeout=0;
+	# server localhost:9999 fail_timeout=0;
+	server localhost:9991 fail_timeout=0;
 	# server http://192.168.1.203/hydro/api fail_timeout=0;
 }
  
-upstream api_uploader {
+upstream api_youtube {
 	# server unix:/tmp/api_hydro_1.sock fail_timeout=0;
-	server localhost:9992 fail_timeout=0;
+	# server localhost:9992 fail_timeout=0;
+	server 192.168.1.203 fail_timeout=0;
 	# server http://192.168.1.203/hydro/api fail_timeout=0;
 }
 
+upstream youtube_uploader {
+	# localhost 로 명명하니 nginx 의 호스트인 wsl2의 localhost인 172.xxx류의 
+	#아이피로 인식되어 안되는 것인 것 같기도 하다.
+	# uploader 는 파일 복사 속도 때문에 wsl1에서 돌아가므로 직접 로컬아이피를 적어주었다
+	# server localhost:9993 fail_timeout=0;
+	server 192.168.1.204:9993 fail_timeout=0;
+}
+
+upstream youtube_cookie {
+	# server unix:/tmp/cookie_changer.sock fail_timeout=0;
+	server 192.168.1.204:9998 fail_timeout=0;
+	# server localhost:9999 fail_timeout=0;
+	# server localhost:9991 fail_timeout=0;
+	# server http://192.168.1.203/hydro/api fail_timeout=0;
+}
 
 upstream memo {
 	server 0.0.0.0:3000 fail_timeout=0;
