@@ -50,7 +50,7 @@ upstream youtube_uploader {
 
 upstream youtube_cookie {
 	# server unix:/tmp/cookie_changer.sock fail_timeout=0;
-	server 192.168.1.204:9998 fail_timeout=0;
+	server 192.168.1.204:9978 fail_timeout=0;
 	# server localhost:9999 fail_timeout=0;
 	# server localhost:9991 fail_timeout=0;
 	# server http://192.168.1.203/hydro/api fail_timeout=0;
