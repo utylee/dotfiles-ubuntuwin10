@@ -1,0 +1,63 @@
+if status is-interactive
+	# CURSOR
+	echo -ne '\eP\e]12;#207dab\a'	# wsl1
+	##echo -ne '\eP\e]12;#e034a1\a'	# wsl2
+	set fish_greeting ''
+	fish_vi_key_bindings
+	starship init fish | source
+end
+if status is-login
+    # Commands to run in interactive sessions can go here
+	fix_wsl2_interop
+	eval (dircolors -c ~/.dircolors)
+end
+
+set -x fish_term24bit 1
+
+set -x EDITOR /usr/bin/vi
+set -x GHQ_ROOT /home/utylee/.ghq
+
+# PATH
+set CLANGHOME /usr/local/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04
+set -l GOHOME /usr/local/go1.17.2
+# set -l NODEHOME /usr/local/node-v16.13.0-linux-x64
+set -l NODEHOME /usr/local/node-v18.12.1-linux-x64
+#fish_add_path $CLANGHOME/bin 
+#fish_add_path $HOME/.go/bin /usr/local/go1.17.2/bin /usr/local/node-v14.18.1-linux-x64/bin ~/utylee/bin
+set -x PATH $CLANGHOME/bin $PATH
+set -x PATH $HOME/.go/bin $GOHOME/bin $NODEHOME/bin /mnt/c/Windows/System32/WindowsPowrShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts /home/utylee/utylee/bin $PATH
+test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
+#test -z $SSH_CLIENT; or fish_add_path /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts
+#test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
+set -x CC $CLANGHOME/bin/clang
+set -x CXX $CLANGHOME/bin/clang++
+set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH $CLANGHOME/lib 
+
+# FZF
+# fzf을 직접입력해 파일명 탐색용  
+set -gx FZF_DEFAULT_COMMAND 'fd --type file --color=always --follow --hidden --exclude .git'
+set -gx FZF_DEFAULT_OPTS "--ansi"
+# 현재디렉토리로부터 검색
+set -gx FZF_CTRL_T_COMMAND "fd --type file --color=always --follow --hidden --exclude .git"
+## 풀디렉토리로부터 검색
+#set -gx FZF_CTRL_TT_COMMAND "fd --type file --color=always --follow --hidden --exclude .git . $HOME"
+
+set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
+#set -gx FZF_CTRL_F_COMMAND "fd --type d --hidden --color=always . $HOME"
+set -gx FZF_CTRL_R_OPTS "--reverse --height 100%"
+#set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+#set -gx FZF_CTRL_T_COMMAND "fd --type d --hidden --color=always"
+
+#set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --no-ignore"
+#set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
+#set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
+#set -gx FZF_ALT_C_COMMAND "find . -depth"
+##set -gx FZF_ALT_C_COMMAND "rg --hidden --files --null | xargs -0 dirname | uniq"
+##set -gx FZF_ALT_C_COMMAND "rg --hidden --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq"
+#
+# VENV
+set -gx WORKON_HOME $HOME/.virtualenvs
+
+
+#source ~/.mintty-colors-solarized/mintty-solarized-dark.sh
+
