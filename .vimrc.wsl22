@@ -66,6 +66,90 @@ let g:terminal_ansi_colors = [
 "set t_Co=16
 "let g:solarized_termcolors=16
 
+"vim-gutentags setups
+"
+"
+
+" let g:gutentags_add_default_project_roots = 0
+" let g:gutentags_project_root = ['package.json', '.git']
+
+" let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+
+" let g:gutentags_generate_on_new = 1
+" let g:gutentags_generate_on_missing = 1
+" let g:gutentags_generate_on_write = 1
+" let g:gutentags_generate_on_empty_buffer = 0
+
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+ailmnS',
+      \ ]
+
+let g:gutentags_ctags_exclude = [
+      \ '*.git', '*.svg', '*.hg',
+      \ '*/tests/*',
+      \ 'build',
+      \ 'dist',
+      \ '*sites/*/files/*',
+      \ 'bin',
+      \ 'node_modules',
+      \ '.next',
+      \ 'bower_components',
+      \ 'cache',
+      \ 'compiled',
+      \ 'docs',
+      \ 'example',
+      \ 'bundle',
+      \ 'vendor',
+      \ '*.md',
+      \ '*-lock.json',
+      \ '*.lock',
+      \ '*bundle*.js',
+      \ '*build*.js',
+      \ '.*rc*',
+      \ '*.json',
+      \ '*.min.*',
+      \ '*.map',
+      \ '*.bak',
+      \ '*.zip',
+      \ '*.pyc',
+      \ '*.class',
+      \ '*.sln',
+      \ '*.Master',
+      \ '*.csproj',
+      \ '*.tmp',
+      \ '*.csproj.user',
+      \ '*.cache',
+      \ '*.pdb',
+      \ 'tags*',
+      \ 'cscope.*',
+      \ '*.css',
+      \ '*.less',
+      \ '*.scss',
+      \ '*.exe', '*.dll',
+      \ '*.mp3', '*.ogg', '*.flac',
+      \ '*.swp', '*.swo',
+      \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+      \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+      \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+      \ ]
+
+" " enable gtags module
+" " let g:gutentags_modules = ['ctags', 'gtags_cscope']
+" let g:gutentags_modules = ['ctags']
+
+" " config project root markers.
+" let g:gutentags_project_root = ['.root']
+
+" " generate datebases in my cache directory, prevent gtags files polluting my project
+" let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" " change focus to quickfix window after search (optional).
+" let g:gutentags_plus_switch = 1
+
+" let g:gutentags_plus_nomap = 1
+
+
 " coc setups  ---------------------------------------------------------
 "
 "
@@ -797,10 +881,10 @@ map <A-4> :tabprevious<CR>
 "map <F4> :cp<CR>
 "ex) :ccl<CR>       "Close the search result windows
 
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-h> <c-w>h
-map <c-l> <c-w>l
+" map <c-j> <c-w>j
+" map <c-k> <c-w>k
+" map <c-h> <c-w>h
+" map <c-l> <c-w>l
 "map <C-T> :tabnew<CR>:wincmd w<CR>
 
 " Setup some default ignores
