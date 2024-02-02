@@ -58,6 +58,54 @@ let g:terminal_ansi_colors = [
     \ '#002b36', '#cb4b16', '#586e75', '#657b83',
     \ '#839496', '#6c71c4', '#93a1a1', '#fdf6e3']
 
+let g:gutentags_ctags_exclude = [
+      \ '*.git', '*.svg', '*.hg',
+      \ '*/tests/*',
+      \ 'build',
+      \ 'dist',
+      \ '*sites/*/files/*',
+      \ 'bin',
+      \ 'node_modules',
+      \ 'bower_components',
+      \ 'cache',
+      \ 'compiled',
+      \ 'docs',
+      \ 'example',
+      \ 'bundle',
+      \ 'vendor',
+      \ '*.md',
+      \ '*-lock.json',
+      \ '*.lock',
+      \ '*bundle*.js',
+      \ '*build*.js',
+      \ '.*rc*',
+      \ '*.json',
+      \ '*.min.*',
+      \ '*.map',
+      \ '*.bak',
+      \ '*.zip',
+      \ '*.pyc',
+      \ '*.class',
+      \ '*.sln',
+      \ '*.Master',
+      \ '*.csproj',
+      \ '*.tmp',
+      \ '*.csproj.user',
+      \ '*.cache',
+      \ '*.pdb',
+      \ 'tags*',
+      \ 'cscope.*',
+      \ '*.css',
+      \ '*.less',
+      \ '*.scss',
+      \ '*.exe', '*.dll',
+      \ '*.mp3', '*.ogg', '*.flac',
+      \ '*.swp', '*.swo',
+      \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+      \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+      \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+      \ ]
+
 "set t_Co=16
 "let g:solarized_termcolors=16
 
@@ -790,10 +838,6 @@ map <A-4> :tabprevious<CR>
 "map <F4> :cp<CR>
 "ex) :ccl<CR>       "Close the search result windows
 
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-h> <c-w>h
-map <c-l> <c-w>l
 "map <C-T> :tabnew<CR>:wincmd w<CR>
 
 " Setup some default ignores
@@ -832,7 +876,7 @@ nmap <leader>fg :ProjectFiles<cr>
 "nmap <leader>; :BLines<cr>
 nmap <leader>k :BLines<cr>
 nmap <leader>l :Lines<cr>
-nmap <leader>b :Buffers<cr>
+"nmap <leader>b :Buffers<cr>
 nmap <leader>t :History<cr>		
 
 nmap <silent> <leader>ud :BTags <C-R><C-W><CR>
@@ -865,7 +909,7 @@ nmap <leader>gx :Commits<cr>
 "nmap <leader>f :CtrlPCurWD<cr>
 
 " Easy bindings for its various modes
-"nmap <leader>b :CtrlPBuffer<cr>
+nmap <leader>b :CtrlPBuffer<cr>
 "nmap <leader>t :CtrlPMRU<cr>
 "nmap <leader>m :CtrlPMixed<cr>
 "nmap <leader>bs :CtrlPMRU<cr>
