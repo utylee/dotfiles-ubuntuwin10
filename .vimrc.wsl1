@@ -10,14 +10,18 @@ endif
 let g:netrw_keepdir=0
 runtime macros/matchit.vim
 
+" 새로운 wsl21 머신에서 오류가 나서 ?를 추가해보는 답변을 따라해보니 돼서
+" 일단 고쳐놓아봅니다
+" https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 augroup remember_folds
   autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
+  autocmd BufWinLeave ?* mkview 1
+  autocmd BufWinEnter ?* silent! loadview 1
 augroup END
 
 
 "10ms is more reasonable value
+set ttimeout
 set timeoutlen=1000 ttimeoutlen=10
 
 "set grepprg=rg\ --color=never
@@ -26,8 +30,9 @@ set timeoutlen=1000 ttimeoutlen=10
 " 밑줄_이 아닌 하이픈- 으로도 파싱을 해주는 것 아닐까 합니다
 set iskeyword+=-
 
-set grepprg=ag
+set grepprg=rg
 set updatetime=1000
+" set updatetime=300
 
 let g:simple_todo_map_normal_mode_keys = 0
 
@@ -60,6 +65,90 @@ let g:terminal_ansi_colors = [
 
 "set t_Co=16
 "let g:solarized_termcolors=16
+
+"vim-gutentags setups
+"
+"
+
+" let g:gutentags_add_default_project_roots = 0
+" let g:gutentags_project_root = ['package.json', '.git']
+
+" let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+
+" let g:gutentags_generate_on_new = 1
+" let g:gutentags_generate_on_missing = 1
+" let g:gutentags_generate_on_write = 1
+" let g:gutentags_generate_on_empty_buffer = 0
+
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+ailmnS',
+      \ ]
+
+let g:gutentags_ctags_exclude = [
+      \ '*.git', '*.svg', '*.hg',
+      \ '*/tests/*',
+      \ 'build',
+      \ 'dist',
+      \ '*sites/*/files/*',
+      \ 'bin',
+      \ 'node_modules',
+      \ '.next',
+      \ 'bower_components',
+      \ 'cache',
+      \ 'compiled',
+      \ 'docs',
+      \ 'example',
+      \ 'bundle',
+      \ 'vendor',
+      \ '*.md',
+      \ '*-lock.json',
+      \ '*.lock',
+      \ '*bundle*.js',
+      \ '*build*.js',
+      \ '.*rc*',
+      \ '*.json',
+      \ '*.min.*',
+      \ '*.map',
+      \ '*.bak',
+      \ '*.zip',
+      \ '*.pyc',
+      \ '*.class',
+      \ '*.sln',
+      \ '*.Master',
+      \ '*.csproj',
+      \ '*.tmp',
+      \ '*.csproj.user',
+      \ '*.cache',
+      \ '*.pdb',
+      \ 'tags*',
+      \ 'cscope.*',
+      \ '*.css',
+      \ '*.less',
+      \ '*.scss',
+      \ '*.exe', '*.dll',
+      \ '*.mp3', '*.ogg', '*.flac',
+      \ '*.swp', '*.swo',
+      \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+      \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+      \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+      \ ]
+
+" " enable gtags module
+" " let g:gutentags_modules = ['ctags', 'gtags_cscope']
+" let g:gutentags_modules = ['ctags']
+
+" " config project root markers.
+" let g:gutentags_project_root = ['.root']
+
+" " generate datebases in my cache directory, prevent gtags files polluting my project
+" let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" " change focus to quickfix window after search (optional).
+" let g:gutentags_plus_switch = 1
+
+" let g:gutentags_plus_nomap = 1
+
 
 " coc setups  ---------------------------------------------------------
 "
@@ -235,7 +324,9 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+" 이게 에러가 나서 formatFile 을 사용합니다
+" command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 "
 "
@@ -298,7 +389,7 @@ nmap ,e <Plug>(coc-rename)
 "nmap ,d <Plug>(coc-codeaction)
 
 ""coc-prettier settings
-"command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "vmap ;f  <Plug>(coc-format-selected)
 ""nmap ;f  <Plug>(coc-format-selected)
 
@@ -377,7 +468,7 @@ let vim_markdown_preview_hotkey='<C-m>'
 set backspace=indent,eol,start
 
 " maybe nvim config?
-"let g:loaded_python_provider = 1
+" let g:loaded_python_provider = 1
 
 "osx 터미널 상에서의 인서트모드 커서를 변경합니다.
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -484,7 +575,6 @@ set t_ut=
 
 "==================================================================
 
-" pack 때문에 필요없어졌습니다
 " execute pathogen#infect()
 
 filetype plugin indent on
@@ -749,6 +839,7 @@ nmap <leader>et :!tmux send-keys -t 1 "tsc '%:p' 2>/dev/null" Enter<CR> <CR>
 " nmap <leader>ee :!ls 3>/dev/null<CR>
 " nmap <leader>er :!ts npm run dev<CR> <CR>
 nmap <leader>er :!tmux send-keys -t 1 "npm run dev" Enter<CR><CR>
+nmap <leader>eb :!tmux send-keys -t 1 "npm run build" Enter<CR><CR>
 "nmap <leader>er :!ts cargo run -j6<CR> <CR>
 " nmap <leader>w :!ts cargo run -j6<CR> <CR>
 nmap <leader>w :!tmux send-keys -t 1 "cargo run -j6" Enter<CR> <CR>
@@ -790,10 +881,10 @@ map <A-4> :tabprevious<CR>
 "map <F4> :cp<CR>
 "ex) :ccl<CR>       "Close the search result windows
 
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-h> <c-w>h
-map <c-l> <c-w>l
+" map <c-j> <c-w>j
+" map <c-k> <c-w>k
+" map <c-h> <c-w>h
+" map <c-l> <c-w>l
 "map <C-T> :tabnew<CR>:wincmd w<CR>
 
 " Setup some default ignores
@@ -816,7 +907,7 @@ nmap <leader>3 :ArduinoSerial<CR>
 " Use the nearest .git directory as the cwd
 " This makes a lot of sense if you are working on a project that is in version
 " control. It also supports works with .svn, .hg, .bzr.
-"let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_working_path_mode = 'r'
 nmap <leader>v :Marks<cr>
 nmap <leader>m :Marks<cr>
 nmap <leader>a :Rg<cr>
@@ -832,7 +923,7 @@ nmap <leader>fg :ProjectFiles<cr>
 "nmap <leader>; :BLines<cr>
 nmap <leader>k :BLines<cr>
 nmap <leader>l :Lines<cr>
-nmap <leader>b :Buffers<cr>
+" nmap <leader>b :Buffers<cr>
 nmap <leader>t :History<cr>		
 
 nmap <silent> <leader>ud :BTags <C-R><C-W><CR>
@@ -865,7 +956,7 @@ nmap <leader>gx :Commits<cr>
 "nmap <leader>f :CtrlPCurWD<cr>
 
 " Easy bindings for its various modes
-"nmap <leader>b :CtrlPBuffer<cr>
+nmap <leader>b :CtrlPBuffer<cr>
 "nmap <leader>t :CtrlPMRU<cr>
 "nmap <leader>m :CtrlPMixed<cr>
 "nmap <leader>bs :CtrlPMRU<cr>
