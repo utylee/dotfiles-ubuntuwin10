@@ -94,6 +94,7 @@ let g:gutentags_ctags_exclude = [
       \ 'bin',
       \ 'node_modules',
       \ '.next',
+      \ 'out',
       \ 'bower_components',
       \ 'cache',
       \ 'compiled',
