@@ -1,7 +1,7 @@
 set nocompatible
 "source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
-"behave mswin
+behave mswin
 
 if &shell =~# 'fish$'
     set shell=sh
@@ -21,6 +21,7 @@ augroup END
 
 
 "10ms is more reasonable value
+" set notimeout
 set ttimeout
 set timeoutlen=1000 ttimeoutlen=10
 
@@ -797,13 +798,14 @@ set autochdir
 "nnoremap ,cd :cd %:p:h<CR> 
 
 if has("gui_running")
-	"set lines=55
-"	set columns=120
-"	au GUIEnter * winpos 300 0
+	set lines=35
+	set columns=95
+	" winpos 80 500
+	au GUIEnter * winpos 500 40
 "
-	"set guioptions -=T
-	"set guioptions -=m
-	set fullscreen
+	" set guioptions -=T
+	set guioptions -=m
+	" set fullscreen
 endif
 
 
@@ -834,7 +836,8 @@ let g:rooter_manual_only = 1
 " nmap <leader>ee :!ts python '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>ee :!tmux send-keys -t 1 "python %:p" Enter<CR><CR>
 " nmap <leader>ew :!ts tsc '%:p' 2>/dev/null<CR> <CR>
-nmap <leader>ew :!tmux send-keys -t 1 "/home/utylee/utylee/.virtualenvs/win/Scripts/python.exe  %:p" Enter<CR><CR>
+nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Program\ Files/Python38/python.exe %:p" Enter<CR><CR>
+nmap <leader>eq :!tmux send-keys -t 1 "/home/utylee/utylee/.virtualenvs/win/Scripts/python.exe  %:p" Enter<CR><CR>
 " nmap <leader>et :!ts tsc '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>et :!tmux send-keys -t 1 "tsc '%:p' 2>/dev/null" Enter<CR> <CR>
 " nmap <leader>ee :!ls 3>/dev/null<CR>
@@ -872,7 +875,7 @@ nnoremap ;; ;
 ""nmap <leader>2 :NERDTreeToggle<CR>
 "nmap <leader>2 :NERDTree<CR>
 "nmap <leader>3 :NERDTreeClose<CR>
-nmap <leader>1 :e $MYVIMRC<CR>
+nmap <leader>11 :e $MYVIMRC<CR>
 nmap <leader>5 :syntax sync fromstart<CR>
 "nmap <leader>1 :e ~/todo<CR>
 "nmap <leader>3 :r ~/.vim/mytemplate/main.txt<CR>
@@ -1203,7 +1206,8 @@ set fileencodings=utf-8,cp949
 "set guifont=Consolas:h10.2:cANSI
 "set guifont=Ubuntu\ Mono\ for\ Powerline:h15:cANSI
 "set guifont=Ubuntu\ Mono:h15:cANSI
-"set guifont=Ubuntu\ Mono\ derivative\ Powerline:h18.3
+" set guifont=Ubuntu\ Mono\ derivative\ Powerline:h18.3
+set guifont=Cascadia\ Mono\ PL\ Light:h14:cDEFAULT
 "set guifontwide=NanumGothicCoding:h23
 "set guifont=D2Coding\ for\ Powerline
 "set font=Ubuntu\ Mono\ derivative\ Powerline:h19
