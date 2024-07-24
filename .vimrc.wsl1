@@ -828,8 +828,6 @@ let g:rooter_manual_only = 1
 
 " send cd to directory of current buffer
 nmap <leader>gg :!tmux send-keys -t 1 "cd %:p:h" Enter<CR><CR>
-nmap <leader>ess :!tmux send-keys -t 1 "sudo screen /dev/ttyS3 115200" Enter<CR><CR>
-nmap <leader>z :!tmux send-keys -t 1  C-b<CR><CR>:sleep 200m<CR><CR>:!tmux send-keys -t 1 \\ <CR><CR>:!tmux send-keys -t 1 y<CR><CR> 
 
 "nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 
@@ -855,16 +853,21 @@ nmap <leader>eb :!tmux send-keys -t 1 "npm run build" Enter<CR><CR>
 "  for nodemcu, esp8266, arduino projects
 " nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:h' -v" Enter<CR><CR>
 " --- for arduino nano
-nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 8 -v" Enter<CR><CR>
-nmap <leader>es :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 8 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 4 -v" Enter<CR><CR>
+nmap <leader>es :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+" nmap <leader>ess :!tmux send-keys -t 1 "sudo screen /dev/ttyS3 115200" Enter<CR><CR>
+" nmap <leader>z :!tmux send-keys -t 1  C-b<CR><CR>:sleep 200m<CR><CR>:!tmux send-keys -t 1 \\ <CR><CR>:!tmux send-keys -t 1 y<CR><CR> 
+" changed to tio. /home/utylee/.tioconfig 참조
+nmap <leader>ess :!tmux send-keys -t 1 "tio com3" Enter<CR><CR>
+nmap <leader>z :!tmux send-keys -t 1  C-t<CR><CR>:sleep 200m<CR><CR>:!tmux send-keys -t 1 q<CR><CR>
 "
 " --- for arduino pro mini atmega328p
-nmap <leader>ed :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro --libraries '/home/utylee/.virtualenvs/arduino/src/_old/libraries' '%:p:h' -j 8 -v" Enter<CR><CR>
-nmap <leader>ef :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro '%:p:h' -j 8 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>ed :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro --libraries '/home/utylee/.virtualenvs/arduino/src/_old/libraries' '%:p:h' -j 4 -v" Enter<CR><CR>
+nmap <leader>ef :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
 
 " --- for esp8266
-nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 8 --port /dev/ttyS3 -v" Enter<CR><CR>
-nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 8 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
 " nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS3 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:h' -v" Enter<CR><CR>
 " nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS3 '%:h' -v" Enter<CR><CR>
 " nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS4 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:p:h' -v" Enter<CR><CR>
