@@ -150,6 +150,9 @@ let g:gutentags_ctags_exclude = [
 
 " let g:gutentags_plus_nomap = 1
 
+" 아두이노 코멘트를 /* */에서 //로 변경합니다
+" autocmd FileType arduino setlocal comments=:// "이줄은 없어도 되는 것같습니다
+autocmd FileType arduino setlocal commentstring=//\ %s
 
 " coc setups  ---------------------------------------------------------
 "
@@ -919,7 +922,7 @@ nmap ,r :syntax sync fromstart<CR>
 " ;의 반대방향 역할을 하는 ,키를 더블클릭으로 사용하기 위함입니다
 nnoremap ,, ,
 
-nmap ;z :cd %:p:h<cr> :pwd<cr>
+nmap ;z :cd %:p:h<cr><CR>:pwd<cr>
 nmap ;Z :ProsessionDelete<cr>
 nmap ;r :Rooter<CR>
 nnoremap ;; ;
