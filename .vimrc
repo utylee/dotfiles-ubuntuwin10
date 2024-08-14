@@ -10,14 +10,18 @@ endif
 let g:netrw_keepdir=0
 runtime macros/matchit.vim
 
+" 새로운 wsl21 머신에서 오류가 나서 ?를 추가해보는 답변을 따라해보니 돼서
+" 일단 고쳐놓아봅니다
+" https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
 augroup remember_folds
   autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
+  autocmd BufWinLeave ?* mkview 1
+  autocmd BufWinEnter ?* silent! loadview 1
 augroup END
 
 
 "10ms is more reasonable value
+set ttimeout
 set timeoutlen=1000 ttimeoutlen=10
 
 "set grepprg=rg\ --color=never
@@ -26,8 +30,9 @@ set timeoutlen=1000 ttimeoutlen=10
 " 밑줄_이 아닌 하이픈- 으로도 파싱을 해주는 것 아닐까 합니다
 set iskeyword+=-
 
-set grepprg=ag
+set grepprg=rg
 set updatetime=1000
+" set updatetime=300
 
 let g:simple_todo_map_normal_mode_keys = 0
 
@@ -60,6 +65,94 @@ let g:terminal_ansi_colors = [
 
 "set t_Co=16
 "let g:solarized_termcolors=16
+
+"vim-gutentags setups
+"
+"
+
+" let g:gutentags_add_default_project_roots = 0
+" let g:gutentags_project_root = ['package.json', '.git']
+
+" let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+
+" let g:gutentags_generate_on_new = 1
+" let g:gutentags_generate_on_missing = 1
+" let g:gutentags_generate_on_write = 1
+" let g:gutentags_generate_on_empty_buffer = 0
+
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+ailmnS',
+      \ ]
+
+let g:gutentags_ctags_exclude = [
+      \ '*.git', '*.svg', '*.hg',
+      \ '*/tests/*',
+      \ 'build',
+      \ 'dist',
+      \ '*sites/*/files/*',
+      \ 'bin',
+      \ 'node_modules',
+      \ '.next',
+      \ 'out',
+      \ 'bower_components',
+      \ 'cache',
+      \ 'compiled',
+      \ 'docs',
+      \ 'example',
+      \ 'bundle',
+      \ 'vendor',
+      \ '*.md',
+      \ '*-lock.json',
+      \ '*.lock',
+      \ '*bundle*.js',
+      \ '*build*.js',
+      \ '.*rc*',
+      \ '*.json',
+      \ '*.min.*',
+      \ '*.map',
+      \ '*.bak',
+      \ '*.zip',
+      \ '*.pyc',
+      \ '*.class',
+      \ '*.sln',
+      \ '*.Master',
+      \ '*.csproj',
+      \ '*.tmp',
+      \ '*.csproj.user',
+      \ '*.cache',
+      \ '*.pdb',
+      \ 'tags*',
+      \ 'cscope.*',
+      \ '*.css',
+      \ '*.less',
+      \ '*.scss',
+      \ '*.exe', '*.dll',
+      \ '*.mp3', '*.ogg', '*.flac',
+      \ '*.swp', '*.swo',
+      \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
+      \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
+      \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
+      \ ]
+
+" " enable gtags module
+" " let g:gutentags_modules = ['ctags', 'gtags_cscope']
+" let g:gutentags_modules = ['ctags']
+
+" " config project root markers.
+" let g:gutentags_project_root = ['.root']
+
+" " generate datebases in my cache directory, prevent gtags files polluting my project
+" let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" " change focus to quickfix window after search (optional).
+" let g:gutentags_plus_switch = 1
+
+" let g:gutentags_plus_nomap = 1
+
+" 아두이노 코멘트를 /* */에서 //로 변경합니다
+" autocmd FileType arduino setlocal comments=:// "이줄은 없어도 되는 것같습니다
+autocmd FileType arduino setlocal commentstring=//\ %s
 
 " coc setups  ---------------------------------------------------------
 "
@@ -235,7 +328,9 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+" 이게 에러가 나서 formatFile 을 사용합니다
+" command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 "
 "
@@ -298,7 +393,7 @@ nmap ,e <Plug>(coc-rename)
 "nmap ,d <Plug>(coc-codeaction)
 
 ""coc-prettier settings
-"command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "vmap ;f  <Plug>(coc-format-selected)
 ""nmap ;f  <Plug>(coc-format-selected)
 
@@ -354,8 +449,9 @@ map <leader>0 :cd /home/utylee/temp/projectLegion/build/src/server/worldserver<c
 " 현재파일의 디렉토리로 변경 %->  상대경로파일명, :p-> 절대경로파일명, :h->
 " 한마디전으로
 
-nmap <leader>z :cd %:p:h<cr> :pwd<cr>
-nmap <leader>Z :ProsessionDelete<cr> :cd %:p:h<cr> :pwd<cr>
+" screen exit 명령에 할당합니다
+" nmap <leader>z :cd %:p:h<cr> :pwd<cr>
+" nmap <leader>Z :ProsessionDelete<cr> :cd %:p:h<cr> :pwd<cr>
 
 " 버퍼를 저장하지 않아도 버퍼간 이동을 가능하게끔합니다
 set hidden
@@ -377,7 +473,7 @@ let vim_markdown_preview_hotkey='<C-m>'
 set backspace=indent,eol,start
 
 " maybe nvim config?
-"let g:loaded_python_provider = 1
+" let g:loaded_python_provider = 1
 
 "osx 터미널 상에서의 인서트모드 커서를 변경합니다.
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -484,7 +580,7 @@ set t_ut=
 
 "==================================================================
 
-execute pathogen#infect()
+" execute pathogen#infect()
 
 filetype plugin indent on
 syntax on
@@ -733,6 +829,9 @@ let g:rooter_patterns = ['.git', 'Makefile', 'Rakefile', 'package.json']
 "stop vim-rooter change dir automatically
 let g:rooter_manual_only = 1   
 
+" send cd to directory of current buffer
+nmap <leader>gg :!tmux send-keys -t 1 "cd %:p:h" Enter<CR><CR>
+
 "nmap <leader>e :!ts python '%:p' 2>/dev/null<CR> <CR>
 
 "nmap <leader>w :!ts cargo build --release<CR> <CR>
@@ -742,14 +841,68 @@ let g:rooter_manual_only = 1
 " nmap <leader>ee :!ts python '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>ee :!tmux send-keys -t 1 "python %:p" Enter<CR><CR>
 " nmap <leader>ew :!ts tsc '%:p' 2>/dev/null<CR> <CR>
-nmap <leader>ew :!tmux send-keys -t 1 "/home/utylee/utylee/.virtualenvs/win/Scripts/python.exe  %:p" Enter<CR><CR>
+nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Program\ Files/Python38/python.exe %:p" Enter<CR><CR>
+nmap <leader>eq :!tmux send-keys -t 1 "/home/utylee/utylee/.virtualenvs/win/Scripts/python.exe  %:p" Enter<CR><CR>
 " nmap <leader>et :!ts tsc '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>et :!tmux send-keys -t 1 "tsc '%:p' 2>/dev/null" Enter<CR> <CR>
 " nmap <leader>ee :!ls 3>/dev/null<CR>
 " nmap <leader>er :!ts npm run dev<CR> <CR>
 nmap <leader>er :!tmux send-keys -t 1 "npm run dev" Enter<CR><CR>
+nmap <leader>eb :!tmux send-keys -t 1 "npm run build" Enter<CR><CR>
 "nmap <leader>er :!ts cargo run -j6<CR> <CR>
 " nmap <leader>w :!ts cargo run -j6<CR> <CR>
+"
+"
+"  for nodemcu, esp8266, arduino projects
+" nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:h' -v" Enter<CR><CR>
+" --- for arduino nano
+nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 4 -v" Enter<CR><CR>
+nmap <leader>es :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+" nmap <leader>ess :!tmux send-keys -t 1 "sudo screen /dev/ttyS3 115200" Enter<CR><CR>
+" nmap <leader>z :!tmux send-keys -t 1  C-b<CR><CR>:sleep 200m<CR><CR>:!tmux send-keys -t 1 \\ <CR><CR>:!tmux send-keys -t 1 y<CR><CR> 
+" changed to tio. /home/utylee/.tioconfig 참조
+nmap <leader>ess :!tmux send-keys -t 1 "tio com3" Enter<CR><CR>
+nmap <leader>z :!tmux send-keys -t 1  C-t<CR><CR>:sleep 200m<CR><CR>:!tmux send-keys -t 1 q<CR><CR>
+"
+" --- for arduino pro mini atmega328p
+nmap <leader>ed :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro --libraries '/home/utylee/.virtualenvs/arduino/src/_old/libraries' '%:p:h' -j 4 -v" Enter<CR><CR>
+nmap <leader>ef :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+
+" --- for esp8266
+nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+" nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS3 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:h' -v" Enter<CR><CR>
+" nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS3 '%:h' -v" Enter<CR><CR>
+" nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS4 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:p:h' -v" Enter<CR><CR>
+nmap <leader>ei :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS5 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:h' -v" Enter<CR><CR>
+" nmap <leader>eo :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS6 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:h' -v" Enter<CR><CR>
+" ex))
+" https://vimdoc.sourceforge.net/htmldoc/eval.html#expand()
+"
+"When {expr} starts with '%', '#' or '<', the expansion is done
+		"like for the |cmdline-special| variables with their associated
+		"modifiers.  Here is a short overview:
+"
+			"%		current file name
+			"#		alternate file name
+			"#n		alternate file name n
+			"<cfile>		file name under the cursor
+			"<afile>		autocmd file name
+			"<abuf>		autocmd buffer number (as a String!)
+			"<amatch>	autocmd matched name
+			"<sfile>		sourced script file name
+			"<slnum>		sourced script file line number
+			"<cword>		word under the cursor
+			"<cWORD>		WORD under the cursor
+			"<client>	the {clientid} of the last received
+					"message |server2client()  | 
+"		modifiers:
+			":p		expand to full path
+			":h		head (last path component removed)
+			":t		tail (last path component only)
+			":r		root (one extension removed)
+			":e		extension only
+
 nmap <leader>w :!tmux send-keys -t 1 "cargo run -j6" Enter<CR> <CR>
 
 "nmap <leader>w :!ts python.exe '%'<CR> <CR>
@@ -769,7 +922,7 @@ nmap ,r :syntax sync fromstart<CR>
 " ;의 반대방향 역할을 하는 ,키를 더블클릭으로 사용하기 위함입니다
 nnoremap ,, ,
 
-nmap ;z :cd %:p:h<cr> :pwd<cr>
+nmap ;z :cd %:p:h<cr><CR>:pwd<cr>
 nmap ;Z :ProsessionDelete<cr>
 nmap ;r :Rooter<CR>
 nnoremap ;; ;
@@ -789,10 +942,10 @@ map <A-4> :tabprevious<CR>
 "map <F4> :cp<CR>
 "ex) :ccl<CR>       "Close the search result windows
 
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-h> <c-w>h
-map <c-l> <c-w>l
+" map <c-j> <c-w>j
+" map <c-k> <c-w>k
+" map <c-h> <c-w>h
+" map <c-l> <c-w>l
 "map <C-T> :tabnew<CR>:wincmd w<CR>
 
 " Setup some default ignores
@@ -815,7 +968,7 @@ nmap <leader>3 :ArduinoSerial<CR>
 " Use the nearest .git directory as the cwd
 " This makes a lot of sense if you are working on a project that is in version
 " control. It also supports works with .svn, .hg, .bzr.
-"let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_working_path_mode = 'r'
 nmap <leader>v :Marks<cr>
 nmap <leader>m :Marks<cr>
 nmap <leader>a :Rg<cr>
@@ -831,7 +984,7 @@ nmap <leader>fg :ProjectFiles<cr>
 "nmap <leader>; :BLines<cr>
 nmap <leader>k :BLines<cr>
 nmap <leader>l :Lines<cr>
-nmap <leader>b :Buffers<cr>
+" nmap <leader>b :Buffers<cr>
 nmap <leader>t :History<cr>		
 
 nmap <silent> <leader>ud :BTags <C-R><C-W><CR>
@@ -864,7 +1017,7 @@ nmap <leader>gx :Commits<cr>
 "nmap <leader>f :CtrlPCurWD<cr>
 
 " Easy bindings for its various modes
-"nmap <leader>b :CtrlPBuffer<cr>
+nmap <leader>b :CtrlPBuffer<cr>
 "nmap <leader>t :CtrlPMRU<cr>
 "nmap <leader>m :CtrlPMixed<cr>
 "nmap <leader>bs :CtrlPMRU<cr>
