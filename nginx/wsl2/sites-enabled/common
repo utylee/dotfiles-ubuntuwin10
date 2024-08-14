@@ -16,6 +16,16 @@
 
 proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=STATIC:10m inactive=7d use_temp_path=off;
 
+upstream print {
+	# server 192.168.1.202:3000 fail_timeout=0;
+	server 0.0.0.0:3002 fail_timeout=0;
+}
+upstream api_print {
+	# server unix:/tmp/api_hydro_1.sock fail_timeout=0;
+	server localhost:8080 fail_timeout=0;
+	# server http://192.168.1.203/hydro/api fail_timeout=0;
+}
+
 upstream hydro {
 	# server 192.168.1.202:3000 fail_timeout=0;
 	server 0.0.0.0:3001 fail_timeout=0;
