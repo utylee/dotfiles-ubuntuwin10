@@ -2,6 +2,13 @@
 enabled = true
 options = "metadata"
 
+[boot]
+systemd=true
+
+#[network]
+#generateResolvConf = false
+#generateHosts = false
+
 [interop]
 enabled=true # enable launch of Windows binaries; default is true
 appendWindowsPath=true # append Windows path to $PATH variable; default is true

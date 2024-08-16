@@ -1,0 +1,128 @@
+# upstream hydro {
+# 	# server 192.168.1.202:3000 fail_timeout=0;
+# 	server 0.0.0.0:3001 fail_timeout=0;
+# }
+# upstream api_hydro {
+# 	server unix:/temp/api_hydro_1.sock fail_timeout=0;
+# 	# server localhost:8080 fail_timeout=0;
+# }
+
+# server {
+	 # server_name 192.168.1.203;
+	# server_name utylee.duckdns.org;
+	# listen 80;
+	# location / {
+	# 	# index /hydro/hydro.html;
+	# 	# index hydro.html;
+	# 	alias /home/utylee/.virtualenvs/react/src/next-hydro/out/;
+	# 	# proxy_pass http://hydro/;
+	# }
+
+        #error_page  404              /404.html;
+
+        ## redirect server error pages to the static page /50x.html
+        ##
+        #error_page   500 502 503 504  /50x.html;
+        #location = /50x.html {
+        #    root   html;
+        #}
+
+	# # location /hydro/_next/static {
+	# location /_next/static {
+	# 	alias /home/utylee/.virtualenvs/react/src/next-hydro/.next/statica;
+	# }
+location /print/_next/webpack-hmr {
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection "upgrade";
+	proxy_set_header Host $http_host;
+	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	proxy_redirect off;
+	proxy_buffering off;
+	proxy_read_timeout 1800;
+
+	proxy_pass http://print/print/_next/webpack-hmr;
+}
+
+# location /print/_next/static/development {
+# 	# alias /home/utylee/.virtualenvs/react/src/next-print-12/.next/static/development;
+# 	proxy_pass http://print/_next/static/development;
+# }
+
+# location /print/_next/static {
+# 	# alias /home/utylee/.virtualenvs/react/src/next-print-12/.next/static;
+#  	proxy_pass http://print/_next/static;
+# }
+
+# webpack-hmr 과 더불어 이 조합이 그나마 가장 path 규칙 개수를 줄이고
+# 코드가 가장 적은 방법이었습니다. 
+location /print/_next {
+	# alias /home/utylee/.virtualenvs/react/src/next-print-12/.next/static;
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection "upgrade";
+	proxy_set_header Host $http_host;
+	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	proxy_redirect off;
+	proxy_buffering off;
+	proxy_read_timeout 1800;
+
+ 	proxy_pass http://print/_next;
+}
+
+# location /print/_next/static {
+# 	alias /home/utylee/.virtualenvs/react/src/next-print-12/.next/static;
+# }
+# location /print/_next/ {
+# 	alias /home/utylee/.virtualenvs/react/src/next-print-12/.next/;
+# }
+# location /print/_next/static/development {
+# 	alias /home/utylee/.virtualenvs/react/src/next-print-12/.next/static;
+# 	proxy_pass http://localhost:3002/print/_next/static/development;
+# }
+# location /print/_next/* {
+# 	alias /home/utylee/.virtualenvs/react/src/next-print-12/.next/*;
+# }
+
+# nextjs.config 상에서 assetPrefix과 함께 basePath를 사용해봤는데
+# 도저히 답이 안나와서 public을 차라리 명시적으로 사용하고 nginx가 서빙하는
+# 걸로 결론을 냈습니다	  
+location /print/public {
+	# autoindex on;
+	alias /home/utylee/.virtualenvs/react/src/next-print-12/public;
+}
+
+location /print/favicon.ico {
+	alias /home/utylee/.virtualenvs/react/src/next-print-12/public/favicon.ico;
+}
+
+location /print {
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection "upgrade";
+	proxy_set_header Host $http_host;
+	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	proxy_redirect off;
+	proxy_buffering off;
+	proxy_read_timeout 1800;
+
+	# proxy_pass http://hydro/hydro;
+	proxy_pass http://print;
+	# index hydro.html;
+	# alias /home/utylee/.virtualenvs/react/src/next-hydro/out;
+}
+
+location /print/api/ {
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection "upgrade";
+	proxy_set_header Host $http_host;
+	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	proxy_redirect off;
+	proxy_buffering off;
+	proxy_read_timeout 1800;
+
+	# proxy_pass http://api_hydro;
+	proxy_pass http://192.168.1.203/print/api/;
+}
+# }
