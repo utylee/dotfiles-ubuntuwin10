@@ -254,6 +254,9 @@ nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 " nmap <leader>cl  <Plug>(coc-codelens-action)
 nmap ;cl  <Plug>(coc-codelens-action)
 
+" cocrestart
+nmap ;cr  :CocRestart<CR><CR>
+
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
@@ -705,7 +708,8 @@ let g:crystalline_statusline_fn = 'StatusLine'
 let g:crystalline_tabline_fn = 'TabLine'
 "let g:crystalline_theme = 'default'
 "let g:crystalline_theme = 'molokai'
-let g:crystalline_theme = 'onedark'
+" let g:crystalline_theme = 'onedark'
+let g:crystalline_theme = 'gruvbox'
 
 set showtabline=2
 set guioptions-=e
@@ -870,11 +874,35 @@ nmap <leader>ef :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pr
 
 " --- for esp8266
 nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --port /dev/ttyS3 -v" Enter<CR><CR>
-nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+"
+" nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+"
+" dos 의 arduino-cli.exe를 이용해야 OTA(over-the-air) 업로드가
+" 가능했습니다.wsl 내에서는 mdns-dicovery가 작동하지 않았습니다.
+" 따라서 dos 식 파일명으로 정규식 교체 문법을 넣어줬습니다
+" 또한 패스워드를 물어보는데 더미를 전송해주기도 합니다
+" o는 over-the-air 의 o를 단축키로 지정하기로 했습니다
+nmap <leader>eo :!tmux send-keys -t 1 "arduino-cli.exe compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:s?mnt/./??' --upload --protocol network --port 192.168.1.72 -v --discovery-timeout 20s" Enter<CR><CR><CR>:!tmux send-keys -t1 "a" Enter<CR><CR>
+
+" 특정 ip입력을 받아 업로드하는 단축키입니다
+" ex)) https://stackoverflow.com/questions/57788828/vim-macro-which-accepts-user-input
+function! UploadToIp()
+  let newname = input('ESP Ip? ')
+  execute "silent !tmux send-keys -t 1 'arduino-cli.exe compile --fqbn esp8266:esp8266:nodemcuv2 %:p:s?mnt/./?? --upload --protocol network --port 192.168.1.".newname." -v --discovery-timeout 20s' Enter \<cr>" 
+  execute "redraw!"
+  " 단축키 등록처럼 <CR>로 쉘을 닫는 방법을 찾을 수 없어 silent 와 redraw를
+  " 통해서 해결하기로 합니다"
+  "return '0/\<John\>'."\<cr>cw".newname."\<esc>n."
+  " ex)) https://stackoverflow.com/questions/48977808/hide-the-output-of-shell-commands-in-vim
+endfunction
+nnoremap <expr> <leader>ei UploadToIp()
+
+
 " nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS3 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:h' -v" Enter<CR><CR>
 " nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS3 '%:h' -v" Enter<CR><CR>
 " nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS4 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:p:h' -v" Enter<CR><CR>
-nmap <leader>ei :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS5 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:h' -v" Enter<CR><CR>
+" nmap <leader>ei :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS5 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:h' -v" Enter<CR><CR>
 " nmap <leader>eo :!tmux send-keys -t 1 "arduino-cli upload -p /dev/ttyS6 --fqbn esp8266:esp8266:nodemcuv2:baud=115200 '%:h' -v" Enter<CR><CR>
 " ex))
 " https://vimdoc.sourceforge.net/htmldoc/eval.html#expand()
@@ -1037,7 +1065,11 @@ nmap <leader>= :resize +5<cr>
 "colorscheme monokai "oreilly jellybeans sweyla1 
 "set background=dark
 "colorscheme solarized 
-colorscheme solarized_sd_utylee
+" colorscheme solarized_sd_utylee
+set background=dark
+let g:gruvbox_italic = 1
+colorscheme gruvbox
+
 
 "let python_no_builtin_highlight = 1  
 "let g:molokai_original = 1
