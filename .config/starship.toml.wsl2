@@ -23,6 +23,7 @@ $directory\
 $git_branch$git_commit\
 $character\
 """
+#$cmd_duration\
 [character]
 success_symbol = "[❯](bold #e034a1)"
 #error_symbol = "[✗](fg:1)"
@@ -54,8 +55,9 @@ vicmd_symbol = "[N](fg:14 bold)"
 
 #right_format = """$time"""
 
-#[cmd_duration]
-#min_time = 50
+[cmd_duration]
+min_time = 10 
+show_milliseconds = true
 
 
 [line_break]
@@ -65,7 +67,8 @@ disabled = true
 ##symbol = "👾 "
 #format = "[${symbol}${version}\\($virtualenv\\)]($style) "
 #format = "[\\($virtualenv\\)](bold #a87932) "
-format = "[\\($virtualenv\\)](fg:3 bg:8) "
+# format = "[\\($virtualenv\\)](fg:3 bg:8) "
+format = "[\\($virtualenv\\)](fg:15 bg:8) "
 # 아래 파일로 버전표시를 하는 것 같은데 env 용으로만 사용키 위해 아래를 다 비웠습니다
 detect_files = []
 detect_folders = []
@@ -88,7 +91,8 @@ format = " [$path](fg:2)[$read_only]($read_only_style)"  #green
 #format = "[ $symbol$branch ](fg:#222222 bg:#8f3928)"
 #format = "[ $symbol$branch ](fg:#222222 bg:#9c341f)"
 #format = "[ $symbol$branch ](bold fg:black bg:#cb4b16)"
-format = "[ $symbol$branch ](fg:8 bg:9)"					#brblack:orange 
+# format = "[ $symbol$branch ](fg:8 bg:9)"					#brblack:orange 
+format = "[ $symbol$branch ](fg:0 bg:3)"
 only_attached = true
 symbol = " "
 #9c341f
@@ -101,7 +105,8 @@ commit_hash_length = 8
 #format = " [ $hash$tag ](fg:#333333 bold bg:#ab513f)"
 #format = "[ $hash$tag ](fg:#333333 bold bg:#74358f)"
 #format = "[ $hash$tag ](fg:8 bg:13)"
-format = "[ detached from \\( $hash$tag \\) ](fg:8 bg:13)"
+# format = "[ detached from \\( $hash$tag \\) ](fg:8 bg:13)"
+format = "[ detached from \\( $hash$tag \\) ](fg:0 bg:6)"
 #15474a
 
 [username]
