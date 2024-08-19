@@ -56,7 +56,9 @@
         "list": 
         [
             {
+                "colorScheme": "Selenized dark",
                 "commandline": "C:\\Windows\\system32\\wsl.exe -d Ubuntu20WSL1 -u utylee",
+                "elevate": true,
                 "guid": "{7f1de6d4-7a00-5a7d-8af1-54fc45030350}",
                 "hidden": false,
                 "name": "Ubuntu20WSL1",
@@ -64,6 +66,7 @@
             },
             {
                 "commandline": "C:\\Windows\\system32\\wsl.exe -d Ubuntu22WSL2 -u utylee",
+                "elevate": true,
                 "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
                 "hidden": false,
                 "name": "Ubuntu22WSL2",
@@ -71,6 +74,7 @@
                 "startingDirectory": "~"
             },
             {
+                "elevate": true,
                 "font": 
                 {
                     "face": "CaskaydiaMono Nerd Font Mono"
@@ -83,14 +87,14 @@
             {
                 "closeOnExit": "always",
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
-                "elevate": false,
+                "elevate": true,
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "\uba85\ub839 \ud504\ub86c\ud504\ud2b8"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                "elevate": false,
+                "elevate": true,
                 "font": 
                 {
                     "face": "CaskaydiaMono Nerd Font Mono"
@@ -174,6 +178,29 @@
             "yellow": "#C19C00"
         },
         {
+            "background": "#282828",
+            "black": "#282828",
+            "blue": "#458588",
+            "brightBlack": "#928374",
+            "brightBlue": "#83A598",
+            "brightCyan": "#8EC07C",
+            "brightGreen": "#B8BB26",
+            "brightPurple": "#D3869B",
+            "brightRed": "#FB4934",
+            "brightWhite": "#EBDBB2",
+            "brightYellow": "#FABD2F",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#689D6A",
+            "foreground": "#EBDBB2",
+            "green": "#98971A",
+            "name": "Gruvbox Dark",
+            "purple": "#B16286",
+            "red": "#CC241D",
+            "selectionBackground": "#FFFFFF",
+            "white": "#A89984",
+            "yellow": "#D79921"
+        },
+        {
             "background": "#282C34",
             "black": "#282C34",
             "blue": "#61AFEF",
@@ -218,6 +245,29 @@
             "selectionBackground": "#4F525D",
             "white": "#FAFAFA",
             "yellow": "#C18301"
+        },
+        {
+            "background": "#103C48",
+            "black": "#174956",
+            "blue": "#4695F7",
+            "brightBlack": "#325B66",
+            "brightBlue": "#58A3FF",
+            "brightCyan": "#53D6C7",
+            "brightGreen": "#84C747",
+            "brightPurple": "#FF84CD",
+            "brightRed": "#FF665C",
+            "brightWhite": "#CAD8D9",
+            "brightYellow": "#EBC13D",
+            "cursorColor": "#CAD8D9",
+            "cyan": "#41C7B9",
+            "foreground": "#ADBCBC",
+            "green": "#75B938",
+            "name": "Selenized dark",
+            "purple": "#F275BE",
+            "red": "#FA5750",
+            "selectionBackground": "#325B66",
+            "white": "#72898F",
+            "yellow": "#DBB32D"
         },
         {
             "background": "#002B36",
