@@ -708,8 +708,8 @@ let g:crystalline_statusline_fn = 'StatusLine'
 let g:crystalline_tabline_fn = 'TabLine'
 "let g:crystalline_theme = 'default'
 "let g:crystalline_theme = 'molokai'
-" let g:crystalline_theme = 'onedark'
-let g:crystalline_theme = 'gruvbox'
+let g:crystalline_theme = 'onedark'
+" let g:crystalline_theme = 'gruvbox'
 
 set showtabline=2
 set guioptions-=e
@@ -932,6 +932,9 @@ nnoremap <expr> <leader>ei UploadToIp()
 			":e		extension only
 
 nmap <leader>w :!tmux send-keys -t 1 "cargo run -j6" Enter<CR> <CR>
+"
+" for flutter
+nmap <leader>wf :!tmux send-keys -t 1 "flutter run" Enter<CR> <CR>
 
 "nmap <leader>w :!ts python.exe '%'<CR> <CR>
 " nmap <leader>c :!ts C-c<CR> <CR>
@@ -1067,8 +1070,11 @@ nmap <leader>= :resize +5<cr>
 "colorscheme solarized 
 " colorscheme solarized_sd_utylee
 set background=dark
-let g:gruvbox_italic = 1
-colorscheme gruvbox
+let g:selenized_green_keywords=1
+colorscheme selenized 
+" set background=dark
+" let g:gruvbox_italic = 1
+" colorscheme gruvbox
 
 
 "let python_no_builtin_highlight = 1  
