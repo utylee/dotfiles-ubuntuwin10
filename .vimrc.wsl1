@@ -17,6 +17,8 @@ augroup remember_folds
   autocmd!
   autocmd BufWinLeave ?* mkview 1
   autocmd BufWinEnter ?* silent! loadview 1
+  " autocmd BufWinLeave ?* mkview 
+  " autocmd BufWinEnter ?* silent! loadview 
 augroup END
 
 
@@ -584,8 +586,8 @@ set t_ut=
 
 
 filetype plugin indent on
-" filetype plugin on
-" filetype indent on
+"filetype plugin on
+"filetype indent on
 syntax on
 
 
@@ -1093,6 +1095,7 @@ colorscheme selenized
 "let g:airline_theme='jellybeans'
 
 
+
 let g:jedi#completions_command = "<C-N>"
 
 
@@ -1290,6 +1293,7 @@ au BufRead,BufNewFile */nginx/* set ft=nginx
 autocmd FileType arduino setlocal commentstring=//\ %s
 " setlocal commentstring=/*\ %s\ */ define& include&
 autocmd FileType autohotkey setlocal commentstring=;\ %s
+autocmd FileType dart setlocal commentstring=//\ %s
 
 set langmenu=utf8
 "lang mes en_US 
