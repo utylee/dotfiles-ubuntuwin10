@@ -150,9 +150,6 @@ let g:gutentags_ctags_exclude = [
 
 " let g:gutentags_plus_nomap = 1
 
-" 아두이노 코멘트를 /* */에서 //로 변경합니다
-" autocmd FileType arduino setlocal comments=:// "이줄은 없어도 되는 것같습니다
-autocmd FileType arduino setlocal commentstring=//\ %s
 
 " coc setups  ---------------------------------------------------------
 "
@@ -335,8 +332,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-"
-"
+
 
 " 기존 coc.nvim 설정입니다
 " Use tab for trigger completion with characters ahead and navigate.
@@ -585,8 +581,13 @@ set t_ut=
 
 " execute pathogen#infect()
 
+
+
 filetype plugin indent on
+" filetype plugin on
+" filetype indent on
 syntax on
+
 
 "ncm2
 "coc.nvim 으로 교체합니다	
@@ -762,7 +763,6 @@ set laststatus=2
 "let g:airline_section_c = '%t'
 
 
-
 "function! MyOverride(...)
 "	call a:l.add_section('StatusLine', 'all')
 "	return l
@@ -815,8 +815,7 @@ if has("gui_running")
 endif
 
 
-au BufRead,BufNewFile */etc/nginx/* set ft=nginx
-au BufRead,BufNewFile */nginx/* set ft=nginx
+
 
 set noshellslash
 "map <F5> : !python3 %<CR>
@@ -1098,9 +1097,6 @@ let g:jedi#completions_command = "<C-N>"
 
 
 
-"autocmd BufNewFile,BufRead *.qml so c:\vim\vim74\ftplugin\qml.vim
-autocmd BufNewFile,BufRead *.qml setf qml 
-
 if has("autocmd")
 	augroup templates
 		autocmd BufNewFile *.json 0r ~/.vim/template/skeleton.json
@@ -1109,7 +1105,7 @@ endif
 
 
 
-"filetype plugin on
+" filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
 "set complete
 
@@ -1254,6 +1250,7 @@ let g:vebugger_leader=','
 "endif
 
 
+
 "autocmd BufEnter * silent! normal! g`"
 "set nostartofline
 
@@ -1284,6 +1281,15 @@ if v:version >= 700
     autocmd BufEnter * call AutoRestoreWinView()
 endif
 
+
+au BufRead,BufNewFile */etc/nginx/* set ft=nginx
+au BufRead,BufNewFile */nginx/* set ft=nginx
+
+" 아두이노 코멘트를 /* */에서 //로 변경합니다
+" autocmd FileType arduino setlocal comments=:// "이줄은 없어도 되는 것같습니다
+autocmd FileType arduino setlocal commentstring=//\ %s
+" setlocal commentstring=/*\ %s\ */ define& include&
+autocmd FileType autohotkey setlocal commentstring=;\ %s
 
 set langmenu=utf8
 "lang mes en_US 
