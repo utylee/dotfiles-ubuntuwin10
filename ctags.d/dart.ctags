@@ -1,0 +1,43 @@
+--langdef=dart
+--langmap=dart:.dart
+# --dart-kinds=-c-f-m-p-v
+# --kinddef-dart=d,definition,definitions
+# --kinddef-dart=f,function,functions
+# --kinddef-dart=c,class,classes
+
+
+# 함수찾기 구문입니다
+# if 등의 예약어까지 함수로 걸리길래 negative lookahead (?!)는 pcre2를 넣어야한다고해서
+# ctags를 다시 컴파일했습니다. 별 옵션없이 기존 컴파일은 pcre2 lib이 없이 컴파인돼서
+# 안됐었나봅니다
+--regex-dart=/[ \t]*([A-Za-z0-9_]+)\((?!\().*\)[ \t]*(async)?[ \t]*\{/\1/f,function/{pcre2}
+# --regex-dart=/^[ \t]+[A-Za-z0-9_]*[ \t]*([A-Za-z0-9_]*)\((?!\().*\)[ \t]*(async)?[ \t]*\{/\1/f,function/{pcre2}
+# --regex-dart=/^[ \t]*[A-Za-z0-9_]*[ \t]+((?!if)[A-Za-z0-9_]*)[ \t]*\(.*\)[ \t]*(async)?[ \t]*\{/\1/f,function/{pcre2}
+# 테스트를 위한 예문
+#  if (result != null && result) {
+#void main() {
+#  Widget build(BuildContext context) {
+#  Future<void> initPlatformState() async {
+#
+
+# 클래스찾기 구문입니다
+--regex-dart=/^[ \t]*class[ \t]+([A-Za-z0-9_]+)/\1/c,class/
+
+# 변수찾기 구문입니다
+# 주석시에도 탐색되는 문제를 위해 (?!\/\/).+ 를 추가했습니다
+# pcre2를 사용하면 (?!if)등의 제외문구 즉 negative lookahead를 사용할 수 있습니다
+--regex-dart=/^[ \t]+(?!\/\/).+[ \t]*[A-Za-z0-9_?]+[ \t]+([A-Za-z0-9_]+)[ \t]*=/\1/v,variable/{pcre2}
+# --regex-dart=/[ \t]*[A-Za-z0-9_?]+[ \t]+([A-Za-z0-9_]+)[ \t]*=/\1/v,variable/
+# --regex-dart=/^[ \t]*(if|switch)[ \t]*\(.*\)//{exclusive}
+
+# 아래는 sms_receiver 테스트 문구입니다
+#	final bool? result = await telephony.requestPhoneAndSmsPermissions;
+# String _message = "";
+#  final Telephony telephony = Telephony.instance;
+
+# void main(){
+#     runApp(app: MyApp());
+#}
+
+#   class MyApp extends StatefulWidget 
+#    {}}
