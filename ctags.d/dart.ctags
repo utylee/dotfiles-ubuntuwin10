@@ -10,7 +10,7 @@
 # if 등의 예약어까지 함수로 걸리길래 negative lookahead (?!)는 pcre2를 넣어야한다고해서
 # ctags를 다시 컴파일했습니다. 별 옵션없이 기존 컴파일은 pcre2 lib이 없이 컴파인돼서
 # 안됐었나봅니다
---regex-dart=/[ \t]*([A-Za-z0-9_]+)\((?!\().*\)[ \t]*(async)?[ \t]*\{/\1/f,function/{pcre2}
+--regex-dart=/[ \t]*([A-Za-z0-9_]+)\((?!\().*\)[ \t]*(async)?[ \t]*(\{|=>)/\1/f,function/{pcre2}
 # --regex-dart=/^[ \t]+[A-Za-z0-9_]*[ \t]*([A-Za-z0-9_]*)\((?!\().*\)[ \t]*(async)?[ \t]*\{/\1/f,function/{pcre2}
 # --regex-dart=/^[ \t]*[A-Za-z0-9_]*[ \t]+((?!if)[A-Za-z0-9_]*)[ \t]*\(.*\)[ \t]*(async)?[ \t]*\{/\1/f,function/{pcre2}
 # 테스트를 위한 예문
@@ -18,6 +18,7 @@
 #void main() {
 #  Widget build(BuildContext context) {
 #  Future<void> initPlatformState() async {
+#  _MyAppState createState() => _MyAppState();
 #
 
 # 클래스찾기 구문입니다
