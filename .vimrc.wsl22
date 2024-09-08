@@ -13,10 +13,14 @@ runtime macros/matchit.vim
 " 새로운 wsl21 머신에서 오류가 나서 ?를 추가해보는 답변을 따라해보니 돼서
 " 일단 고쳐놓아봅니다
 " https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
+" 1이 끝에들 있으니 vim/view에 vimrc coc <CR> 컨피그가 중복되면서 (:verbose
+" imap <CR>) 엔터가 그냥 개행이 되어버리는 문제가 생겼습니다. 
 augroup remember_folds
   autocmd!
-  autocmd BufWinLeave ?* mkview 1
-  autocmd BufWinEnter ?* silent! loadview 1
+  autocmd BufWinLeave ?* mkview 
+  autocmd BufWinEnter ?* silent! loadview 
+  " autocmd BufWinLeave ?* mkview 1
+  " autocmd BufWinEnter ?* silent! loadview 1
 augroup END
 
 
@@ -175,7 +179,9 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! CheckBackspace() abort
+" 혹시 abort 가 글자 지워지는 것의 원인일까요?
+" function! CheckBackspace() 
+function! CheckBackspace() abort 
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -184,7 +190,8 @@ endfunction
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+  " inoremap <silent><expr> <c-@> coc#refresh()
+  inoremap <silent><expr> <c-]> coc#refresh()
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -331,6 +338,21 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 "
 "
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
 
 " 기존 coc.nvim 설정입니다
 " Use tab for trigger completion with characters ahead and navigate.
@@ -701,8 +723,9 @@ let g:crystalline_statusline_fn = 'StatusLine'
 let g:crystalline_tabline_fn = 'TabLine'
 "let g:crystalline_theme = 'default'
 "let g:crystalline_theme = 'molokai'
-" let g:crystalline_theme = 'onedark'
-let g:crystalline_theme = 'gruvbox'
+let g:crystalline_theme = 'onedark'
+"let g:crystalline_theme = 'gruvbox'
+" let g:crystalline_theme = 'selenized'
 
 set showtabline=2
 set guioptions-=e
@@ -866,6 +889,7 @@ nnoremap ,, ,
 nmap ;z :cd %:p:h<cr> :pwd<cr>
 nmap ;Z :ProsessionDelete<cr>
 nmap ;r :Rooter<CR>
+nmap ;cr  :CocRestart<CR><CR>
 nnoremap ;; ;
 
 "nmap <leader>a :bufdo bd<CR>
@@ -978,10 +1002,13 @@ nmap <leader>= :resize +5<cr>
 "colorscheme monokai "oreilly jellybeans sweyla1 
 "set background=dark
 "colorscheme solarized 
-" colorscheme solarized_sd_utylee
 set background=dark
-let g:gruvbox_italic = 1
-colorscheme gruvbox
+let g:selenized_green_keywords=1
+colorscheme selenized 
+" colorscheme solarized_sd_utylee
+" set background=dark
+" let g:gruvbox_italic = 1
+" colorscheme gruvbox
 
 "let python_no_builtin_highlight = 1  
 "let g:molokai_original = 1
