@@ -59,12 +59,17 @@
                 "colorScheme": "Selenized dark",
                 "commandline": "C:\\Windows\\system32\\wsl.exe -d Ubuntu20WSL1 -u utylee",
                 "elevate": true,
+                "font": 
+                {
+                    "weight": "light"
+                },
                 "guid": "{7f1de6d4-7a00-5a7d-8af1-54fc45030350}",
                 "hidden": false,
                 "name": "Ubuntu20WSL1",
                 "source": "Windows.Terminal.Wsl"
             },
             {
+                "colorScheme": "Selenized dark",
                 "commandline": "C:\\Windows\\system32\\wsl.exe -d Ubuntu22WSL2 -u utylee",
                 "elevate": true,
                 "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
@@ -74,6 +79,7 @@
                 "startingDirectory": "~"
             },
             {
+                "colorScheme": "Selenized dark",
                 "elevate": true,
                 "font": 
                 {
@@ -86,6 +92,7 @@
             },
             {
                 "closeOnExit": "always",
+                "colorScheme": "Selenized dark",
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "elevate": true,
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -93,6 +100,7 @@
                 "name": "\uba85\ub839 \ud504\ub86c\ud504\ud2b8"
             },
             {
+                "colorScheme": "Selenized dark",
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "elevate": true,
                 "font": 

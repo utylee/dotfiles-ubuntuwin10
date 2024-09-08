@@ -978,9 +978,12 @@ nmap <leader>= :resize +5<cr>
 "colorscheme molokai "oreilly jellybeans sweyla1 
 "colorscheme oreilly "oreilly jellybeans sweyla1 
 "colorscheme monokai "oreilly jellybeans sweyla1 
-"set background=dark
-"colorscheme solarized 
-colorscheme solarized_sd_utylee
+" set background=dark
+" colorscheme solarized 
+" colorscheme solarized_sd_utylee
+set background=dark
+let g:selenized_green_keywords=1
+colorscheme selenized
 
 "let python_no_builtin_highlight = 1  
 "let g:molokai_original = 1
