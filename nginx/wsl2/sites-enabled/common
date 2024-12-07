@@ -16,14 +16,28 @@
 
 proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=STATIC:10m inactive=7d use_temp_path=off;
 
+
+upstream property {
+	# server 192.168.1.202:3000 fail_timeout=0;
+	server 0.0.0.0:3003 fail_timeout=0;
+}
+upstream api_property {
+	# server unix:/tmp/api_hydro_1.sock fail_timeout=0;
+	# server localhost:8080 fail_timeout=0;
+	server 192.168.1.203 fail_timeout=0;
+}
+
 upstream print {
 	# server 192.168.1.202:3000 fail_timeout=0;
 	server 0.0.0.0:3002 fail_timeout=0;
 }
-upstream api_print {
-	# server unix:/tmp/api_hydro_1.sock fail_timeout=0;
-	server localhost:8080 fail_timeout=0;
-	# server http://192.168.1.203/hydro/api fail_timeout=0;
+# upstream api_print {
+# 	# server unix:/tmp/api_hydro_1.sock fail_timeout=0;
+# 	server localhost:8080 fail_timeout=0;
+# 	# server http://192.168.1.203/hydro/api fail_timeout=0;
+# }
+upstream mympd {
+	server localhost:88 fail_timeout=0;
 }
 
 upstream hydro {
@@ -79,6 +93,36 @@ upstream api_memo {
 }
 
 
+# server {
+# 	server_name 192.168.1.204;
+# 	listen 88;
+
+# 	# location /mympd {
+# 	# 	proxy_http_version 1.1;
+# 	# 	proxy_set_header Upgrade $http_upgrade;
+# 	# 	proxy_set_header Connection "upgrade";
+# 	# 	proxy_set_header Host $http_host;
+# 	# 	# proxy_set_header Host $host;
+# 	# 	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+# 	# 	# proxy_redirect off;
+# 	# 	proxy_buffering off;
+# 	# 	proxy_read_timeout 1800;
+# 	# 	# proxy_cache_bypass $http_upgrade;
+
+# 	# 	# memo를 assetPrefix로 사용하고 memo/index.html를 사용하고 
+# 	# 	# 불필요한 원래 index.html를 제거할시 next export시 변경되는 index.html를
+# 	# 	# 명시해줘야합니다
+# 	# 	# index memo.html;
+# 	# 	# alias /home/utylee/.virtualenvs/react/src/next-memo/out;
+# 	# 	proxy_pass http://mympd;
+# 	# 	# proxy_redirect / /mympd;
+
+# 	# 	# root을 사용할 경우, 위의로케이션이 마지막에 추가되게됩니다.
+# 	# 	# root 단어의 의미를 생각해봤을 때, 이해가 가는 부분입니다
+# 	# 	# root /home/utylee/.virtualenvs/react/src/next-memo/out/;
+# 	# }		
+# }
+
 server {
 	# server_name utylee.duckdns.org;
 	server_name _;
@@ -90,6 +134,34 @@ server {
 	#server_name 192.168.1.203:3000;
 	# server_name localhost;
 	#listen 3000;
+
+	location /mympd/ {
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_set_header Host $http_host;
+		# proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		# proxy_redirect off;
+		proxy_buffering off;
+		proxy_read_timeout 1800;
+		# proxy_cache_bypass $http_upgrade;
+
+		# memo를 assetPrefix로 사용하고 memo/index.html를 사용하고 
+		# 불필요한 원래 index.html를 제거할시 next export시 변경되는 index.html를
+		# 명시해줘야합니다
+		# index memo.html;
+		# alias /home/utylee/.virtualenvs/react/src/next-memo/out;
+		# proxy_pass http://localhost:88/;
+		proxy_pass http://mympd/;
+		# nginx path 오류를 해소하는 방법인 것 같습니다
+		# eg)) https://jcorporation.github.io/myMPD/070-additional-topics/behind-a-reverse-proxy/
+		proxy_redirect / /mympd/;
+
+		# root을 사용할 경우, 위의로케이션이 마지막에 추가되게됩니다.
+		# root 단어의 의미를 생각해봤을 때, 이해가 가는 부분입니다
+		# root /home/utylee/.virtualenvs/react/src/next-memo/out/;
+	}		
 
 	include /etc/nginx/servers/*;
 	# include next-memo;
