@@ -13,7 +13,8 @@ echo /usr/local/bin/fish >>/etc/shells
 (sudo sh -c 'echo /usr/local/bin/fish >> /etc/shells')
 chsh -s /usr/local/bin/fish
 
-* sudo apt install autotools-dev automake libtool bison
+* sudo apt install autotools-dev automake bison
+(libtool)
 
 * install fisher
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
