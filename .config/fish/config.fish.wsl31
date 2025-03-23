@@ -3,7 +3,7 @@ if status is-interactive
 	set fish_greeting ''
 	fish_vi_key_bindings
 	#echo -ne '\eP\e]12;#e034a1\a'	# wsl2
-	echo -ne '\eP\e]12;#ab2294\a'	# wsl21
+	echo -ne '\eP\e]12;#a45cf7\a'	# wsl21
 	starship init fish | source
 end
 if status is-login
