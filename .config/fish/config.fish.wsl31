@@ -13,9 +13,9 @@ if status is-login
 	eval (dircolors -c ~/.dircolors)
 end
 
-set -Ux PYENV_ROOT $HOME/.pyenv
-#fish_add_path $PYENV_ROOT/bin
-pyenv init - fish | source
+set -x PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
+#pyenv init - fish | source
 #set -Ux fish_term24bit 1
 set -x fish_term24bit 1
 
