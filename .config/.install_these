@@ -1,5 +1,7 @@
 * install fish-shell
 git clone https://github.com/fish-shell/fish-shell.git
+- rust-lang install
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cd fish-shell; mkdir build ; cd build ; cmake ..; make; sudo make install 
 	*if MACOS
 		mkdir build; cd build
@@ -8,8 +10,11 @@ cd fish-shell; mkdir build ; cd build ; cmake ..; make; sudo make install
 		xcodebuild -scheme install
 		잘 안됩니다. 빌드는 됐는데 debug 빌드로 나오고 찝찝합니다.그냥 brew install 합시다 
 echo /usr/local/bin/fish >>/etc/shells
+(sudo sh -c 'echo /usr/local/bin/fish >> /etc/shells')
 chsh -s /usr/local/bin/fish
 
+* sudo apt install autotools-dev automake bison
+(libtool)
 
 * install fisher
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
@@ -50,7 +55,7 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sudo apt-get update; sudo apt-get install make build-essential \
 libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
 wget curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
-libpq-dev libcurl4-openssl-dev
+libpq-dev libcurl4-openssl-dev libncurses5
 
 * nginx compile dependencies:
 apt-get install libperl-dev libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev google-perftools libgoogle-perftools-dev 
