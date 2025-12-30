@@ -1,0 +1,3 @@
+LABEL=cloudimg-rootfs	/	 ext4	defaults	0 1
+//192.168.1.202/8001 /home/utylee/media/8001 cifs username=utylee,password=sksmsqnwk11,iocharset=utf8,file_mode=0777,dir_mode=0777,uid=utylee,gid=utylee,noauto,x-systemd.automount 0 0
+
