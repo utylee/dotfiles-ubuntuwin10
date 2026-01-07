@@ -36,6 +36,10 @@ set grepprg=rg
 set updatetime=1000
 " set updatetime=300
 
+
+let g:dart_style_guide = 8
+" let g:dart_trailing_comma_indent = v:true
+
 let g:simple_todo_map_normal_mode_keys = 0
 
 set rtp+=~/.fzf
@@ -186,7 +190,9 @@ endfunction
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+  inoremap <silent><expr> <c-]> coc#refresh()
+  " inoremap <silent><expr> <c-@> coc#refresh()
+  " inoremap <silent><expr> <c-m> coc#refresh()
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -334,6 +340,17 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
 " 기존 coc.nvim 설정입니다
@@ -401,6 +418,8 @@ nmap ,e <Plug>(coc-rename)
 " 파일저장시 자동 수정이 아닌 수동 수정으로 변경합니다
 nmap ;f  :Prettier<CR>
 nmap ;g  :Format<CR>
+
+nmap ;s  :CocCommand snippets.openSnippetFiles<CR>
 
 
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--hidden', <bang>0)
@@ -708,7 +727,9 @@ let g:crystalline_mode_labels = {
         \ }
 let g:crystalline_enable_sep = 1
 let g:crystalline_statusline_fn = 'StatusLine'
+" let g:CrystallineStatuslineFn = 'StatusLine'
 let g:crystalline_tabline_fn = 'TabLine'
+" let g:CrystallineTablineFn = 'TabLine'
 "let g:crystalline_theme = 'default'
 "let g:crystalline_theme = 'molokai'
 let g:crystalline_theme = 'onedark'
@@ -846,7 +867,10 @@ nmap <leader>gg :!tmux send-keys -t 1 "cd %:p:h" Enter<CR><CR>
 " nmap <leader>ee :!ts python '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>ee :!tmux send-keys -t 1 "python %:p" Enter<CR><CR>
 " nmap <leader>ew :!ts tsc '%:p' 2>/dev/null<CR> <CR>
-nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Program\ Files/Python38/python.exe %:p" Enter<CR><CR>
+"nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Program\ Files/Python38/python.exe %:p" Enter<CR><CR>
+" nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Program\ Files/Python38/python.exe %:p" Enter<CR><CR>
+" nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Python38/python.exe %:p" Enter<CR><CR>
+nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Python38/python.exe %" Enter<CR><CR>
 nmap <leader>eq :!tmux send-keys -t 1 "/home/utylee/utylee/.virtualenvs/win/Scripts/python.exe  %:p" Enter<CR><CR>
 " nmap <leader>et :!ts tsc '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>et :!tmux send-keys -t 1 "tsc '%:p' 2>/dev/null" Enter<CR> <CR>
@@ -860,9 +884,10 @@ nmap <leader>eb :!tmux send-keys -t 1 "npm run build" Enter<CR><CR>
 "
 "  for nodemcu, esp8266, arduino projects
 " nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:h' -v" Enter<CR><CR>
+" nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 1 -v" Enter<CR><CR>
 " --- for arduino nano
-nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 4 -v" Enter<CR><CR>
-nmap <leader>es :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 8 -v" Enter<CR><CR>
+nmap <leader>es :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 8 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
 " nmap <leader>ess :!tmux send-keys -t 1 "sudo screen /dev/ttyS3 115200" Enter<CR><CR>
 " nmap <leader>z :!tmux send-keys -t 1  C-b<CR><CR>:sleep 200m<CR><CR>:!tmux send-keys -t 1 \\ <CR><CR>:!tmux send-keys -t 1 y<CR><CR> 
 " changed to tio. /home/utylee/.tioconfig 참조
@@ -871,10 +896,10 @@ nmap <leader>z :!tmux send-keys -t 1  C-t<CR><CR>:sleep 200m<CR><CR>:!tmux send-
 "
 " --- for arduino pro mini atmega328p
 nmap <leader>ed :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro --libraries '/home/utylee/.virtualenvs/arduino/src/_old/libraries' '%:p:h' -j 4 -v" Enter<CR><CR>
-nmap <leader>ef :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>ef :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro '%:p:h' -j 8 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
 
 " --- for esp8266
-nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 8 --port /dev/ttyS3 -v" Enter<CR><CR>
 "
 " nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
 nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' --upload --port /dev/ttyS3 -v" Enter<CR><CR>
@@ -936,6 +961,11 @@ nmap <leader>w :!tmux send-keys -t 1 "cargo run -j6" Enter<CR> <CR>
 "
 " for flutter
 nmap <leader>wf :!tmux send-keys -t 1 "flutter run" Enter<CR> <CR>
+"" hot reload
+nmap <leader>wr :!tmux send-keys -t 1 "r" Enter<CR> <CR>    
+"" restart
+nmap <leader>wt :!tmux send-keys -t 1 "R" Enter<CR> <CR>
+nmap <leader>wb :!tmux send-keys -t 1 "flutter build apk" Enter<CR> <CR>
 
 "nmap <leader>w :!ts python.exe '%'<CR> <CR>
 " nmap <leader>c :!ts C-c<CR> <CR>
@@ -1073,6 +1103,8 @@ nmap <leader>= :resize +5<cr>
 set background=dark
 let g:selenized_green_keywords=1
 colorscheme selenized 
+
+" colorscheme onedark 
 " set background=dark
 " let g:gruvbox_italic = 1
 " colorscheme gruvbox
