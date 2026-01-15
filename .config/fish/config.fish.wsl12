@@ -18,20 +18,21 @@ set -x EDITOR /usr/bin/vi
 set -x GHQ_ROOT /home/utylee/.ghq
 
 # PATH
-set CLANGHOME /usr/local/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04
+#set CLANGHOME /usr/local/clang+llvm-12.0.1-x86_64-linux-gnu-ubuntu-16.04
+#set CLANGHOME /usr/local/clang+llvm-14.0.6-x86_64-linux-gnu-rhel-8.4
 set -l GOHOME /usr/local/go1.17.2
 # set -l NODEHOME /usr/local/node-v16.13.0-linux-x64
 set -l NODEHOME /usr/local/node-v18.12.1-linux-x64
 #fish_add_path $CLANGHOME/bin 
 #fish_add_path $HOME/.go/bin /usr/local/go1.17.2/bin /usr/local/node-v14.18.1-linux-x64/bin ~/utylee/bin
-set -x PATH $CLANGHOME/bin $PATH
+#set -x PATH $CLANGHOME/bin $PATH
 set -x PATH $HOME/.go/bin $GOHOME/bin $NODEHOME/bin /mnt/c/Windows/System32/WindowsPowrShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts /home/utylee/utylee/bin $PATH
 test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
 #test -z $SSH_CLIENT; or fish_add_path /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts
 #test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
-set -x CC $CLANGHOME/bin/clang
-set -x CXX $CLANGHOME/bin/clang++
-set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH $CLANGHOME/lib 
+#set -x CC $CLANGHOME/bin/clang
+#set -x CXX $CLANGHOME/bin/clang++
+#set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH $CLANGHOME/lib 
 
 # FZF
 # fzf을 직접입력해 파일명 탐색용  
