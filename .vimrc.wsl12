@@ -13,12 +13,39 @@ runtime macros/matchit.vim
 " 새로운 wsl21 머신에서 오류가 나서 ?를 추가해보는 답변을 따라해보니 돼서
 " 일단 고쳐놓아봅니다
 " https://stackoverflow.com/questions/37552913/vim-how-to-keep-folds-on-save
+" 
 augroup remember_folds
   autocmd!
   autocmd BufWinLeave ?* mkview 1
   autocmd BufWinEnter ?* silent! loadview 1
+  " autocmd BufWinLeave ?* mkview 
+  " autocmd BufWinEnter ?* silent! loadview 
 augroup END
 
+"---------------------------------------------------------
+" for GODOT : indent 를 그냥 되게끔 바꿉니다
+"---------------------------------------------------------
+" set viewoptions-=options
+
+augroup gdscript_indent_fix
+  autocmd!
+  autocmd FileType gdscript
+        \ setlocal indentexpr=
+        \ | setlocal nocindent
+        \ | setlocal nosmartindent
+        \ | setlocal autoindent
+        \ | setlocal expandtab
+        \ | setlocal shiftwidth=4
+        \ | setlocal tabstop=4
+augroup END
+
+" autocmd FileType gdscript setlocal
+"     \ indentexpr=
+"     \ autoindent
+"     \ smartindent
+"     \ expandtab
+"     \ shiftwidth=4
+"     \ tabstop=4
 
 "10ms is more reasonable value
 set ttimeout
@@ -33,6 +60,10 @@ set iskeyword+=-
 set grepprg=rg
 set updatetime=1000
 " set updatetime=300
+
+
+let g:dart_style_guide = 8
+" let g:dart_trailing_comma_indent = v:true
 
 let g:simple_todo_map_normal_mode_keys = 0
 
@@ -72,6 +103,7 @@ let g:terminal_ansi_colors = [
 
 " let g:gutentags_add_default_project_roots = 0
 " let g:gutentags_project_root = ['package.json', '.git']
+let g:gutentags_project_root = ['.git', 'package.json', 'project.godot']
 
 " let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
 
@@ -150,9 +182,6 @@ let g:gutentags_ctags_exclude = [
 
 " let g:gutentags_plus_nomap = 1
 
-" 아두이노 코멘트를 /* */에서 //로 변경합니다
-" autocmd FileType arduino setlocal comments=:// "이줄은 없어도 되는 것같습니다
-autocmd FileType arduino setlocal commentstring=//\ %s
 
 " coc setups  ---------------------------------------------------------
 "
@@ -187,7 +216,9 @@ endfunction
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+  inoremap <silent><expr> <c-]> coc#refresh()
+  " inoremap <silent><expr> <c-@> coc#refresh()
+  " inoremap <silent><expr> <c-m> coc#refresh()
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -335,8 +366,18 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-"
-"
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 
 " 기존 coc.nvim 설정입니다
 " Use tab for trigger completion with characters ahead and navigate.
@@ -403,6 +444,8 @@ nmap ,e <Plug>(coc-rename)
 " 파일저장시 자동 수정이 아닌 수동 수정으로 변경합니다
 nmap ;f  :Prettier<CR>
 nmap ;g  :Format<CR>
+
+nmap ;s  :CocCommand snippets.openSnippetFiles<CR>
 
 
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--hidden', <bang>0)
@@ -585,8 +628,13 @@ set t_ut=
 
 " execute pathogen#infect()
 
+
+
 filetype plugin indent on
+"filetype plugin on
+"filetype indent on
 syntax on
+
 
 "ncm2
 "coc.nvim 으로 교체합니다	
@@ -705,7 +753,9 @@ let g:crystalline_mode_labels = {
         \ }
 let g:crystalline_enable_sep = 1
 let g:crystalline_statusline_fn = 'StatusLine'
+" let g:CrystallineStatuslineFn = 'StatusLine'
 let g:crystalline_tabline_fn = 'TabLine'
+" let g:CrystallineTablineFn = 'TabLine'
 "let g:crystalline_theme = 'default'
 "let g:crystalline_theme = 'molokai'
 let g:crystalline_theme = 'onedark'
@@ -762,7 +812,6 @@ set laststatus=2
 "let g:airline_section_c = '%t'
 
 
-
 "function! MyOverride(...)
 "	call a:l.add_section('StatusLine', 'all')
 "	return l
@@ -815,8 +864,7 @@ if has("gui_running")
 endif
 
 
-au BufRead,BufNewFile */etc/nginx/* set ft=nginx
-au BufRead,BufNewFile */nginx/* set ft=nginx
+
 
 set noshellslash
 "map <F5> : !python3 %<CR>
@@ -845,7 +893,10 @@ nmap <leader>gg :!tmux send-keys -t 1 "cd %:p:h" Enter<CR><CR>
 " nmap <leader>ee :!ts python '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>ee :!tmux send-keys -t 1 "python %:p" Enter<CR><CR>
 " nmap <leader>ew :!ts tsc '%:p' 2>/dev/null<CR> <CR>
-nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Program\ Files/Python38/python.exe %:p" Enter<CR><CR>
+"nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Program\ Files/Python38/python.exe %:p" Enter<CR><CR>
+" nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Program\ Files/Python38/python.exe %:p" Enter<CR><CR>
+" nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Python38/python.exe %:p" Enter<CR><CR>
+nmap <leader>ew :!tmux send-keys -t 1 "/mnt/c/Python38/python.exe %" Enter<CR><CR>
 nmap <leader>eq :!tmux send-keys -t 1 "/home/utylee/utylee/.virtualenvs/win/Scripts/python.exe  %:p" Enter<CR><CR>
 " nmap <leader>et :!ts tsc '%:p' 2>/dev/null<CR> <CR>
 nmap <leader>et :!tmux send-keys -t 1 "tsc '%:p' 2>/dev/null" Enter<CR> <CR>
@@ -859,9 +910,10 @@ nmap <leader>eb :!tmux send-keys -t 1 "npm run build" Enter<CR><CR>
 "
 "  for nodemcu, esp8266, arduino projects
 " nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:h' -v" Enter<CR><CR>
+" nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 1 -v" Enter<CR><CR>
 " --- for arduino nano
-nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 4 -v" Enter<CR><CR>
-nmap <leader>es :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>ea :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 8 -v" Enter<CR><CR>
+nmap <leader>es :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:nano '%:p:h' -j 8 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
 " nmap <leader>ess :!tmux send-keys -t 1 "sudo screen /dev/ttyS3 115200" Enter<CR><CR>
 " nmap <leader>z :!tmux send-keys -t 1  C-b<CR><CR>:sleep 200m<CR><CR>:!tmux send-keys -t 1 \\ <CR><CR>:!tmux send-keys -t 1 y<CR><CR> 
 " changed to tio. /home/utylee/.tioconfig 참조
@@ -870,10 +922,10 @@ nmap <leader>z :!tmux send-keys -t 1  C-t<CR><CR>:sleep 200m<CR><CR>:!tmux send-
 "
 " --- for arduino pro mini atmega328p
 nmap <leader>ed :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro --libraries '/home/utylee/.virtualenvs/arduino/src/_old/libraries' '%:p:h' -j 4 -v" Enter<CR><CR>
-nmap <leader>ef :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>ef :!tmux send-keys -t 1 "arduino-cli compile --fqbn arduino:avr:pro '%:p:h' -j 8 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
 
 " --- for esp8266
-nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --port /dev/ttyS3 -v" Enter<CR><CR>
+nmap <leader>ey :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 8 --port /dev/ttyS3 -v" Enter<CR><CR>
 "
 " nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' -j 4 --upload --port /dev/ttyS3 -v" Enter<CR><CR>
 nmap <leader>eu :!tmux send-keys -t 1 "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 '%:p:h' --upload --port /dev/ttyS3 -v" Enter<CR><CR>
@@ -932,6 +984,563 @@ nnoremap <expr> <leader>ei UploadToIp()
 			":e		extension only
 
 nmap <leader>w :!tmux send-keys -t 1 "cargo run -j6" Enter<CR> <CR>
+"
+" for flutter
+nmap <leader>wf :!tmux send-keys -t 1 "flutter run" Enter<CR> <CR>
+"" hot reload
+nmap <leader>wr :!tmux send-keys -t 1 "r" Enter<CR> <CR>    
+"" restart
+nmap <leader>wt :!tmux send-keys -t 1 "R" Enter<CR> <CR>
+nmap <leader>wb :!tmux send-keys -t 1 "flutter build apk" Enter<CR> <CR>
+
+
+
+
+
+
+set shortmess+=I
+set nomore
+
+" tmux target(원하면 pane id로 바꿔: 예 '1' -> '%3')
+let g:godot_tmux_target = '1'
+
+let g:godot_wait_timer = -1
+let g:godot_wait_tries = 0
+
+function! s:GodotPortListening() abort
+  " LISTEN 여부를 ss로 확인(가장 정확)
+  if !executable('ss')
+    " ss가 없으면 어쩔 수 없이 connect 시도(backup)
+    try
+      let ch = sockconnect('tcp', '127.0.0.1:6005', {'timeout': 200})
+      if ch > 0 | call chanclose(ch) | return 1 | endif
+    catch
+    endtry
+    try
+      let ch6 = sockconnect('tcp', '::1:6005', {'timeout': 200})
+      if ch6 > 0 | call chanclose(ch6) | return 1 | endif
+    catch
+    endtry
+    return 0
+  endif
+
+  " ss 출력에서 :6005 LISTEN 찾기
+  " -H: 헤더 제거, -l: listen, -t: tcp, -n: numeric
+  let out = systemlist("sh -lc 'ss -H -ltn | grep -E \"(:|\\])6005\\b\"'")
+  return len(out) > 0
+endfunction
+
+function! GodotWaitAndRestartCoc(timer) abort
+  let g:godot_wait_tries += 1
+
+  " coc가 아직 안 준비되면 기다림
+  if exists('*coc#rpc#ready') && coc#rpc#ready() != 1
+    return
+  endif
+
+  " 6005 LISTEN 확인
+  if !s:GodotPortListening()
+    " 최대 ~20초(200 * 100ms)까지만 기다림
+    if g:godot_wait_tries >= 200
+      echom '[AUTO] give up: port 6005 not listening'
+      call timer_stop(a:timer)
+      let g:godot_wait_timer = -1
+      let g:godot_wait_tries = 0
+    endif
+    return
+  endif
+
+  " 여기 도달하면: coc 준비 + 6005 LISTEN
+  silent! CocRestart
+
+  call timer_stop(a:timer)
+  let g:godot_wait_timer = -1
+  let g:godot_wait_tries = 0
+endfunction
+
+function! GodotScheduleRestartCoc() abort
+  if g:godot_wait_timer != -1
+    return
+  endif
+  let g:godot_wait_tries = 0
+  let g:godot_wait_timer = timer_start(100, 'GodotWaitAndRestartCoc', {'repeat': -1})
+endfunction
+
+function! GodotStartHeadless() abort
+  " 현재 파일 위치에서 위로 project.godot를 찾아 루트 절대경로 확정
+  let start = expand('%:p:h')
+  let pg = findfile('project.godot', start . ';')
+  if empty(pg)
+    echom '[AUTO] project.godot not found from: ' . start
+    return
+  endif
+  let root = fnamemodify(pg, ':p:h')
+
+  let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+  let cmd = godot . ' --editor --headless --path ' . shellescape(root)
+
+  " tmux로 순차 전송(레이스 제거) + Enter는 C-m
+  let tgt = get(g:, 'godot_tmux_target', '1')
+  let shcmd = 'tmux send-keys -t ' . shellescape(tgt) . ' -l ' . shellescape(cmd) . ' \; send-keys -t ' . shellescape(tgt) . ' C-m'
+  call job_start(['sh','-lc', shcmd], {'in_io':'null','out_io':'null','err_io':'null'})
+
+  call GodotScheduleRestartCoc()
+endfunction
+
+nnoremap <silent> <leader>wg :call GodotStartHeadless()<CR>
+
+
+
+
+
+
+
+
+
+
+
+" function! GodotAutoCocRestart(tag) abort
+"   echom '[AUTO] CocRestart TRY : ' . a:tag
+"   silent! CocRestart
+"   echom '[AUTO] CocRestart DONE: ' . a:tag
+" endfunction
+
+" function! GodotAutoTimerRestart(timer) abort
+"   echom '[AUTO] timer fired'
+"   call GodotAutoCocRestart('timer-1s')
+" endfunction
+
+" function! GodotStartAndRestartCoc() abort
+"   " 현재 파일 기준으로 project.godot 찾기
+"   let start = expand('%:p:h')
+"   let pg = findfile('project.godot', start . ';')
+
+"   if empty(pg)
+"     echom '[AUTO] project.godot not found'
+"     return
+"   endif
+
+"   let root = fnamemodify(pg, ':h')
+"   echom '[AUTO] project root = ' . root
+
+"   let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+"   let cmd = godot . ' --editor --headless --path ' . shellescape(root)
+
+"   " tmux pane 1에서 기존 godot 중단 후 재실행
+"   call job_start(['tmux','send-keys','-t','1','C-c'], {'in_io':'null','out_io':'null','err_io':'null'})
+"   call job_start(['tmux','send-keys','-t','1', cmd, 'Enter'], {'in_io':'null','out_io':'null','err_io':'null'})
+
+"   echom '[AUTO] Godot headless started'
+"   echom '[AUTO] timer scheduled (1s)'
+
+"   " ★ 핵심: 그냥 1초 후 CocRestart
+"   call timer_start(1000, 'GodotAutoTimerRestart')
+" endfunction
+
+" nnoremap <silent> <leader>wg :call GodotStartAndRestartCoc()<CR>
+
+" " ===== Godot headless + CocRestart (Vim 9 안전 버전) =====
+" "
+
+" " .gd -> gdscript 고정 (이미 맞지만 보험)
+" augroup ft_gdscript
+"   autocmd!
+"   autocmd BufRead,BufNewFile *.gd setfiletype gdscript
+" augroup END
+
+" let g:godot_coc_timer = -1
+
+" function! GodotCocKickOnce() abort
+"   " coc가 아직 안 올라왔으면 올림(이미 떠있으면 조용히 무시)
+"   if exists(':CocStart')
+"     silent! CocStart
+"   endif
+
+"   " coc가 준비 안 됐으면 다음 틱
+"   if exists('*coc#rpc#ready') && coc#rpc#ready() != 1
+"     return 0
+"   endif
+
+"   " 6005 열렸는지 확인
+"   try
+"     let ch = sockconnect('tcp', '127.0.0.1:6005', {'timeout': 50})
+"     if ch <= 0
+"       return 0
+"     endif
+"     call chanclose(ch)
+"   catch
+"     return 0
+"   endtry
+
+"   " 여기까지 오면: coc ready + port open => restart
+"   silent! CocRestart
+"   return 1
+" endfunction
+
+" function! GodotCocEnsure() abort
+"   " 이미 타이머 돌고 있으면 중복 방지
+"   if g:godot_coc_timer != -1
+"     return
+"   endif
+
+"   let state = {'n': 0}
+"   let g:godot_coc_timer = timer_start(200, {tid ->
+"         \ (state.n += 1,
+"         \  GodotCocKickOnce() ? (timer_stop(tid), (g:godot_coc_timer = -1)) :
+"         \  (state.n >= 15 ? (timer_stop(tid), (g:godot_coc_timer = -1)) : 0)
+"         \ )}, {'repeat': -1})
+" endfunction
+
+" augroup godot_coc_autofix
+"   autocmd!
+"   " gdscript 파일 들어갈 때마다 (필요할 때만) 3초 정도만 붙잡고 리스타트 시도
+"   autocmd BufEnter *.gd call GodotCocEnsure()
+" augroup END
+
+
+
+
+
+" function! s:GodotRootFromBuf() abort
+"   let start = expand('%:p:h')
+"   let pg = findfile('project.godot', start . ';')
+"   return empty(pg) ? '' : fnamemodify(pg, ':h')
+" endfunction
+
+" function! GodotHeadlessStart() abort
+"   let root = s:GodotRootFromBuf()
+"   if empty(root)
+"     echohl WarningMsg | echom '[godot] project.godot not found (skip start)' | echohl None
+"     return
+"   endif
+"   let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+"   let cmd = godot . ' --editor --headless --path ' . shellescape(root)
+
+"   call job_start(['tmux','send-keys','-t','1','C-c'], {'in_io':'null','out_io':'null','err_io':'null'})
+"   call job_start(['tmux','send-keys','-t','1', cmd, 'Enter'], {'in_io':'null','out_io':'null','err_io':'null'})
+"   echom '[godot] headless started: ' . root
+" endfunction
+
+" nnoremap <silent> <leader>wg :call GodotHeadlessStart()<CR>
+
+" let s:godot_lsp_timer = -1
+
+" function! s:GodotRootFromBuf() abort
+"   " 현재 버퍼 위치에서 project.godot를 위로 찾는다
+"   let start = expand('%:p:h')
+"   let pg = findfile('project.godot', start . ';')
+"   return empty(pg) ? '' : fnamemodify(pg, ':h')
+" endfunction
+
+" function! s:GodotWaitPort() abort
+"   " 포트 열렸으면 CocRestart
+"   try
+"     let ch = sockconnect('tcp', '127.0.0.1:6005', {'timeout': 50})
+"     if ch > 0
+"       call chanclose(ch)
+"       if s:godot_lsp_timer != -1
+"         call timer_stop(s:godot_lsp_timer)
+"         let s:godot_lsp_timer = -1
+"       endif
+"       silent! execute 'CocRestart'
+"     endif
+"   catch
+"   endtry
+" endfunction
+
+" function! GodotHeadlessAndCocRestart() abort
+"   let root = s:GodotRootFromBuf()
+"   if empty(root)
+"     " 프로젝트 밖(.vimrc 같은)에서 누르면 아무 것도 안 함
+"     echohl WarningMsg | echom '[godot] project.godot not found (skip)' | echohl None
+"     return
+"   endif
+
+"   let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+"   let cmd = godot . ' --editor --headless --path ' . shellescape(root)
+
+"   " pane 1에 기존 실행 끊고 재실행
+"   call job_start(['tmux','send-keys','-t','1','C-c'], {'in_io':'null','out_io':'null','err_io':'null'})
+"   call job_start(['tmux','send-keys','-t','1', cmd, 'Enter'], {'in_io':'null','out_io':'null','err_io':'null'})
+
+"   " 타이머 중복 방지
+"   if s:godot_lsp_timer != -1
+"     call timer_stop(s:godot_lsp_timer)
+"   endif
+
+"   " 최대 5초동안 6005 열릴 때까지 대기 → 열리면 CocRestart
+"   let s:godot_lsp_timer = timer_start(100, {-> s:GodotWaitPort()}, {'repeat': 50})
+" endfunction
+
+" nnoremap <silent> <leader>wg :call GodotHeadlessAndCocRestart()<CR>
+
+
+" let s:godot_lsp_timer = -1
+
+" function! s:GodotWaitPort() abort
+"   " 포트 열렸는지 체크
+"   try
+"     let ch = sockconnect('tcp', '127.0.0.1:6005', {'timeout': 50})
+"     if ch > 0
+"       call chanclose(ch)
+
+"       " 타이머 종료
+"       if s:godot_lsp_timer != -1
+"         call timer_stop(s:godot_lsp_timer)
+"         let s:godot_lsp_timer = -1
+"       endif
+
+"       " 여기서부터가 핵심: CocRestart가 실제로 실행되는지 보이게
+"       echom '[godot] 6005 open -> running :CocRestart'
+"       execute 'CocRestart'
+"       echom '[godot] CocRestart done'
+"     endif
+"   catch
+"     " 아직 안 열림
+"   endtry
+" endfunction
+
+" function! GodotHeadlessAndCocRestart() abort
+"   if !exists(':CocRestart')
+"     echohl ErrorMsg | echom '[godot] CocRestart command not found (is coc.nvim loaded?)' | echohl None
+"     return
+"   endif
+
+"   let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+"   let root = expand('%:p:h')  " (루트 자동탐색 버전 쓰고 있으면 그 root 사용)
+
+"   let cmd = godot . ' --editor --headless --path ' . root
+
+"   " tmux에 Ctrl-C 후 재실행 (출력 완전 무음)
+"   call job_start(['tmux','send-keys','-t','1','C-c'], {'in_io':'null','out_io':'null','err_io':'null'})
+"   call job_start(['tmux','send-keys','-t','1', cmd, 'Enter'], {'in_io':'null','out_io':'null','err_io':'null'})
+"   echom '[godot] start headless: ' . root
+
+"   " 타이머 중복 방지
+"   if s:godot_lsp_timer != -1
+"     call timer_stop(s:godot_lsp_timer)
+"   endif
+
+"   " 100ms 간격, 최대 5초 동안 체크
+"   let s:godot_lsp_timer = timer_start(100, {-> s:GodotWaitPort()}, {'repeat': 50})
+" endfunction
+
+" nnoremap <silent> <leader>wg :call GodotHeadlessAndCocRestart()<CR>
+
+" let s:godot_lsp_timer = -1
+
+" function! s:FindGodotRoot() abort
+"   let start = expand('%:p:h')
+"   let pg = findfile('project.godot', start . ';')
+"   return empty(pg) ? '' : fnamemodify(pg, ':h')
+" endfunction
+
+" function! s:GodotWaitPort() abort
+"   " 포트 열리면 CocRestart
+"   try
+"     let ch = sockconnect('tcp', '127.0.0.1:6005', {'timeout': 50})
+"     if ch > 0
+"       call chanclose(ch)
+"       if s:godot_lsp_timer != -1
+"         call timer_stop(s:godot_lsp_timer)
+"         let s:godot_lsp_timer = -1
+"       endif
+"       silent! CocRestart
+"       " 디버그용: 실제로 실행됐는지 메시지 남김
+"       echom '[godot] port ready -> CocRestart'
+"     endif
+"   catch
+"   endtry
+" endfunction
+
+" function! GodotHeadlessAndCocRestart() abort
+"   let root = s:FindGodotRoot()
+"   if empty(root)
+"     echohl ErrorMsg | echom '[godot] project.godot not found from current file dir' | echohl None
+"     return
+"   endif
+
+"   let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+"   let cmd = godot . ' --editor --headless --path ' . root
+
+"   " tmux pane 1에서 기존 실행이 있으면 Ctrl-C 보내고 재실행
+"   call job_start(['tmux','send-keys','-t','1','C-c'], {'in_io':'null','out_io':'null','err_io':'null'})
+"   call job_start(['tmux','send-keys','-t','1', cmd, 'Enter'], {'in_io':'null','out_io':'null','err_io':'null'})
+
+"   " 타이머 중복 방지
+"   if s:godot_lsp_timer != -1
+"     call timer_stop(s:godot_lsp_timer)
+"   endif
+
+"   " 100ms 간격, 최대 5초 동안 포트 확인
+"   let s:godot_lsp_timer = timer_start(100, {-> s:GodotWaitPort()}, {'repeat': 50})
+"   echom '[godot] starting headless at: ' . root
+" endfunction
+
+" nnoremap <silent> <leader>wg :call GodotHeadlessAndCocRestart()<CR>
+
+" let s:godot_lsp_timer = -1
+
+" function! s:GodotWaitPort() abort
+"   try
+"     let ch = sockconnect('tcp', '127.0.0.1:6005', {'timeout': 50})
+"     if ch > 0
+"       call chanclose(ch)
+"       if s:godot_lsp_timer != -1
+"         call timer_stop(s:godot_lsp_timer)
+"         let s:godot_lsp_timer = -1
+"       endif
+"       silent! CocRestart
+"     endif
+"   catch
+"     " 아직 포트 안 열림 → 조용히 무시
+"   endtry
+" endfunction
+
+" function! GodotHeadlessAndCocRestart() abort
+"   let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+"   let proj  = expand('%:p:h')
+"   let cmd   = [godot, '--editor', '--headless', '--path', proj]
+
+"   " tmux send-keys를 Vim job으로 실행 (쉘 전환 없음)
+"   call job_start(
+"         \ ['tmux', 'send-keys', '-t', '1', join(cmd, ' '), 'Enter'],
+"         \ {
+"         \   'in_io':  'null',
+"         \   'out_io': 'null',
+"         \   'err_io': 'null'
+"         \ }
+"         \ )
+
+"   " 기존 타이머 있으면 중복 방지
+"   if s:godot_lsp_timer != -1
+"     call timer_stop(s:godot_lsp_timer)
+"   endif
+
+"   " 100ms 간격으로 포트 체크 (최대 5초)
+"   let s:godot_lsp_timer = timer_start(100, {-> s:GodotWaitPort()}, {'repeat': 50})
+" endfunction
+
+" nnoremap <silent> <leader>wg :call GodotHeadlessAndCocRestart()<CR>
+
+" " Godot headless 실행 + LSP 준비되면 CocRestart (깜빡임/Press ENTER 없음)
+
+" let s:godot_lsp_timer = -1
+
+" function! s:GodotWaitAndRestartCoc(timer) abort
+"   " 포트 열렸는지 TCP로 직접 체크 (nc 필요 없음)
+"   try
+"     let ch = sockconnect('tcp', '127.0.0.1:6005', {'timeout': 50})
+"     if ch > 0
+"       call chanclose(ch)
+"       if s:godot_lsp_timer != -1
+"         call timer_stop(s:godot_lsp_timer)
+"         let s:godot_lsp_timer = -1
+"       endif
+"       silent! CocRestart
+"     endif
+"   catch
+"     " 아직 안 열림: 조용히 다음 틱에서 계속
+"   endtry
+" endfunction
+
+" function! GodotHeadlessAndCocRestart() abort
+"   let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+"   let proj  = expand('%:p:h')
+"   let cmd   = godot . ' --editor --headless --path ' . proj
+
+"   " tmux send-keys를 job으로 실행 (Vim 화면 안 바뀜)
+"   call job_start(['tmux', 'send-keys', '-t', '1', cmd, 'Enter'], {'detach': v:true})
+
+"   " 기존 타이머 있으면 중복 방지
+"   if s:godot_lsp_timer != -1
+"     call timer_stop(s:godot_lsp_timer)
+"   endif
+
+"   " 100ms 간격으로 포트 오픈 체크 (최대 5초: 50회)
+"   let s:tries = 0
+"   let s:godot_lsp_timer = timer_start(100, {-> execute('call <SID>GodotTick()')}, {'repeat': 50})
+" endfunction
+
+" function! s:GodotTick() abort
+"   let s:tries += 1
+"   call s:GodotWaitAndRestartCoc(0)
+" endfunction
+
+" nnoremap <silent> <leader>wg :call GodotHeadlessAndCocRestart()<CR>
+
+" function! GodotHeadlessAndCocRestart() abort
+"   let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+"   let proj  = expand('%:p:h')
+
+"   " 1) tmux pane에 Godot 실행 (완전 무음)
+"   let cmd = godot . ' --editor --headless --path ' . proj
+"   silent execute '!tmux send-keys -t 1 "' . cmd . '" Enter >/dev/null 2>&1'
+
+"   " 2) 포트 열릴 때까지 대기 (Vim 내부 sleep만 사용 → 깜빡임 없음)
+"   let ok = 0
+"   for i in range(1, 30)
+"     silent execute '!nc -z 127.0.0.1 6005 >/dev/null 2>&1'
+"     if v:shell_error == 0
+"       let ok = 1
+"       break
+"     endif
+"     sleep 100m
+"   endfor
+
+"   " 3) 성공 시 CocRestart
+"   if ok
+"     CocRestart
+"   else
+"     echohl WarningMsg
+"     echom 'Godot LSP not ready (127.0.0.1:6005)'
+"     echohl None
+"   endif
+" endfunction
+
+" nnoremap <silent> <leader>wg :call GodotHeadlessAndCocRestart()<CR>
+
+" function! GodotLspStartAndRestartCoc() abort
+"   let godot = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64'
+"   let proj  = expand('%:p:h')
+
+"   " 1) tmux로 headless Godot 실행
+"   let cmd = godot . ' --editor --headless --path ' . proj
+"   silent execute '!tmux send-keys -t 1 "' . cmd . '" Enter'
+
+"   " 2) 포트 열릴 때까지 짧게 폴링(최대 2.5초)
+"   " nc가 없으면: sudo apt install netcat-openbsd
+"   let ok = 0
+"   for i in range(1, 25)
+"     " 127.0.0.1:6005 연결되면 0, 아니면 1
+"     silent execute '!nc -z 127.0.0.1 6005 >/dev/null 2>&1'
+"     if v:shell_error == 0
+"       let ok = 1
+"       break
+"     endif
+"     sleep 100m
+"   endfor
+
+"   " 3) 열렸으면 CocRestart, 아니면 조용히 경고
+"   if ok
+"     CocRestart
+"   else
+"     echohl WarningMsg | echom 'Godot LSP not ready on 127.0.0.1:6005 (timeout)' | echohl None
+"   endif
+" endfunction
+
+" nnoremap <silent> <leader>wg :call GodotLspStartAndRestartCoc()<CR>
+
+" function! GodotHeadlessAndCocRestart() abort
+"   let cmd = '/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64 --editor --headless --path ' . expand('%:p:h')
+"   silent execute '!tmux send-keys -t 1 "' . cmd . '" Enter'
+"   CocRestart
+" endfunction
+
+" nnoremap <leader>wg :call GodotHeadlessAndCocRestart()<CR>
+
+" nmap <leader>wg :!tmux send-keys -t 1 "/usr/local/bin/Godot_v4.5.1-stable_linux.x86_64 --editor --headless --path %:p:h" Enter<CR> \| CocRestart<CR> <CR>
+nmap <leader>eq :!tmux send-keys -t 1 "/home/utylee/utylee/.virtualenvs/win/Scripts/python.exe  %:p" Enter<CR><CR>
 
 "nmap <leader>w :!ts python.exe '%'<CR> <CR>
 " nmap <leader>c :!ts C-c<CR> <CR>
@@ -945,7 +1554,40 @@ nmap <leader>` :set fullscreen<CR>
 "Add for all buffer close
 nmap <leader>q :bd!<CR>
 nmap ,q :%bd!<CR>
-nmap ,c :cclose<CR>
+" nmap ,c :cclose<CR>
+
+
+"---------------------------------------------------------
+" for GODOT : ,c 로도 에러창 안닫혀서 gpt와 논의하면서 만든 함수입니다
+"---------------------------------------------------------
+function! CocCloseAll() abort
+  " 1) quickfix / locationlist / preview 닫기(있으면)
+  silent! cclose
+  silent! lclose
+  silent! pclose
+
+  " 2) coc output:// 창 닫기(있으면)
+  let cur = win_getid()
+  for w in getwininfo()
+    if bufname(w.bufnr) =~# '^output://'
+      call win_gotoid(w.winid)
+      silent! close
+    endif
+  endfor
+  call win_gotoid(cur)
+
+  " 3) coc output:// 버퍼 자체도 목록에서 제거
+  for b in getbufinfo()
+    if b.name =~# '^output://'
+      execute 'bwipeout!' b.bufnr
+    endif
+  endfor
+endfunction
+
+nnoremap <silent> ,c :call CocCloseAll()<CR>
+"---------------------------------------------------------
+
+
 nmap ,r :syntax sync fromstart<CR>
 " ;의 반대방향 역할을 하는 ,키를 더블클릭으로 사용하기 위함입니다
 nnoremap ,, ,
@@ -1069,6 +1711,8 @@ nmap <leader>= :resize +5<cr>
 set background=dark
 let g:selenized_green_keywords=1
 colorscheme selenized 
+
+" colorscheme onedark 
 " set background=dark
 " let g:gruvbox_italic = 1
 " colorscheme gruvbox
@@ -1091,12 +1735,10 @@ colorscheme selenized
 "let g:airline_theme='jellybeans'
 
 
+
 let g:jedi#completions_command = "<C-N>"
 
 
-
-"autocmd BufNewFile,BufRead *.qml so c:\vim\vim74\ftplugin\qml.vim
-autocmd BufNewFile,BufRead *.qml setf qml 
 
 if has("autocmd")
 	augroup templates
@@ -1106,7 +1748,7 @@ endif
 
 
 
-"filetype plugin on
+" filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
 "set complete
 
@@ -1251,6 +1893,7 @@ let g:vebugger_leader=','
 "endif
 
 
+
 "autocmd BufEnter * silent! normal! g`"
 "set nostartofline
 
@@ -1281,6 +1924,16 @@ if v:version >= 700
     autocmd BufEnter * call AutoRestoreWinView()
 endif
 
+
+au BufRead,BufNewFile */etc/nginx/* set ft=nginx
+au BufRead,BufNewFile */nginx/* set ft=nginx
+
+" 아두이노 코멘트를 /* */에서 //로 변경합니다
+" autocmd FileType arduino setlocal comments=:// "이줄은 없어도 되는 것같습니다
+autocmd FileType arduino setlocal commentstring=//\ %s
+" setlocal commentstring=/*\ %s\ */ define& include&
+autocmd FileType autohotkey setlocal commentstring=;\ %s
+autocmd FileType dart setlocal commentstring=//\ %s
 
 set langmenu=utf8
 "lang mes en_US 
