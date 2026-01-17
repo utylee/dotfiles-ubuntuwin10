@@ -25,7 +25,7 @@ augroup END
 "---------------------------------------------------------
 " for GODOT : indent 를 그냥 되게끔 바꿉니다
 "---------------------------------------------------------
-" set viewoptions-=options
+set viewoptions-=options
 
 augroup gdscript_indent_fix
   autocmd!
