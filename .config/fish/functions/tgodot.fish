@@ -1,3 +1,3 @@
 function tgodot 
-	source ~/.tmuxset-godot
+	source ~/.tmuxset-godot.fish
 end

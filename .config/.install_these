@@ -18,6 +18,9 @@ chsh -s /usr/local/bin/fish
 
 * install fisher
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+* 새방법
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fi      sh \
+-o ~/.config/fish/functions/fisher.fish
 
 * install fisher pyenv plugin
 fisher install utylee/pyenv 
