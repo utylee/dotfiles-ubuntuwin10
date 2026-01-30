@@ -14,6 +14,7 @@ if status is-login
 end
 
 set -x fish_term24bit 1
+set -Ux OLLAMA_HOST 127.0.0.1:11435
 
 set -x EDITOR /usr/bin/vi
 set -x GHQ_ROOT /home/utylee/.ghq
