@@ -14,6 +14,7 @@ if status is-login
 end
 
 set -x fish_term24bit 1
+set -Ux OLLAMA_HOST 127.0.0.1:11435
 
 set -x EDITOR /usr/bin/vi
 set -x GHQ_ROOT /home/utylee/.ghq
@@ -34,6 +35,8 @@ set -x PATH $HOME/.go/bin $GOHOME/bin $NODEHOME/bin /mnt/c/Windows/System32/Wind
 test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
 #test -z $SSH_CLIENT; or fish_add_path /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts
 #test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
+fish_add_path /home/utylee/temp/llama.cpp/build/bin 
+
 set -x CC $CLANGHOME/bin/clang
 set -x CXX $CLANGHOME/bin/clang++
 set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH $CLANGHOME/lib 
