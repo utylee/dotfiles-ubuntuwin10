@@ -12,12 +12,23 @@ if status is-login
 	eval (dircolors -c ~/.dircolors)
 end
 
+set -Ux LANG ko_KR.UTF-8
+set -Ux LC_ALL ko_KR.UTF-8
+
 set -x fish_term24bit 1
 
 set -x EDITOR /usr/bin/vi
 set -x GHQ_ROOT /home/utylee/.ghq
 #set -x DISPLAY :0.0
 set -x DISPLAY localhost:0
+
+# for llama-server of wsl2 ssh
+set -Ux LLS_REMOTE 1
+set -Ux LLS_REMOTE_SSH wsl2-llama
+
+# WSL2 기준 경로로 지정해야 함 (중요)
+set -Ux LLS_REMOTE_MODELS_DIR /home/utylee/temp/llm_models
+set -Ux LLS_REMOTE_LLAMA_BIN  /home/utylee/llama.cpp/build/bin/llama-server
 
 # PATH
 set -x SCREENRC /home/utylee/.screenrc	# 별 소용은 없었습니다. /etc/sreenrc를 수정해서 사용
@@ -28,20 +39,43 @@ set -l GOHOME /usr/local/go1.22.5
 # set -l NODEHOME /usr/local/node-v18.12.1-linux-x64
 set -l NODEHOME /usr/local/node-v21.6.1-linux-x64
 set -l FLUTTER /home/utylee/.mobiledevs/flutter 
+# set -l DART /home/utylee/temp/dartsdk2.19/dart-sdk
 set -l ANDROID /home/utylee/.mobiledevs/android
 # set -l CMDLINETOOLS /home/utylee/.mobiledevs/android/cmdline-tools/12.0 
 #set -l ESPHOME /usr/local/xtensa-lx106-elf
 set -x IDF_PATH /home/utylee/esp/ESP8266_RTOS_SDK
 #fish_add_path $CLANGHOME/bin 
 #fish_add_path $HOME/.go/bin /usr/local/go1.17.2/bin /usr/local/node-v14.18.1-linux-x64/bin ~/utylee/bin
-set -x PATH $ANDROID/cmdline-tools/12.0/bin $PATH
-set -x PATH $ANDROID/emulator $PATH
-set -x PATH $ANDROID/platform-tools $PATH
-set -x PATH $FLUTTER/bin $PATH
-set -x PATH $CLANGHOME/bin $PATH
-set -x PATH $ESPHOME/bin $PATH
-set -x PATH $HOME/.go/bin $GOHOME/bin $NODEHOME/bin /mnt/c/Windows/System32/WindowsPowrShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts /home/utylee/utylee/bin /mnt/c/Program\ Files/OpenVPN/bin /mnt/c/Program\ Files/Arduino\ CLI/ $PATH 
-test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
+
+
+# if status is-login
+# if status is-interactive
+
+	# set -x PATH $DART/bin $PATH
+	# set -Up fish_user_paths $DART/bin
+	# set -x PATH $ANDROID/cmdline-tools/12.0/bin $PATH
+	set -Ua fish_user_paths $ANDROID/cmdline-tools/12.0/bin 
+	# set -x PATH $ANDROID/emulator $PATH
+	set -Ua fish_user_paths $ANDROID/emulator 
+	# set -x PATH $ANDROID/platform-tools $PATH
+	set -Ua fish_user_paths $ANDROID/platform-tools
+	# # set -x PATH $FLUTTER/bin $PATH
+	set -Ua fish_user_paths $FLUTTER/bin
+	# set -x PATH $CLANGHOME/bin $PATH
+	set -Ua fish_user_paths $CLANGHOME/bin
+	# set -x PATH $ESPHOME/bin $PATH
+	set -Ua fish_user_paths $ESPHOME/bin
+	# set -x PATH $HOME/.go/bin $GOHOME/bin $NODEHOME/bin /mnt/c/Windows/System32/WindowsPowrShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts /home/utylee/utylee/bin /mnt/c/Program\ Files/OpenVPN/bin /mnt/c/Program\ Files/Arduino\ CLI/ $PATH 
+	set -Ua fish_user_paths $HOME/.local/bin $HOME/.go/bin $GOHOME/bin $NODEHOME/bin /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowrShell/v1.0/ /mnt/c/Users/utylee/AppData/Local/Programs/Python/Python310/ /mnt/c/Users/utylee/AppData/Local/Programs/Python/Python310/Scripts/ /home/utylee/utylee/bin /mnt/c/Program\ Files/OpenVPN/bin /mnt/c/Program\ Files/Arduino\ CLI/ 
+	# set -Ua fish_user_paths $HOME/.go/bin $GOHOME/bin $NODEHOME/bin /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowrShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts /home/utylee/utylee/bin /mnt/c/Program\ Files/OpenVPN/bin /mnt/c/Program\ Files/Arduino\ CLI/ 
+
+	fish_add_path /home/utylee/temp/bin 
+
+# end
+
+# test -z $SSH_CLIENT; or set -Ua fish_user_paths /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts 
+# test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
+
 #test -z $SSH_CLIENT; or fish_add_path /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts
 #test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
 set -x CC $CLANGHOME/bin/clang
@@ -76,3 +110,10 @@ set -gx WORKON_HOME $HOME/.virtualenvs
 
 #source ~/.mintty-colors-solarized/mintty-solarized-dark.sh
 
+
+# opencode
+fish_add_path /home/utylee/.opencode/bin
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
