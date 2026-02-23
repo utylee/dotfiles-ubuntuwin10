@@ -1,0 +1,89 @@
+{
+  // 공통 기본값
+  "defaults": {
+    "host": "0.0.0.0",
+    "port": 8080,
+
+    // llama-server: --ctx-size
+    "ctx": 40960,
+
+    // llama-server: --threads
+    "threads": 8,
+
+    // llama-server: --batch-size / --ubatch-size
+    "batch": 2048,
+    "ubatch": 512,
+
+    // mac metal: -1 / nvidia cuda: 적당히
+    // llama-server: --n-gpu-layers
+    "gpu_layers": -1
+
+    // 필요하면 여기에 raw 옵션을 추가할 수도 있음:
+    // "extra_args": ["--no-mmap"]
+    //
+    // 또는 flag_* 형태로 boolean/값 플래그를 쓸 수도 있음:
+    // "flag_no_mmap": true          -> --no-mmap
+    // "flag_flash_attn": 1          -> --flash-attn 1
+  },
+
+  // 이 프로필들은 "모델 매칭" 결과로 합쳐짐(override)
+  "profiles": {
+    "mac": {
+      "gpu_layers": -1,
+      "threads": 4
+    },
+    "mac2": {
+      "ctx": 20480,
+      "gpu_layers": -1,
+      "threads": 4
+    },
+    "wsl": {
+      "gpu_layers": -1,
+      "threads": 8
+    },
+    "halo": {
+      "gpu_layers": 99,
+      "threads": 16
+    },
+
+    // 예: 무거운 모델은 ctx/batch 낮춰 안정화
+    "safe": {
+      "gpu_layers": -1,
+      "ctx": 4096,
+      "batch": 512,
+      "ubatch": 128
+    },
+    "fast": {
+	  "gpu_layers": 99
+    }
+  },
+
+  // 모델 파일명(부분매칭/정규식 느낌) -> 적용할 프로필/직접 override
+  "model_rules": [
+    {
+      "match": "phi",
+      "use_profiles": ["safe"],
+      // "override": { "ctx": 4096 }
+    },
+    {
+      "match": "gpt-oss-20b",
+      "use_profiles": ["safe"],
+      "override": { "batch": 512, "ubatch": 128 }
+    },
+    {
+      "match": "qwen",
+      "use_profiles": ["defaults"]
+    },
+    {
+      "match": "lfm",
+      "use_profiles": ["fast"]
+    }
+
+  ]
+
+  // (선택) 특정 모델 파일명 "정확히 일치" override
+  // "overrides": {
+  //   "Qwen2.5-Coder-14B-Q4_K_M.gguf": { "ctx": 8192, "batch": 1024, "ubatch": 256 }
+  // }
+}
+
