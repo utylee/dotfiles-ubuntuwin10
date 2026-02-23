@@ -24,7 +24,7 @@ set -x DISPLAY localhost:0
 
 # for llama-server of wsl2 ssh
 set -Ux LLS_REMOTE 1
-set -Ux LLS_REMOTE_SSH wsl2-llama
+set -Ux LLS_REMOTE_SSH wsl12
 
 # WSL2 기준 경로로 지정해야 함 (중요)
 set -Ux LLS_REMOTE_MODELS_DIR /home/utylee/temp/llm_models
