@@ -1,3 +1,3 @@
 function oc
-	opencode
+	opencode $argv
 end
