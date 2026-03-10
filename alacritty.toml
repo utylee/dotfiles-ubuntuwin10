@@ -1,0 +1,112 @@
+[window]
+# opacity = 0.99
+dimensions = { columns = 92, lines = 38 }
+position = { x = 430, y = 50 }
+padding = { x = 5, y = 3 }
+# decorations = "None"
+# conpty = false
+
+# [rendering]
+# renderer = "gl" 
+
+
+# [env]
+# WINIT_X11_SCALE_FACTOR = "1"
+
+# [debug]
+# render_timer = true
+
+# [terminal]
+# shell = { program = "C:\\Windows\\System32\\cmd.exe" }
+
+[terminal.shell]
+# program = "powershell.exe"
+# args = ["-NoLogo", "-NoProfile"]
+program = "cmd.exe"
+# args = ["/d"]
+# args = ["/d", "/c", "echo HELLO & timeout /t 3"]
+args = ["/c", "wsl -d Ubuntu20WSL1 -u utylee --cd ~"]
+
+# program = "pwsh.exe"
+# args = ["-NoLogo"]
+
+# program = "cmd.exe"
+# args = ["/k"]
+# args = ["/c", "echo START>%TEMP%\\ala-test.txt & echo HELLO & timeout /t 3"]
+# args = ["/c", "echo OUT & echo ERR 1>&2 & timeout /t 3"]
+# args = ["/c", "echo HELLO & for /l %i in (1,1,5) do @echo %i & @ping -n 2 127.0.0.1>nul"]
+# args = ["/c", "echo HELLO & timeout /t 3"]
+
+# program = "powershell.exe"
+# args = ["-NoProfile"]
+
+[scrolling]
+history = 10000
+
+[selection]
+save_to_clipboard = true
+
+[font]
+size = 13
+# normal = { family = "Cascadia Mono NF", style="SemiLight"}
+normal = { family = "CaskaydiaMono Nerd Font Mono", style="SemiLight"}
+bold = { family = "CaskaydiaMono Nerd Font Mono", style = "Regular" }
+italic = { family = "CaskaydiaMono Nerd Font Mono", style = "SemiLight Italic" }
+
+# fallback = [
+#   "Noto Sans KR"
+# ]
+
+# use_thin_strokes = true
+# AppleFontSmoothing = true
+  # "Segoe UI Emoji"
+# [font.normal]
+# # family = "Hack Nerd Font Mono"
+# family = "Cascadia Mono NF"
+# style = "SemiLight"
+# # style = "Regular"
+
+# [font.normal.fallback]
+# family = "Noto Sans CJK KR"
+
+# [font.bold]
+# family = "Cascadia Mono NF"
+# style = "Regular"
+# # style = "Bold"
+
+# [font.italic]
+# family = "Cascadia Mono NF"
+# style = "SemiLight Italic"
+
+# [terminal.shell]
+# program = "C:\\Windows\\System32\\wsl.exe"
+# args = ["-d", "Ubuntu20WSL1", "-u", "utylee"]
+
+[colors.primary]
+background = "#103c48"
+foreground = "#adbcbc"
+
+[colors.cursor]
+text = "#103c48"
+cursor = "#adbcbc"
+
+[colors.normal]
+black   = "#184956"
+red     = "#fa5750"
+green   = "#75b938"
+yellow  = "#dbb32d"
+blue    = "#4695f7"
+magenta = "#f275be"
+cyan    = "#41c7b9"
+white   = "#72898f"
+
+[colors.bright]
+black   = "#2d5b69"
+red     = "#ff665c"
+green   = "#84c747"
+yellow  = "#ebc13d"
+blue    = "#58a3ff"
+magenta = "#ff84cd"
+cyan    = "#53d6c7"
+white   = "#cad8d9"
+
