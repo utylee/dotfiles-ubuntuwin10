@@ -989,6 +989,10 @@ nmap ;Z :ProsessionDelete<cr>
 nmap ;r :Rooter<CR>
 nnoremap ;; ;
 
+"set paste 를 켜고 끕니다. 코드 붙여넣기 줄 밀림 방지
+nnoremap ;p :set invpaste paste?<CR>
+inoremap ;p <C-o>:set invpaste paste?<CR>
+
 "nmap <leader>a :bufdo bd<CR>
 "map <F7> :NERDTreeTabsToggle<CR>
 ""nmap <leader>2 :NERDTreeToggle<CR>
