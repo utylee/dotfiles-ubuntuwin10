@@ -8,6 +8,7 @@ function fish_user_key_bindings
 	bind \cs fzf-history-widget		# command history 단축키를 덮어씌웁니다
 	bind \cgg _fzf_search_git_log    #
 	bind \cga _fzf_search_git_status #
+	bind \cgb _fzf_search_git_branch #
 	bind \cfk fkill
 
 	#bind \ct fzf-file-full_widget	#    (풀 디렉토리에서 검색하는 명령어를 따로 만듭니다)
@@ -26,6 +27,7 @@ function fish_user_key_bindings
 		bind -M insert \cs	fzf-history-widget		
 		bind -M insert \cgg _fzf_search_git_log
 		bind -M insert \cga _fzf_search_git_status
+		bind -M insert \cgb _fzf_search_git_branch
 		bind -M insert \cfk fkill
 
 		#bind -M insert \cs 'rg . --pretty | fzf'
