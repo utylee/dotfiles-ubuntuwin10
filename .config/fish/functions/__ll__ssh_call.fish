@@ -33,6 +33,14 @@ function __ll__ssh_call
                     command ssh $host lls stop "$chosen"
                     return $status
                 end
+
+			case show-profile
+                if test (count $argv) -eq 1
+                    set -l chosen (__ll__pick_remote_model $host)
+                    test -n "$chosen"; or return 1
+                    command ssh $host lls show-profile "$chosen"
+                    return $status
+                end
         end
     end
 
