@@ -25,12 +25,39 @@ function __ll__ssh_call
                     test -n "$chosen"; or return 1
                     command ssh $host lls start -d "$chosen"
                     return $status
-                end
+				else if test (count $argv) -eq 3; and test "$argv[2]" = "-d"; and string match -qr '^[0-9]+$' -- "$argv[3]"
+					set -l slot $argv[3]
+					set -l chosen (__ll__pick_remote_model $host)
+					test -n "$chosen"; or return 1
+					command ssh $host lls start -d $slot "$chosen"
+					return $status
+				end
+
 			case stop
                 if test (count $argv) -eq 1
-                    set -l chosen (__ll__pick_remote_running_model $host)
-                    test -n "$chosen"; or return 1
-                    command ssh $host lls stop "$chosen"
+                    command ssh -q -t $host lls stop
+                    return $status
+                end
+			# case stop
+                # if test (count $argv) -eq 1
+                    # set -l chosen (__ll__pick_remote_running_model $host)
+                    # test -n "$chosen"; or return 1
+                    # command ssh $host lls stop "$chosen"
+                    # return $status
+                # end
+
+			case log
+                if test (count $argv) -eq 1
+                    command ssh -q -t $host lls log
+                    return $status
+                else if test (count $argv) -eq 2; and test "$argv[2]" = "-f"
+                    command ssh -q -t $host lls log -f
+                    return $status
+                else if test (count $argv) -eq 2; and string match -qr '^[0-9]+$' -- "$argv[2]"
+                    command ssh -q -t $host lls log $argv[2]
+                    return $status
+                else if test (count $argv) -eq 3; and string match -qr '^[0-9]+$' -- "$argv[2]"; and test "$argv[3]" = "-f"
+                    command ssh -q -t $host lls log $argv[2] -f
                     return $status
                 end
 
@@ -44,18 +71,6 @@ function __ll__ssh_call
         end
     end
 
-
     command ssh $host lls $argv
 
-    # switch $argv[1]
-    #     case start stop use log
-    #         command ssh -t $host lls $argv
-    #     case '*'
-    #         command ssh $host lls $argv
-    # end
 end
-# function __ll__ssh_call
-#     set -l host $argv[1]
-#     set -e argv[1]
-#     command ssh $host lls $argv
-# end
