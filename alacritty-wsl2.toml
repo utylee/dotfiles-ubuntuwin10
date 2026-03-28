@@ -14,21 +14,16 @@ bindings = [
 
   # { key = "B", mods = "Control|Alt", chars = "\u001b[5~" },
   # { key = "F", mods = "Control|Alt", chars = "\u001b[6~" },
-  # { key = "U", mods = "Control|Alt", chars = "\u001b[5~" },
-  # { key = "D", mods = "Control|Alt", chars = "\u001b[6~" },
-
   # { key = "B", mods = "Control|Shift", chars = "\u001b[5~" },
   # { key = "F", mods = "Control|Shift", chars = "\u001b[6~" },
 
-  # { key = "F", mods = "Control|Alt", action = "None" },
-  # { key = "B", mods = "Control|Alt", action = "None" },
+  # { key = "F", mods = "Control | Alt", action = "None" },
+  # { key = "B", mods = "Control | Alt", action = "None" },
 ]
+# action = "None"
 
 # [rendering]
 # renderer = "gl" 
-# [env]
-# # TERM = "xterm"
-# TERM = "vt100"
 
 
 # [env]
@@ -40,14 +35,14 @@ bindings = [
 # [terminal]
 # shell = { program = "C:\\Windows\\System32\\cmd.exe" }
 
-[terminal.shell]
+# [terminal.shell]
 # program = "powershell.exe"
 # args = ["-NoLogo", "-NoProfile"]
 # program = "cmd.exe"
 # args = ["/d"]
 # args = ["/d", "/c", "echo HELLO & timeout /t 3"]
-program = "cmd.exe"
-args = ["/c", "wsl -d Ubuntu20WSL1 -u utylee --cd ~"]
+# program = "cmd.exe"
+# args = ["/c", "wsl -d Ubuntu20WSL1 -u utylee --cd ~"]
 
 # program = "pwsh.exe"
 # args = ["-NoLogo"]
@@ -69,15 +64,17 @@ history = 10000
 save_to_clipboard = true
 
 [font]
+# builtin_box_drawing = true
+# draw_bold_text_with_bright_colors = false
 size = 13
 # normal = { family = "Cascadia Mono NF", style="SemiLight"}
 # normal = { family = ["CaskaydiaMono Nerd Font Mono", "Noto Sans KR"], style="SemiLight"}
 # normal = { family = "CaskaydiaMono Nerd Font Mono", style="SemiLight"}
 # normal = { family = "CaskaydiaMono Nerd Font Mono", style="Regular"}
-# normal = { family = "CaskaydiaMono NFM", style="Regular"}
+normal = { family = "CaskaydiaMono NFM", style="Regular"}
 # normal = { family = "CaskaydiaMono NFM", style="Light"}
 # normal = { family = "CaskaydiaMono NFM", style="SemiLight"}
-normal = { family = "CaskaydiaMono NFM", style="Regular"}
+# normal = { family = "CaskaydiaMono NFM", style="Regular"}
 # normal = { family = "Noto Sans Mono", style="DemiLight"}
 # normal = { family = "D2Coding", style="Regular"}
 # normal = { family = "Noto Sans KR", style="Thin"}
@@ -88,8 +85,9 @@ normal = { family = "CaskaydiaMono NFM", style="Regular"}
 # normal = { family = "Noto Sans KR Medium"}
 # bold = { family = "CaskaydiaMono Nerd Font Mono", style = "Regular" }
 # bold = { family = "CaskaydiaMono NFM", style = "Regular" }
+# bold = { family = "CaskaydiaMono NFM", style = "Bold" }
+# bold = { family = "CaskaydiaMono NFM", style = "Black" }
 bold = { family = "CaskaydiaMono NFM", style = "SemiBold" }
-# bold = { family = "CaskaydiaMono NFM", style = "SemiLight" }
 # italic = { family = "CaskaydiaMono Nerd Font Mono", style = "SemiLight Italic" }
 # italic = { family = "CaskaydiaMono NFM", style = "SemiLight Italic" }
 italic = { family = "CaskaydiaMono NFM", style = "Italic" }
@@ -121,9 +119,9 @@ italic = { family = "CaskaydiaMono NFM", style = "Italic" }
 # family = "Cascadia Mono NF"
 # style = "SemiLight Italic"
 
-# [terminal.shell]
-# program = "C:\\Windows\\System32\\wsl.exe"
-# args = ["-d", "Ubuntu20WSL1", "-u", "utylee", "--cd", "~"]
+[terminal.shell]
+program = "C:\\Windows\\System32\\wsl.exe"
+args = ["-d", "Ubuntu24WSL2", "-u", "utylee", "--cd", "~"]
 
 [colors.primary]
 background = "#103c48"

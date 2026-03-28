@@ -5,6 +5,31 @@ if status is-interactive
 	set fish_greeting ''
 	fish_vi_key_bindings
 	starship init fish | source
+
+	 function __update_cursor_by_vi_mode
+        switch $fish_bind_mode
+            case default
+                printf '\e[2 q'   # normal: block
+            case insert
+                printf '\e[6 q'   # insert: beam
+            case replace_one
+                printf '\e[4 q'   # replace: underline
+            case visual
+                printf '\e[4 q'   # visual: underline
+            case '*'
+                printf '\e[2 q'
+        end
+    end
+
+    function __cursor_on_mode_change --on-variable fish_bind_mode
+        __update_cursor_by_vi_mode
+    end
+
+    function __cursor_on_prompt --on-event fish_prompt
+        __update_cursor_by_vi_mode
+    end
+
+    __update_cursor_by_vi_mode
 end
 if status is-login
     # Commands to run in interactive sessions can go here
