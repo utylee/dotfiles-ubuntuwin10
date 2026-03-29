@@ -2,7 +2,9 @@ function __ll_models_for_host -d "List GGUF models on remote host via ssh (mac/l
     set -l host $argv[1]
 
     set -l fallback "/home/utylee/temp/llm_models"
-    if test "$host" = mac
+    # if test "$host" = mac 
+    # if [ "$host" = mac ] or [ "$host" = mac2 ]
+	if test "$host" = "mac" -o "$host" = "mac2"
         set fallback "/Users/utylee/temp/llm_models"
     end
 
