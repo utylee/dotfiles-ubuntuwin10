@@ -1211,7 +1211,24 @@ set fileencodings=utf-8,cp949
 "set guifont=Ubuntu\ Mono:h15:cANSI
 " set guifont=Ubuntu\ Mono\ derivative\ Powerline:h18.3
 " set guifont=Cascadia\ Mono\ PL\ Light:h14:cDEFAULT
-set guifont=CaskaydiaMono\ NFM\ Regular:h13.2:cDEFAULT
+ 
+" set guifont=CaskaydiaMono\ NFM\ Regular:h13.2:cDEFAULT
+" set guifont=CaskaydiaMono\ NFM:h13:cDEFAULT
+" set guifont=CaskaydiaMono\ Nerd\ Font\ Mono:h13:b0:i0
+set guifont=CaskaydiaMono_NFM_Regular:h13:cANSI
+" set guifont=CaskaydiaMono_NFM_Light:h13:cANSI
+" set guifont=CaskaydiaMono\ NFM:h13:b0:i0
+" set guifont=CaskaydiaMono\ NFM:h13:b0:i0
+" set guifont-=i
+" set guifont=CaskaydiaMono_Nerd_Font_Mono:h13
+" set guifont=CaskaydiaMono\ Nerd\ Font\ Mono:h13:cDEFAULT
+" set guifont=CaskaydiaMono\ Nerd\ Font\ Mono:h13:cDEFAULT
+" set guifontset=\
+"   CaskaydiaMono\ Nerd\ Font\ Mono:h13,\
+"   CaskaydiaMono\ Nerd\ Font\ Mono\ SemiBold:h13,\
+"   CaskaydiaMono\ Nerd\ Font\ Mono\ Italic:h13,\
+"   CaskaydiaMono\ Nerd\ Font\ Mono\ SemiBold\ Italic:h13
+
 "set guifontwide=NanumGothicCoding:h23
 "set guifont=D2Coding\ for\ Powerline
 "set font=Ubuntu\ Mono\ derivative\ Powerline:h19
