@@ -12,6 +12,7 @@ OPTS=(
   -N
   -p "$SSH_PORT"
 
+  -o BindAddress=192.168.100.103   # 🔥 핵심 
   -o ServerAliveInterval=10
   -o ServerAliveCountMax=2
   -o TCPKeepAlive=yes
@@ -19,7 +20,7 @@ OPTS=(
   -o ConnectTimeout=5
   -o ConnectionAttempts=1
 
-  -R 0.0.0.0:8813:192.168.100.103:8811
+  -R 0.0.0.0:8813:127.0.0.1:8811
 )
 
 LOG_DIR="$HOME/logs"
