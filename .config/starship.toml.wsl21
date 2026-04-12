@@ -20,7 +20,7 @@ $python\
 [W21](bold fg:#ab2294)\
 $username\
 $directory\
-$git_branch$git_commit\
+$git_branch$git_commit
 $character\
 """
 [character]
