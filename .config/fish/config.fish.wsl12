@@ -1,10 +1,17 @@
 if status is-interactive
 	# CURSOR
-	echo -ne '\eP\e]12;#2668ed\a'	# wsl1
 	# echo -ne '\eP\e]12;#207dab\a'	# wsl1
 	##echo -ne '\eP\e]12;#e034a1\a'	# wsl2
+	echo -ne '\eP\e]12;#2668ed\a'	# wsl1
 	set fish_greeting ''
 	fish_vi_key_bindings
+
+    # set -g fish_vi_force_cursor 1
+    # set -g fish_cursor_default block
+    # set -g fish_cursor_insert line
+    # set -g fish_cursor_visual underscore
+    # set -g fish_cursor_replace_one underscore
+
 	starship init fish | source
 end
 if status is-login
@@ -49,11 +56,14 @@ set -x PATH $HOME/.go/bin $GOHOME/bin $NODEHOME/bin /mnt/c/Windows/System32/Wind
 test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
 #test -z $SSH_CLIENT; or fish_add_path /mnt/c/Windows/System32/ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/ /mnt/c/Python310/ /mnt/c/Python310/Scripts
 #test -z $SSH_CLIENT; or set -x PATH /mnt/c/Windows/System32/ /mnt/c/Python310/ /mnt/c/Python310/Scripts $PATH
-fish_add_path /home/utylee/temp/opencode/packages/opencode/dist/opencode-linux-x64/bin /home/utylee/temp/bin /home/utylee/temp/llama.cpp/build/bin /usr/local/cuda/bin /home/utylee/temp/bin
+fish_add_path $CUDA_HOME/bin /home/utylee/temp/opencode/packages/opencode/dist/opencode-linux-x64/bin /home/utylee/temp/bin /home/utylee/temp/llama.cpp/build/bin /usr/local/cuda/bin /home/utylee/temp/bin
+
+set -x CUDA_HOME /usr/local/cuda-13.1
 
 set -x CC $CLANGHOME/bin/clang
 set -x CXX $CLANGHOME/bin/clang++
-set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH $CLANGHOME/lib 
+# set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH $CLANGHOME/lib 
+set -x LD_LIBRARY_PATH $CUDA_HOME/lib64 $CLANGHOME/lib $LD_LIBRARY_PATH 
 
 # FZF
 # fzf을 직접입력해 파일명 탐색용  
@@ -90,3 +100,4 @@ set --export PATH $BUN_INSTALL/bin $PATH
 
 # # opencode
 # fish_add_path /home/utylee/.opencode/bin
+/home/utylee/.local/bin/mise activate fish | source
