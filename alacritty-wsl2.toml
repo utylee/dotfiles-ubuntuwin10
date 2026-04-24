@@ -121,7 +121,7 @@ italic = { family = "CaskaydiaMono NFM", style = "Italic" }
 
 [terminal.shell]
 program = "C:\\Windows\\System32\\wsl.exe"
-args = ["-d", "Ubuntu24WSL2", "-u", "utylee", "--cd", "~"]
+args = ["-d", "Ubuntu24WSL2", "-u", "utylee", "--cd", "~", "--exec", "/usr/local/bin/fish", "-il"]
 
 [colors.primary]
 background = "#103c48"

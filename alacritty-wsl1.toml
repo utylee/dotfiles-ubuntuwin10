@@ -64,7 +64,7 @@ history = 10000
 save_to_clipboard = true
 
 [font]
-# builtin_box_drawing = true
+builtin_box_drawing = true
 # draw_bold_text_with_bright_colors = false
 size = 13
 # normal = { family = "Cascadia Mono NF", style="SemiLight"}
@@ -85,9 +85,9 @@ normal = { family = "CaskaydiaMono NFM", style="Regular"}
 # normal = { family = "Noto Sans KR Medium"}
 # bold = { family = "CaskaydiaMono Nerd Font Mono", style = "Regular" }
 # bold = { family = "CaskaydiaMono NFM", style = "Regular" }
+bold = { family = "CaskaydiaMono NFM", style = "SemiBold" }
 # bold = { family = "CaskaydiaMono NFM", style = "Bold" }
 # bold = { family = "CaskaydiaMono NFM", style = "Black" }
-bold = { family = "CaskaydiaMono NFM", style = "SemiBold" }
 # italic = { family = "CaskaydiaMono Nerd Font Mono", style = "SemiLight Italic" }
 # italic = { family = "CaskaydiaMono NFM", style = "SemiLight Italic" }
 italic = { family = "CaskaydiaMono NFM", style = "Italic" }
