@@ -6,30 +6,30 @@ if status is-interactive
 	fish_vi_key_bindings
 	starship init fish | source
 
-	 function __update_cursor_by_vi_mode
-        switch $fish_bind_mode
-            case default
-                printf '\e[2 q'   # normal: block
-            case insert
-                printf '\e[6 q'   # insert: beam
-            case replace_one
-                printf '\e[4 q'   # replace: underline
-            case visual
-                printf '\e[4 q'   # visual: underline
-            case '*'
-                printf '\e[2 q'
-        end
-    end
+	 # function __update_cursor_by_vi_mode
+        # switch $fish_bind_mode
+            # case default
+                # printf '\e[2 q'   # normal: block
+            # case insert
+                # printf '\e[6 q'   # insert: beam
+            # case replace_one
+                # printf '\e[4 q'   # replace: underline
+            # case visual
+                # printf '\e[4 q'   # visual: underline
+            # case '*'
+                # printf '\e[2 q'
+        # end
+    # end
 
-    function __cursor_on_mode_change --on-variable fish_bind_mode
-        __update_cursor_by_vi_mode
-    end
+    # function __cursor_on_mode_change --on-variable fish_bind_mode
+        # __update_cursor_by_vi_mode
+    # end
 
-    function __cursor_on_prompt --on-event fish_prompt
-        __update_cursor_by_vi_mode
-    end
+    # function __cursor_on_prompt --on-event fish_prompt
+        # __update_cursor_by_vi_mode
+    # end
 
-    __update_cursor_by_vi_mode
+    # __update_cursor_by_vi_mode
 end
 if status is-login
     # Commands to run in interactive sessions can go here
@@ -114,24 +114,24 @@ set -x CXX $CLANGHOME/bin/clang++
 
 # FZF
 # fzf을 직접입력해 파일명 탐색용  
-set -gx FZF_DEFAULT_COMMAND 'fd --type file --color=always --follow --hidden --exclude .git'
-set -gx FZF_DEFAULT_OPTS "--ansi"
+# set -gx FZF_DEFAULT_COMMAND 'fd --type file --color=always --follow --hidden --exclude .git'
+# set -gx FZF_DEFAULT_OPTS "--ansi"
 # 현재디렉토리로부터 검색
 set -gx FZF_CTRL_T_COMMAND "fd --type file --color=always --follow --hidden --exclude .git"
 ## 풀디렉토리로부터 검색
 #set -gx FZF_CTRL_TT_COMMAND "fd --type file --color=always --follow --hidden --exclude .git . $HOME"
 
-set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
+# set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
 #set -gx FZF_CTRL_F_COMMAND "fd --type d --hidden --color=always . $HOME"
 set -gx FZF_CTRL_R_OPTS "--reverse --height 100%"
 #set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 #set -gx FZF_CTRL_T_COMMAND "fd --type d --hidden --color=always"
 
-#set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --no-ignore"
+set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --no-ignore"
+set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
 #set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
-#set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
-#set -gx FZF_ALT_C_COMMAND "find . -depth"
-##set -gx FZF_ALT_C_COMMAND "rg --hidden --files --null | xargs -0 dirname | uniq"
+# set -gx FZF_ALT_C_COMMAND "find . -depth"
+set -gx FZF_ALT_C_COMMAND "rg --hidden --files --null | xargs -0 dirname | uniq"
 ##set -gx FZF_ALT_C_COMMAND "rg --hidden --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq"
 #
 # VENV
