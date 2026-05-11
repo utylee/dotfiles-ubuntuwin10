@@ -1,4 +1,5 @@
 add_newline = false
+scan_timeout = 1000
 
 format = """
 $python\
@@ -6,7 +7,7 @@ $python\
 $username\
 $directory\
 $git_branch$git_commit\
-$package$nodejs$rust$python
+$package$nodejs$rust
 $character\
 """
 [character]
@@ -40,8 +41,8 @@ vicmd_symbol = "[N](fg:14 bold)"
 
 #right_format = """$time"""
 
-#[cmd_duration]
-#min_time = 50
+# [cmd_duration]
+# min_time = 500
 
 
 [line_break]
