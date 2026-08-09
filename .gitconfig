@@ -11,6 +11,9 @@
 	ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
 	pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
 	st = status
+	sw = switch
+	ft = fetch
+	mg = merge
 	br = branch
 	ba = branch -a
 	bm = branch --merged
@@ -27,3 +30,9 @@
 	# add conflicted file on merge
 	#add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 
+[core]
+	quotepath = off
+[safe]
+	directory = /mnt/c/Users/utylee/bin
+	directory = /mnt/c/Users/utylee/.virtualenvs/misc/src
+	directory = /mnt/c/Users/utylee/.virtualenvs/arduino/src
