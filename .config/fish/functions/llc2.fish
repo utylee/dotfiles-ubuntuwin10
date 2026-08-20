@@ -1,4 +1,4 @@
 function llc2
-    __ll__ssh_call m5 $argv
+    __ll__ssh_call ccy2 $argv
 end
 
