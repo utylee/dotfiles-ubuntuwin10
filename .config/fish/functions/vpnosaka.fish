@@ -1,4 +1,4 @@
-function vpn-osaka
+function vpnosaka
 	ssh -vv \
       # osaka oracle for sukebei vpn
         -N \
