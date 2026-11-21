@@ -6,5 +6,6 @@ function vpnosaka
         -o ServerAliveInterval=30 \
         -o ServerAliveCountMax=3 \
         -o ExitOnForwardFailure=yes \
-        utylee@152.69.195.135
+		utylee@129.225.136.200
+        # utylee@152.69.195.135
 end
